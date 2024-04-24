@@ -3,13 +3,32 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    // Auth check
+    if (!Auth::check()) {
+        // If not logged in, go login.
+        return redirect()->route('login');
+    } else {
+        return redirect()->route('home');
+    }
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
+Route::get('/library', function () {
+    return view('library');
+})->middleware(['auth', 'verified'])->name('library');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -18,17 +37,8 @@ Route::middleware('auth')->group(function () {
 });
 
 /* Requires user to be authenticated before accessing library */
-Route::get('/library', function () {
-    return view('library');                                 
-})->middleware(['auth', 'verified'])->name('library');
-
-// Route::get('/dashboard/manuals', function () {
-//     return view('manuals');                                 
-// })->middleware(['auth', 'verified'])->name('manuals');
-
-// Route::get('/dashboard/formats', function () {
-//     return view('formatz');                                 
-// })->middleware(['auth', 'verified'])->name('manuals');
-
+Route::get('/library/manuals', function () {
+    return view('manuals');                                 
+})->middleware(['auth', 'verified'])->name('manuals');
 
 require __DIR__.'/auth.php';
