@@ -30,6 +30,14 @@ Route::get('/library', function () {
     return view('library');
 })->middleware(['auth', 'verified'])->name('library');
 
+Route::get('/library/manuals', function () {
+    return view('manuals');
+})->middleware(['auth', 'verified'])->name('manuals');
+
+Route::get('/library/formats', function () {
+    return view('formats');
+})->middleware(['auth', 'verified'])->name('formats');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

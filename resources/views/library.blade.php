@@ -1,30 +1,29 @@
-<li class="main-nav__item main-nav__community">
-                        <a class="subnav-toggle">
-                            <span class="arrow-down"></span>
-                        </a>
-                        <a href="/forum" class="main-nav__item-link nav__with-sub">Community</a>
-                        <ul class="main-nav__sub-menu hidden-for-medium-down">
-                            <li class="main-nav__sub-item">
-                                <a href="/forum" class="hide-mobile-nav main-nav__sub-item-link">Forum</a>
-                            </li>
-                            <li class="main-nav__sub-item">
-                                <a href="https://wiki.albiononline.com" class="hide-mobile-nav main-nav__sub-item-link">Wiki</a>
-                            </li>
-                            <li class="main-nav__sub-item">
-                                <a target="_blank" href="https://creators.albiononline.com" class="hide-mobile-nav main-nav__sub-item-link">
-                                    Creators Program
-                                </a>
-                            </li>
-                            <li class="main-nav__sub-item">
-                                    <a href="/twitch" class="hide-mobile-nav main-nav__sub-item-link">
-                                        Twitch Drops
-                                    </a>
-                                </li>
-                            <li class="main-nav__sub-item">
-                                <a href="/killboard" class="hide-mobile-nav main-nav__sub-item-link">Killboard</a>
-                            </li>
-                            <li class="main-nav__sub-item">
-                                <a href="/characterbuilder/" class="hide-mobile-nav main-nav__sub-item-link">Character Builder</a>
-                            </li>
-                        </ul>
-                    </li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/library-bg.css" rel="stylesheet" type="text/css">
+    <title>Library</title>
+</head>
+<body>
+    <div class="home-bg">
+        <ul>
+            <li><a href="{{ route('home') }}" style="margin-right: 500px;">Home</a></li>
+            <li><a href="{{ route('manuals') }}">Manuals</a></li>
+            <li><a href="{{ route('formats') }}">Formats</a></li>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        
+
+        </ul>
+    </div>
+        
+    <div class="display-docs">
+        All Documents
+    </div>
+</body>
+</html>

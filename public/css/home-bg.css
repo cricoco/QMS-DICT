@@ -1,0 +1,18 @@
+.home-bg {
+    text-align: center;
+    background-color: #dddddd;
+}
+
+.home-bg li {
+    display: inline;
+}
+
+.home-bg li {
+    float: left;
+  }
+  
+.home-bg a {
+    display: block;
+    padding: 8px;
+    background-color: #dddddd;
+  }
