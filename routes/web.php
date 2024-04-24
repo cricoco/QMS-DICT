@@ -18,7 +18,11 @@ Route::middleware('auth')->group(function () {
 });
 
 /* Requires user to be authenticated before accessing library */
-Route::get('/library', function () {
+Route::get('/home', function () {
+    return view('home');                                 
+})->middleware(['auth', 'verified'])->name('home');
+
+Route::get('/home/library', function () {
     return view('library');                                 
 })->middleware(['auth', 'verified'])->name('library');
 
