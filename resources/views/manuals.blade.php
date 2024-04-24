@@ -7,7 +7,7 @@
     <title>Manuals</title>
 </head>
 <body>
-<div class="home-bg">
+    <div class="home-bg">
         <ul>
             <li><a href="{{ route('library') }}" style="margin-right: 50px;">Back to Library</a></li>
             <li><a href="{{ route('formats') }}">Formats</a></li>
