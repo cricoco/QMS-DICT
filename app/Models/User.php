@@ -16,6 +16,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    /* This right here, basically fills out the database of user*/
     protected $fillable = [
         'name',
         'email',
