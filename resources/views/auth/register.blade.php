@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout>   <!-- Meaning, get guest.blade.php -->
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

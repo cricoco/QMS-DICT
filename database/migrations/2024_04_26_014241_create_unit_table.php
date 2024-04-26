@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('status');
             $table->timestamps();
 
-            $table->foreign('division_id')->references('id')->on('divisions');
+            $table->foreign('division_id')->references('division_id')->on('divisions');
         });
     }
 

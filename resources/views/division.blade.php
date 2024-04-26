@@ -6,6 +6,13 @@
     <title>Division</title>
 </head>
 <body>
-    
+    <form method="POST" action="{{ route('division') }}">
+        @csrf
+        <label for="division_name">Division name:</label><br>
+        <input type="text" id="division_name" name="division_name"><br>
+        <label for="status">Status:</label><br>
+        <input type="text" id="status" name="status"><br><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>

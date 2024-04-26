@@ -50,4 +50,8 @@ Route::middleware('auth')->group(function () {
 
 /* Requires user to be authenticated before accessing library */
 
+Route::get('/division', function () {
+    return view('division');
+})->middleware(['auth', 'verified'])->name('division');
+
 require __DIR__.'/auth.php';
