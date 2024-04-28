@@ -10,7 +10,6 @@
     <div class="home-bg">
         <ul>
             <li><a href="{{ route('library') }}">Library</a></li>
-            <li><a href="news.asp">About Us</a></li>
             <li><a href="{{ route('about-us') }}" style="margin-right: 950px;">About Us</a></li>
 
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
