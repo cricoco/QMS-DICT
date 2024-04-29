@@ -5,7 +5,9 @@
 </head>
 <body>
 
-        <form>
+        <form action"{{url('/UploadData')}}" methods="POST" enctype="multipart/form-data">
+
+            @csrf
 
           <div>
             <label>name</label>
