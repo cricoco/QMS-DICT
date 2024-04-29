@@ -2,18 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/', function () {
+    return view('welcom');
 });
 
-Route::get('/library', function () {
-    return view('library');
-});
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+});->name('dashboard');
 
-Route::get('/manuals', function () {
-    return view('manuals');
-});
-
-Route::get('/forms', function () {
-    return view('forms');
-});
+Route::get('/UploadPage','App\Http\Controllers\UploadDataContorller@index');
