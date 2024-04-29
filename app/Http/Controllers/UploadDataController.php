@@ -32,7 +32,7 @@ class UploadDataController extends Controller
 
              $data->save();
 
-             return redirect->back();
+             return redirect()->back();
     }
           
   }
