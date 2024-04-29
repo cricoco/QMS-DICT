@@ -3,6 +3,23 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+//======================
+use App\Http\Controllers\PageController;
+
+Route::get('/',[PageController::class,'index']);
+
+Route::get('/uploadpage',[PageController::class,'uploadpage']);
+
+Route::post('/uploadproduct',[PageController::class,'store']);
+
+
+Route::get('/show',[PageController::class,'show']);
+
+Route::get('/download/{file}',[PageController::class,'download']);
+
+Route::get('/view/{is}',[PageController::class,'view']);
+//==============
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -57,5 +74,7 @@ Route::get('/division', function () {
 Route::get('/unit', function () {
     return view('unit');
 })->middleware(['auth', 'verified'])->name('unit');
+
+
 
 require __DIR__.'/auth.php';

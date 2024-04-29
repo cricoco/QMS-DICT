@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\DocumentController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -62,5 +63,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/division', [DivisionController::class, 'submitDivisionDetails'])->name('division');
 
     Route::post('/unit', [UnitController::class, 'submitUnitDetails'])->name('unit');
+
+    // Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+    // Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
+    // Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('documents.download');
+    Route::get('documents/', [DocumentController::class, 'index'])->name('documents.index');
+    Route::post('documents/create', [DocumentController::class, 'create'])->name('documents.create');
+    Route::post('documents/store', [DocumentController::class, 'store'])->name('documents.store');
 
 });

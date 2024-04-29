@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id('unit_id');
-            $table->unsignedBigInteger('division_id');
+            $table->unsignedBigInteger('division_id');    // foreign division_id
             $table->string('unit_name');
             $table->string('status');
             $table->timestamps();
 
+            // define foreign keys
             $table->foreign('division_id')->references('division_id')->on('divisions')->onUpdate('cascade')->onDelete('cascade');
+            
         });
     }
 
