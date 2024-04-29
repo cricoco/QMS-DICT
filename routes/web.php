@@ -11,3 +11,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 });->name('dashboard');
 
 Route::get('/UploadPage','App\Http\Controllers\UploadDataContorller@index');
+
+ROute::post('/UploadPage','App\Http\Controller\UploadDataController@store');
