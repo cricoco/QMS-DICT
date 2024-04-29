@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\UnitController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -59,5 +60,7 @@ Route::middleware('auth')->group(function () {
                 ->name('logout');
 
     Route::post('/division', [DivisionController::class, 'submitDivisionDetails'])->name('division');
+
+    Route::post('/unit', [UnitController::class, 'submitUnitDetails'])->name('unit');
 
 });

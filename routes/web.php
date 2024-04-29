@@ -54,4 +54,8 @@ Route::get('/division', function () {
     return view('division');
 })->middleware(['auth', 'verified'])->name('division');
 
+Route::get('/unit', function () {
+    return view('unit');
+})->middleware(['auth', 'verified'])->name('unit');
+
 require __DIR__.'/auth.php';
