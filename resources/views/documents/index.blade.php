@@ -34,10 +34,10 @@
   
                                         <td>
                                             <a href="{{ url('/document/' . $item->id) }}" title="View Document"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/download', $item->file) }}" title="Download Document"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Download</button></a>
+                                            <a href="{{ route('document.download', $item->file) }}" title="Download Document"><button class="btn btn-info btn-sm"><i class="fa fa-download" aria-hidden="true"></i> Download</button></a>
                                             <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
   
-                                            <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">    
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>

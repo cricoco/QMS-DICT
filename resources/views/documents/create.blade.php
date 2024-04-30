@@ -5,7 +5,7 @@
   <div class="card-header">Create New Documents</div>
   <div class="card-body">
        
-      <form action="{{ url('document') }}" method="post">
+      <form action="{{ url('document') }}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <label>Name</label></br>
         <input type="text" name="name" id="name" class="form-control"></br>

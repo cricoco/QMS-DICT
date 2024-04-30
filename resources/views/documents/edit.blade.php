@@ -15,7 +15,14 @@
         <input type="text" name="address" id="address" value="{{$documents->address}}" class="form-control"></br>
         <label>Mobile</label></br>
         <input type="text" name="mobile" id="mobile" value="{{$documents->mobile}}" class="form-control"></br>
+        <label>File</label></br>
+        <!-- <input type="file" name="file" id="file" value="{{$documents->file}}" class="form-control"></br> -->
+        <label>Current File</label><br>
+        <p>{{ $documents->file }}</p><br>
+        <label>Replace with (if any)</label><br>
+        <input type="file" name="file" id="file" value="{{$documents->file}}" class="form-control"></br>
         <input type="submit" value="Update" class="btn btn-success"></br>
+        <a href="{{ route('documents.index') }}" class="btn btn-secondary">Abort</a>
     </form>
     
   </div>

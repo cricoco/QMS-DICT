@@ -37,32 +37,18 @@ class DocumentController extends Controller
     {
         // $input = $request->all();
         // Document::create($input);
-        // return redirect('document')->with('flash_message', 'Document Added!'); 
-        // Validate the request
-        $request->validate([
-            'name' => 'required|string',
-            'address' => 'required|string',
-            'mobile' => 'required|string',
-            'file' => 'required|file|max:2048', // Adjust the file size limit as needed
-      ]);
-
-      // Handle file upload
-      if ($request->hasFile('file')) {
+        // return redirect('document')->with('flash_message', 'Document Added!');
+        $input = $request->all();
+    
+        if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move('assets', $filename);
-      }
-
-      // Create a new document record
-      $document = new Document();
-      $document->name = $request->name;
-      $document->address = $request->address;
-      $document->mobile = $request->mobile;
-      $document->file = $filename; // Store the file name in the database
-      $document->save();
-
-      // Redirect back with a success message
-      return redirect()->back()->with('success', 'Document added successfully.');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/documents', $fileName); // Adjust storage path as needed
+            $input['file'] = $fileName;
+        }
+    
+        Document::create($input);
+        return redirect('document')->with('flash_message', 'Document Added!'); 
         
     }
 
@@ -118,10 +104,16 @@ class DocumentController extends Controller
         return redirect('documents')->with('flash_message', 'Document deleted!');  
     }
      
-    public function download(Request $request,$id)
+    public function download(Request $request,$file)
     {
 
-        return response()->download(public_path('assets/'.$id));
+        $filePath = storage_path('app/public/documents/' . $file); // Adjust storage path as needed
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        }
+    
+        return redirect()->back()->with('error', 'File not found.');
     }
 }
 

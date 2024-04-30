@@ -34,14 +34,15 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
 
 //============== Normal user middleware
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/download/{file}',[PageController::class,'download']);
+    //Route::get('/download/{file}',[PageController::class,'download']);
     Route::get('/view/{is}',[PageController::class,'view']);
     Route::get('/show',[PageController::class,'show']);
     Route::get('/index', function () {
         return view('admin.index');
     });
 });   
-
+//Route::get('/download/{file}', 'DocumentController@download')->name('document.download');
+Route::get('/download/{file}', [DocumentController::class, 'download'])->name('document.download');
 
 //==================
 
