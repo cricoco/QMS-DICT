@@ -13,7 +13,7 @@ use App\Models\Product;
 
 
 
-class PageController extends Controller
+class PageControllerAdmin extends Controller
 {
    public function index()
    {
@@ -59,7 +59,7 @@ class PageController extends Controller
    {
 
    	$data=product::all();
-   	return view('showproduct',compact('data'));
+   	return view('admin.showproduct',compact('data'));
    }
 
 
@@ -81,6 +81,7 @@ class PageController extends Controller
 
    }
 
+   
 
 
    

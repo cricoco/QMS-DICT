@@ -5,20 +5,45 @@ use Illuminate\Support\Facades\Route;
 
 //======================
 use App\Http\Controllers\PageController;
-
-Route::get('/',[PageController::class,'index']);
-
-Route::get('/uploadpage',[PageController::class,'uploadpage']);
-
-Route::post('/uploadproduct',[PageController::class,'store']);
+use App\Http\Controllers\PageControllerAdmin;
+use App\Http\Controllers\DocumentController;
 
 
-Route::get('/show',[PageController::class,'show']);
+ 
+Route::resource("/document", DocumentController::class);
 
-Route::get('/download/{file}',[PageController::class,'download']);
+//Route::get('/',[PageController::class,'index']);
 
-Route::get('/view/{is}',[PageController::class,'view']);
-//==============
+//Route::get('/uploadpage',[PageController::class,'uploadpage'])->middleware(['auth', 'verified']);
+
+//Route::post('/uploadproduct',[PageController::class,'store']);
+
+
+//Route::get('/show',[PageController::class,'show']);
+
+//Route::get('/download/{file}',[PageController::class,'download']);
+
+//Route::get('/view/{is}',[PageController::class,'view']);
+
+//============== Admin middleware
+Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
+    Route::get('/uploadpage',[PageControllerAdmin::class,'uploadpage']);
+    Route::post('/uploadproduct',[PageControllerAdmin::class,'store']);
+    Route::get('/a/show',[PageControllerAdmin::class,'show']);  
+}); 
+
+//============== Normal user middleware
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/download/{file}',[PageController::class,'download']);
+    Route::get('/view/{is}',[PageController::class,'view']);
+    Route::get('/show',[PageController::class,'show']);
+    Route::get('/index', function () {
+        return view('admin.index');
+    });
+});   
+
+
+//==================
 
 // Route::get('/', function () {
 //     return view('welcome');

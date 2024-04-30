@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     use HasFactory;
-
-    protected $fillable=['name','description','file'];
+    protected $table = 'documents';
+    protected $primaryKey = 'id';
+    protected $fillable = ['name', 'address', 'mobile', 'file'];
 }
 

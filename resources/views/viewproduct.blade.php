@@ -9,7 +9,7 @@
 	{{$data->name}}
 	{{$data->description}}
 
-	<iframe height="400"  width="400" src="/assets/{{$data->file}}"></iframe>
+	<iframe height="900"  width="900" src="/assets/{{$data->file}}"></iframe>
 
 </body>
 </html>
