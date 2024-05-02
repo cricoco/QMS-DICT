@@ -49,8 +49,7 @@
                             </table>
                         </div>
                         <div>
-                            {{ $documents->appends(['search' => request()->query('search')])->links() }}
-
+                                {{ $documents->links() }}
                         </div> 
                     </div>
                 </div>

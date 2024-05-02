@@ -12,10 +12,20 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $documents = Document::all();
-        return view ('documents.index')->with('documents', $documents);
+        // $documents = Document::paginate(10);
+        // return view ('documents.index')->with('documents', $documents);
+        // $documents = Document::paginate(5);
+        // return view('documents.index', compact('documents'));
+        $query = $request->input('search');
+        $documents = Document::where('name', 'LIKE', "%$query%")
+                    ->orWhere('address', 'LIKE', "%$query%")
+                    ->orWhere('mobile', 'LIKE', "%$query%")
+                    ->paginate(10)
+                    ->appends(['search' => $query]);
+    
+         return view('documents.index')->with('documents', $documents);
     }
      /**
      * Show the form for creating a new resource.

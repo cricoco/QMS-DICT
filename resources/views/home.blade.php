@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
 <body>
     <div class="home-bg">
         <ul>
-            <li><a href="{{ route('library') }}">Library</a></li>
+            <li><a href="{{ route('documents.index') }}">Library</a></li>
             <li><a href="{{ route('about-us') }}" style="margin-right: 950px;">About Us</a></li>
             
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -21,4 +21,9 @@
         </ul>
     </div>
 </body>
-</html>
+</html> -->
+
+@extends('documents.layout')
+@section('content')
+
+@endsection

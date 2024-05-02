@@ -78,11 +78,11 @@ Route::get('/library', function () {
 })->middleware(['auth', 'verified'])->name('library');
 
 Route::get('/library/manuals', function () {
-    return view('manuals');
+    return view('documents.manuals');
 })->middleware(['auth', 'verified'])->name('manuals');
 
 Route::get('/library/formats', function () {
-    return view('formats');
+    return view('documents.formats');
 })->middleware(['auth', 'verified'])->name('formats');
 
 Route::middleware('auth')->group(function () {

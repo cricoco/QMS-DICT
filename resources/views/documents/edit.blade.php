@@ -2,6 +2,7 @@
 @section('content')
   
 <div class="card" style="margin:20px;">
+</br>
   <div class="card-header">Edit Document</div>
   <div class="card-body">
        
