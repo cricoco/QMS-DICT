@@ -7,9 +7,19 @@
   
   <div class="card-body">
         <div class="card-body">
-        <h5 class="card-title">Name : {{ $documents->name }}</h5>
-        <p class="card-text">Address : {{ $documents->address }}</p>
-        <p class="card-text">Mobile : {{ $documents->mobile }}</p>
+        <h5 class="card-title">Doc Ref. Code : {{ $documents->doc_ref_code }}</h5>
+        <p class="card-text">Document Title : {{ $documents->doc_title }}</p>
+        <p class="card-text">DMT Incharged : {{ $documents->dmt_incharged }}</p>
+        <p class="card-text">Division : {{ $documents->division }}</p>
+        <p class="card-text">Process Owner : {{ $documents->process_owner }}</p>
+        <p class="card-text">Status : {{ $documents->status }}</p>
+        <p class="card-text">Document Type : {{ $documents->doc_type }}</p>
+        <p class="card-text">Request Type : {{ $documents->request_type }}</p>
+        <p class="card-text">Request Reason : {{ $documents->request_reason }}</p>
+        <p class="card-text">Requester : {{ $documents->requester }}</p>
+        <p class="card-text">Request Date  : {{ $documents->request_date }}</p>
+        <p class="card-text">Revision Number : {{ $documents->revision_num }}</p>
+        <p class="card-text">Effectivity Date : {{ $documents->effectivity_date }}</p>
         <p class="card-text">File : {{ $documents->file }}</p>
         <iframe width="900" height="900" src="{{ asset('storage/documents/' . $documents->file) }}"></iframe>
 

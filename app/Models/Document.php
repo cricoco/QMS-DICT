@@ -10,6 +10,20 @@ class Document extends Model
     use HasFactory;
     protected $table = 'documents';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'address', 'mobile', 'file'];
+    protected $fillable = ['doc_ref_code', 
+                            'doc_title', 
+                            'dmt_incharged', 
+                            'division', 
+                            'process_owner',
+                            'status',
+                            'doc_type',
+                            'request_type',
+                            'request_reason',
+                            'requester',
+                            'request_date',
+                            'revision_num',
+                            'effectivity_date',
+                            'file',
+                            ];
 }
 

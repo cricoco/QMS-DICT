@@ -19,9 +19,20 @@ class DocumentController extends Controller
         // $documents = Document::paginate(5);
         // return view('documents.index', compact('documents'));
         $query = $request->input('search');
-        $documents = Document::where('name', 'LIKE', "%$query%")
-                    ->orWhere('address', 'LIKE', "%$query%")
-                    ->orWhere('mobile', 'LIKE', "%$query%")
+        $documents = Document::where('doc_ref_code', 'LIKE', "%$query%")
+                    ->orWhere('doc_title', 'LIKE', "%$query%")
+                    ->orWhere('dmt_incharged', 'LIKE', "%$query%")
+                    ->orWhere('division', 'LIKE', "%$query%")
+                    ->orWhere('process_owner', 'LIKE', "%$query%")
+                    ->orWhere('status', 'LIKE', "%$query%")
+                    ->orWhere('doc_type', 'LIKE', "%$query%")
+                    ->orWhere('request_type', 'LIKE', "%$query%")
+                    ->orWhere('request_reason', 'LIKE', "%$query%")
+                    ->orWhere('requester', 'LIKE', "%$query%")
+                    ->orWhere('request_date', 'LIKE', "%$query%")
+                    ->orWhere('revision_num', 'LIKE', "%$query%")
+                    ->orWhere('effectivity_date', 'LIKE', "%$query%")
+                    ->orWhere('file', 'LIKE', "%$query%")
                     ->paginate(10)
                     ->appends(['search' => $query]);
     
