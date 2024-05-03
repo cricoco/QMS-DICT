@@ -24,6 +24,8 @@ class Document extends Model
                             'revision_num',
                             'effectivity_date',
                             'file',
+                            'created_at',
+                            'updated_at',
                             ];
 }
 

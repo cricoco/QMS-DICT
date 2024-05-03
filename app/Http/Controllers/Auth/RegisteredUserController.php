@@ -45,8 +45,8 @@ class RegisteredUserController extends Controller
         
         event(new Registered($user));      /* User is now registered after previous lines were true */
 
-        Auth::login($user);         /* Logs in user */
+        //Auth::login($user);         /* Logs in user */
 
-        return redirect(route('home', absolute: false)); /* Sends user to homepage */
+        return redirect(route('login', absolute: false)); /* Sends user to homepage */
     }
 }

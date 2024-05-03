@@ -7,7 +7,40 @@
     <style>
         .document-background {
             background-color: #6e70f5;
+            animation: colorchange 45s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
         }
+              @keyframes colorchange {
+            0% {
+              background: #45b3e0;
+            }
+            14% {
+              background: #87ceeb;
+            }
+            28% {
+              background: #164d94;
+            }
+            42% {
+              background: #fbd354;
+            }
+            56% {
+              background: #6b819c;
+            }
+            70% {
+              background: #6b819c; 
+            }
+            84% {
+              background: #ffdada;
+            }
+            100% {
+              background: #45b3e0;
+            }
+          
+        }
+        
+        
     </style>
 </head>
 <body>
@@ -23,8 +56,8 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Library</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('documents.index') }}">Documents</a></li>
-            <li><a class="dropdown-item" href="{{ route('manuals') }}">Manuals</a></li>
-            <li><a class="dropdown-item" href="{{ route('formats') }}">Forms</a></li>
+            <li><a class="dropdown-item" href="{{ route('documents.manuals') }}">Manuals</a></li>
+            <li><a class="dropdown-item" href="{{ route('documents.formats') }}">Forms</a></li>
           </ul>
         </li>
       </ul> 
@@ -52,6 +85,6 @@
         @yield('content')
     </div>
 </div>
-</body>  
+@yield('homeContent')
 </body>
 </html>

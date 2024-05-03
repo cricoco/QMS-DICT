@@ -1,28 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/formats-bg.css') }}" rel="stylesheet" type="text/css">
-    <title>Formats</title>
-</head>
-<body>
-    <div class="home-bg">
-        <ul>
-            <li><a href="{{ route('library') }}" style="margin-right: 50px;">Back to Library</a></li>
-            <li><a href="{{ route('manuals') }}">Manuals</a></li>
-            <li><a href="{{ route('home') }}" style="margin-left: 800px;">Home</a></li>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        
-
-        </ul>
+@extends('documents.layout')
+@section('content')
+<div class="container">
+    <div class="row" style="margin:20px;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header" style="text-align: center;">
+                    <h2>Formats</h2>
+                </div>
+                <div class="card-body" style="height: 100vh; overflow-y: auto;">
+                    <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;">Add New</a>
+                    <br>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table" style="white-space: nowrap;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Doc Ref. Code</th>
+                                    <th>Document Title</th>
+                                    <th>DMT Incharged</th>
+                                    <th>Division</th>
+                                    <th>Process Owner</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($documents as $item)
+                                    @if(in_array($item->doc_type, ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template']))
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->doc_ref_code }}</td>
+                                            <td>{{ $item->doc_title }}</td>
+                                            <td style="text-align: center;">{{ $item->dmt_incharged }}</td>
+                                            <td style="text-align: center;">{{ $item->division }}</td>
+                                            <td>{{ $item->process_owner }}</td>
+                                            <td>{{ $item->status }}</td>
+                                            <td>
+                                                <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                                                <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+                                                <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+                                                <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-        
-    <div class="display-docs">
-        All Formats
-    </div>
-</body>
-</html>
+</div>
+@endsection

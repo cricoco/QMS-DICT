@@ -2,7 +2,8 @@
 @section('content')
 <div class="card" style="margin:20px;">
 </br></br></br>
-<a href="{{ route('documents.index') }}" class="btn btn-secondary">Back</a>
+<!-- <a href="{{ route('documents.index') }}" class="btn btn-secondary">Back</a> -->
+<button class="btn btn-secondary" onclick="history.back()">Back</button>
   <div class="card-header">Documents Page</div>
   
   <div class="card-body">
@@ -21,10 +22,13 @@
         <p class="card-text">Revision Number : {{ $documents->revision_num }}</p>
         <p class="card-text">Effectivity Date : {{ $documents->effectivity_date }}</p>
         <p class="card-text">File : {{ $documents->file }}</p>
+        <p class="card-text">Created at : {{ $documents->created_at }}</p>
+        <p class="card-text">Updated at : {{ $documents->updated_at }}</p>
         <iframe width="900" height="900" src="{{ asset('storage/documents/' . $documents->file) }}"></iframe>
 
   </div>
-  <a href="{{ route('documents.index') }}" class="btn btn-secondary">Back</a>        
+  <!-- <a href="{{ route('documents.index') }}" class="btn btn-secondary">Back</a>         -->
+  <button class="btn btn-secondary" onclick="history.back()">Back</button>
     </hr>
   </div>
 </div>

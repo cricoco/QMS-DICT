@@ -8,7 +8,7 @@
                     <h2>Documents</h2>
                 </div>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
-                    <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document">Add New</a>
+                    <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;">Add New</a>
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -37,7 +37,7 @@
                                     <td>{{ $item->status }}</td>
                                     <td>
                                         <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
-                                        <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+                                        <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
                                         <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
                                         <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                             {{ method_field('DELETE') }}
@@ -58,4 +58,6 @@
         </div>
     </div>
 </div>
+
+<!-- =============FOR VIEW================== -->
 @endsection

@@ -43,6 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });   
 //Route::get('/download/{file}', 'DocumentController@download')->name('document.download');
 Route::get('/download/{file}', [DocumentController::class, 'download'])->name('document.download');
+Route::get('/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
+Route::get('/formats', [DocumentController::class, 'formats'])->name('documents.formats');
 
 //==================
 
@@ -81,9 +83,9 @@ Route::get('/library/manuals', function () {
     return view('documents.manuals');
 })->middleware(['auth', 'verified'])->name('manuals');
 
-Route::get('/library/formats', function () {
-    return view('documents.formats');
-})->middleware(['auth', 'verified'])->name('formats');
+// Route::get('/library/formats', function () {
+//     return view('documents.formats');
+// })->middleware(['auth', 'verified'])->name('formats');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

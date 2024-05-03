@@ -55,8 +55,9 @@
         <label>File</label></br>
         <input type="file" name="file" id="file" class="form-control"></br>
         <input type="submit" value="Save" class="btn btn-success"></br>
-        <a href="{{ route('documents.index') }}" class="btn btn-secondary">Abort</a>
+        <!-- <a href="{{ route('documents.index') }}" class="btn btn-secondary">Abort</a> -->
     </form>
+    <button class="btn btn-secondary" style="background-color: #dc3545; border-color: #dc3545;" onclick="history.back()">Abort</button>
     
   </div>
 </div>

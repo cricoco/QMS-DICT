@@ -54,17 +54,20 @@
         <input type="text" name="revision_num" id="revision_num" value="{{$documents->revision_num}}" class="form-control"></br>
         <label>Effectivity Date</label></br>
         <input type="date" name="effectivity_date" id="effectivity_date" value="{{$documents->effectivity_date}}" class="form-control"></br>
-        <label>File</label></br>
+        <!-- <label>File</label></br> -->
         <!-- <input type="file" name="file" id="file" value="{{$documents->file}}" class="form-control"></br> -->
-        <label>Current File</label><br>
-        <p>{{ $documents->file }}</p><br>
-        <label>Replace with (if any)</label><br>
-        <input type="file" name="file" id="file" value="{{$documents->file}}" class="form-control"></br>
+        <!-- <label>File</label><br>
+        <p>{{ $documents->file }}</p> -->
+        <!-- <label>Replace With</label></br> -->
+        <!-- <input type="file" name="file" id="file" class="form-control"></br>
+        <input type="submit" value="Save" class="btn btn-success"></br> -->
+        <!-- <a href="#" id="myBtn" class="btn btn-primary">Replace Document</a></br></br> -->
         <input type="submit" value="Update" class="btn btn-success"></br>
-        <a href="{{ route('documents.index') }}" class="btn btn-secondary">Abort</a>
+        <!-- <a href="{{ route('documents.index') }}" class="btn btn-secondary">Abort</a> -->
+        <button class="btn btn-secondary" style="background-color: #dc3545; border-color: #dc3545;" onclick="history.back()">Abort</button>
     </form>
-    
   </div>
 </div>
+
   
 @stop
