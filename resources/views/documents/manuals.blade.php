@@ -12,7 +12,7 @@
                     <br>
                     <br>
                     <div class="table-responsive">
-                        <table class="table" style="white-space: nowrap;">
+                        <table class="table" style="white-space: wrap;">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -36,14 +36,14 @@
                                             <td style="text-align: center;">{{ $item->division }}</td>
                                             <td>{{ $item->process_owner }}</td>
                                             <td>{{ $item->status }}</td>
-                                            <td>
-                                                <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
-                                                <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
-                                                <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+                                            <td style="white-space: nowrap;">
+                                                <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                 <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
-                                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
