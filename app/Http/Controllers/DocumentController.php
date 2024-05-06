@@ -146,20 +146,7 @@ class DocumentController extends Controller
         // $documents = Document::paginate(5);
         // return view('documents.index', compact('documents'));
         $query = $request->input('search');
-        $documents = Document::where('doc_ref_code', 'LIKE', "%$query%")
-                    ->orWhere('doc_title', 'LIKE', "%$query%")
-                    ->orWhere('dmt_incharged', 'LIKE', "%$query%")
-                    ->orWhere('division', 'LIKE', "%$query%")
-                    ->orWhere('process_owner', 'LIKE', "%$query%")
-                    ->orWhere('status', 'LIKE', "%$query%")
-                    ->orWhere('doc_type', 'LIKE', "%$query%")
-                    ->orWhere('request_type', 'LIKE', "%$query%")
-                    ->orWhere('request_reason', 'LIKE', "%$query%")
-                    ->orWhere('requester', 'LIKE', "%$query%")
-                    ->orWhere('request_date', 'LIKE', "%$query%")
-                    ->orWhere('revision_num', 'LIKE', "%$query%")
-                    ->orWhere('effectivity_date', 'LIKE', "%$query%")
-                    ->orWhere('file', 'LIKE', "%$query%")
+        $documents = Document::where('doc_type', 'LIKE', "%$query%")
                     ->orderBy('created_at', 'desc')
                     ->paginate(10)
                     ->appends(['search' => $query]);
@@ -174,20 +161,7 @@ class DocumentController extends Controller
         // $documents = Document::paginate(5);
         // return view('documents.index', compact('documents'));
         $query = $request->input('search');
-        $documents = Document::where('doc_ref_code', 'LIKE', "%$query%")
-                    ->orWhere('doc_title', 'LIKE', "%$query%")
-                    ->orWhere('dmt_incharged', 'LIKE', "%$query%")
-                    ->orWhere('division', 'LIKE', "%$query%")
-                    ->orWhere('process_owner', 'LIKE', "%$query%")
-                    ->orWhere('status', 'LIKE', "%$query%")
-                    ->orWhere('doc_type', 'LIKE', "%$query%")
-                    ->orWhere('request_type', 'LIKE', "%$query%")
-                    ->orWhere('request_reason', 'LIKE', "%$query%")
-                    ->orWhere('requester', 'LIKE', "%$query%")
-                    ->orWhere('request_date', 'LIKE', "%$query%")
-                    ->orWhere('revision_num', 'LIKE', "%$query%")
-                    ->orWhere('effectivity_date', 'LIKE', "%$query%")
-                    ->orWhere('file', 'LIKE', "%$query%")
+        $documents = Document::where('doc_type', 'LIKE', "%$query%")
                     ->orderBy('created_at', 'desc')
                     ->paginate(10)
                     ->appends(['search' => $query]);
@@ -195,6 +169,35 @@ class DocumentController extends Controller
          return view('documents.formats')->with('documents', $documents);
     }
 
-    
-}
 
+
+    // public function formats(Request $request)
+    // {
+    //     // $documents = Document::paginate(10);
+    //     // return view ('documents.index')->with('documents', $documents);
+    //     // $documents = Document::paginate(5);
+    //     // return view('documents.index', compact('documents'));
+    //     $query = $request->input('search');
+    //     $documents = Document::where('doc_ref_code', 'LIKE', "%$query%")
+    //                 ->orWhere('doc_title', 'LIKE', "%$query%")
+    //                 ->orWhere('dmt_incharged', 'LIKE', "%$query%")
+    //                 ->orWhere('division', 'LIKE', "%$query%")
+    //                 ->orWhere('process_owner', 'LIKE', "%$query%")
+    //                 ->orWhere('status', 'LIKE', "%$query%")
+    //                 ->orWhere('doc_type', 'LIKE', "%$query%")
+    //                 ->orWhere('request_type', 'LIKE', "%$query%")
+    //                 ->orWhere('request_reason', 'LIKE', "%$query%")
+    //                 ->orWhere('requester', 'LIKE', "%$query%")
+    //                 ->orWhere('request_date', 'LIKE', "%$query%")
+    //                 ->orWhere('revision_num', 'LIKE', "%$query%")
+    //                 ->orWhere('effectivity_date', 'LIKE', "%$query%")
+    //                 ->orWhere('file', 'LIKE', "%$query%")
+    //                 ->orderBy('created_at', 'desc')
+    //                 ->paginate(10)
+    //                 ->appends(['search' => $query]);
+    
+    //      return view('documents.formats')->with('documents', $documents);
+    // }
+
+
+}

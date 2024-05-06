@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header" style="text-align: center;">
-                    <h2>Formats</h2>
+                    <h2>Forms</h2>
                 </div>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
                     <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;">Add New</a>
@@ -52,8 +52,9 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
+                    <div>   
+                        {{ $documents->appends(['search' => request()->query('search')])->links() }}
+                    </div>
         </div>
     </div>
 </div>

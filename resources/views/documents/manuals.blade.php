@@ -27,7 +27,7 @@
                             </thead>
                             <tbody>
                                 @foreach($documents as $item)
-                                    @if(in_array($item->doc_type, ['Quality Manual', 'Operations Manual', 'Procedure Manual']))
+                                    <!-- @if(in_array($item->doc_type, ['Quality Manual', 'Operations Manual', 'Procedure Manual'])) -->
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->doc_ref_code }}</td>
@@ -47,13 +47,14 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endif
+                                    <!-- @endif -->
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
+                    <div>   
+                        {{ $documents->appends(['search' => request()->query('search')])->links() }}
+                    </div>
         </div>
     </div>
 </div>
