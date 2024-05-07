@@ -1,12 +1,19 @@
 @extends('documents.layout')
 @section('content')
 <div class="container">
+<br><br><br>
     <div class="row" style="margin:20px;">
         <div class="col-12">
             <div class="card">
                 <!-- <div class="card-header" style="text-align: center;"> -->
-                <div class="alert alert-dark text-center">
+                <div class="alert alert-dark text-center" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; background-color: #0693e3; color: #ffffff;">
                     <h2>Manuals</h2>
+                </div>
+                <div class="alert alert-light text-center">
+                    <form action="{{ route('documents.index') }}" method="GET" class="d-flex">
+                        <input class="form-control me-2" type="text" placeholder="Search" name="search">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
                 </div>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
                     <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
@@ -54,11 +61,14 @@
                         </table>
                     </div>
                     <div>   
-                        {{ $documents->appends(['search' => request()->query('search')])->links() }}
+                        <!-- {{ $documents->appends(['search' => request()->query('search')])->links() }} -->
                     </div>
                     </div>
+                    <div class="card-footer">{{ $documents->appends(['search' => request()->query('search')])->links() }}</div>
             </div>
         </div>
     </div>
 </div>
+
+<br><br><br><br><br><br><br><br><br><br><br>
 @endsection

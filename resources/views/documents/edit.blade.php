@@ -1,6 +1,18 @@
 @extends('documents.layout')
 @section('content')
   
+@if(session()->has('flash_message'))
+
+    <button type="button" class="btn btn-success swalDefaultSuccess">
+    Launch Success Toast
+    </button>
+
+    <!-- <div class="alert alert-success alert-dismissible fade show" role="alert" style="">
+        {{ (session('flash_message')) }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
+@endif
+
 <div class="card" style="margin:20px;">
 </br>
   <div class="card-header">Edit Document</div>
@@ -69,5 +81,6 @@
   </div>
 </div>
 
-  
+
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 @stop
