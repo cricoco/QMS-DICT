@@ -40,11 +40,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/index', function () {
         return view('admin.index');
     });
+    Route::get('/', function () {
+        return view('home');
+    });
+
 });   
 //Route::get('/download/{file}', 'DocumentController@download')->name('document.download');
 Route::get('/download/{file}', [DocumentController::class, 'download'])->name('document.download');
 Route::get('/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
 Route::get('/formats', [DocumentController::class, 'formats'])->name('documents.formats');
+// Route::get('/documents', [DocumentController::class, 'show'])->name('documents.index');
 
 //==================
 
@@ -52,15 +57,15 @@ Route::get('/formats', [DocumentController::class, 'formats'])->name('documents.
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    // Auth check
-    if (!Auth::check()) {
-        // If not logged in, go login.
-        return redirect()->route('login');
-    } else {
-        return redirect()->route('home');
-    }
-});
+// Route::get('/', function () {
+//     // Auth check
+//     if (!Auth::check()) {
+//         // If not logged in, go login.
+//         return redirect()->route('login');
+//     } else {
+//         return redirect()->route('home');
+//     }
+// });
 
 
 Route::get('/dashboard', function () {

@@ -4,15 +4,15 @@
     <div class="row" style="margin:20px;">
         <div class="col-12">
             <div class="card">
-                <div class="card-header" style="text-align: center;">
+                <div class="alert alert-dark text-center">
                     <h2>Documents</h2>
                 </div>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
-                    <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;">Add New</a>
+                    <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
                     <br>
                     <br>
-                    <div class="table-responsive">
-                        <table class="table" style="white-space: wrap;">
+                    <div class="table-responsive">  
+                        <table class="table table-hover" style="white-space: wrap;">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -36,13 +36,13 @@
                                     <td>{{ $item->process_owner }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td style="white-space: nowrap;">
-                                        <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>   <!-- View -->
+                                        <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a>   <!-- View -->
                                         <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i></a> <!-- Download -->
                                         <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <!-- Edit -->
                                         <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button> <!-- Delete -->
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Are you sure you want to remove this document?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button> <!-- Delete -->
                                         </form>
                                     </td>
                                 </tr>
@@ -60,4 +60,6 @@
 </div>
 
 <!-- =============FOR VIEW================== -->
+
+
 @endsection
