@@ -68,9 +68,9 @@
         </div>
     </div>
 </div>
-
+<br>
 <!-- =============SCRIPTS================== -->
 
-<br><br><br><br><br><br><br><br><br><br><br>
+
 
 @endsection

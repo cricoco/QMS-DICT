@@ -1,28 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/home-bg.css" rel="stylesheet" type="text/css">
-    <title>Home</title>
-</head>
-<body>
-    <div class="home-bg">
-        <ul>
-            <li><a href="{{ route('documents.index') }}">Library</a></li>
-            <li><a href="{{ route('about-us') }}" style="margin-right: 950px;">About Us</a></li>
-            
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-
-        </ul>
-    </div>
-</body>
-</html> -->
-
 @extends('documents.layout')
 @section('homeContent')
 <div class="document-background">
@@ -40,55 +15,80 @@
         <br>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="s-tab" data-bs-toggle="tab" data-bs-target="#s-tab-pane" type="button" role="tab" aria-controls="s-tab-pane" aria-selected="true">Summary</button>
+                <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary-tab-pane" type="button" role="tab" aria-controls="summary-tab-pane" aria-selected="true">Summary</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">History</button>
+                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="false">History</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Vision & Mission</button>
+                <button class="nav-link" id="visionmission-tab" data-bs-toggle="tab" data-bs-target="#visionmission-tab-pane" type="button" role="tab" aria-controls="visionmission-tab-pane" aria-selected="false">Vision & Mission</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Vision & Mission</button>
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact Us</button>
             </li>
-            
+
 
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="s-tab-pane" role="tabpanel" aria-labelledby="s-tab" tabindex="0">Mission and Vision
-Mission
+            <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0"><br>
+                <h1 class="entry-title text-center"><strong>Summary</strong></h1>
+                <div class="card-body">
+                    summary
+                </div>
+            </div>
 
-“DICT of the people and for the people.”
+            <div class="tab-pane fade" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab" tabindex="0"><br>
+                <h1 class="entry-title text-center"><strong>History</strong></h1>
+                <div class="card-body">
+                    history
+                </div>
+            </div>
 
-The Department of Information and Communications Technology commits to:
+            <div class="tab-pane fade" id="visionmission-tab-pane" role="tabpanel" aria-labelledby="visionmission-tab" tabindex="0"><br>
+            <h1 class="entry-title text-center"><strong>Mission and Vision</strong></h1>
+            <br><br>
+                <div class="card-body">
+                    <strong>Mission</strong>
+                    <i>DICT of the people and for the people.”</i>
+                    <p>The Department of Information and Communications Technology commits to:</p>
 
-Provide every Filipino access to vital ICT infostructure and services
-Ensure sustainable growth of Philippine ICT-enabled industries resulting to creation of more jobs
-Establish a One Digitized Government, One Nation
-Support the administration in fully achieving its goals
-Be the enabler, innovator, achiever and leader in pushing the country’s development and transition towards a world-class digital economy
-Vision
+                    <ul>
+                    <li>Provide every Filipino access to vital ICT infostructure and services</li>
+                    <li>Ensure sustainable growth of Philippine ICT-enabled industries resulting to creation of more jobs</li>
+                    <li>Establish a One Digitized Government, One Nation</li>
+                    <li>Support the administration in fully achieving its goals</li>
+                    <li>Be the enabler, innovator, achiever and leader in pushing the country’s development and transition towards a world-class digital economy</li>
+                    </ul>
 
-“An innovative, safe and happy nation that thrives through and is enabled by Information and Communications Technology.”
+                    <strong>Vision</strong>
+                    <i>An innovative, safe and happy nation that thrives through and is enabled by Information and Communications T</i>
 
-DICT aspires for the Philippines to develop and flourish through innovation and constant development of ICT in the pursuit of a progressive, safe, secured, contented and happy Filipino nation.
+                    <p>DICT aspires for the Philippines to develop and flourish through innovation and constant development of ICT in the pursuit of a progressive, safe, secured, contented and happy Filipino nation.</p>
 
-Core Values
+                    <strong>Core Values</strong>
 
-D – Dignity
-I – Integrity
-C – Competency and Compassion
-T – Transparency</div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+                    <p>D – Dignity<br>
+                        I – Integrity<br>
+                        C – Competency and Compassion<br>
+                        T – Transparency
+                    </p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"><br>
+                <h1 class="entry-title text-center"><strong>Contact Us</strong></h1>
+                <div class="card-body">
+                    contacts
+                </div>
+
+            </div>
+
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
 
 
     </div>
-    
+
 </div>
 
 @endsection
