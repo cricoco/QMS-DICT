@@ -141,33 +141,129 @@ class DocumentController extends Controller
 
     public function manuals(Request $request)
     {
-        // $documents = Document::paginate(10);
-        // return view ('documents.index')->with('documents', $documents);
-        // $documents = Document::paginate(5);
-        // return view('documents.index', compact('documents'));
-        $query = $request->input('search');
-        $documents = Document::where('doc_type', 'LIKE', "%$query%")
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(10)
-                    ->appends(['search' => $query]);
+        $searchQuery = $request->input('search');
+        
+        $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
+                        ->when($searchQuery, function ($query) use ($searchQuery) {
+                            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('division', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('status', 'LIKE', "%$searchQuery%");
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10)
+                        ->appends(['search' => $searchQuery]);
     
-         return view('documents.manuals')->with('documents', $documents);
+        return view('documents.manuals')->with('documents', $documents);
+    }
+    
+
+
+    // public function manuals(Request $request)
+    // {
+    //     $query = $request->input('search');
+    //     $documents = Document::where('doc_type', 'LIKE', "%$query%")
+    //                 ->whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
+    //                 ->orderBy('created_at', 'desc')
+    //                 ->paginate(10)
+    //                 ->appends(['search' => $query]);
+    
+    //      return view('documents.manuals')->with('documents', $documents);
+    // }
+
+
+
+
+    // public function manuals(Request $request)
+    // {
+    //     // $documents = Document::paginate(10);
+    //     // return view ('documents.index')->with('documents', $documents);
+    //     // $documents = Document::paginate(5);
+    //     // return view('documents.index', compact('documents'));
+    //     $query = $request->input('search');
+    //     $documents = Document::where('doc_type', 'LIKE', "%$query%")
+    //                 ->orderBy('created_at', 'desc')
+    //                 ->paginate(10)
+    //                 ->appends(['search' => $query]);
+    
+    //      return view('documents.manuals')->with('documents', $documents);
+    // }
+
+// public function manuals(Request $request)
+// {
+//     $query = $request->input('search');
+//     $documents = Document::where(function($queryBuilder) use ($query) {
+//             $queryBuilder->where('doc_type', 'LIKE', "%$query%")
+//                          ->orWhere('doc_ref_code', 'LIKE', "%$query%")
+//                          ->orWhere('doc_title', 'LIKE', "%$query%")
+//                          ->orWhere('dmt_incharged', 'LIKE', "%$query%")
+//                          ->orWhere('division', 'LIKE', "%$query%")
+//                          ->orWhere('process_owner', 'LIKE', "%$query%")
+//                          ->orWhere('status', 'LIKE', "%$query%");
+//         })
+//         ->orderBy('created_at', 'desc')
+//         ->paginate(10)
+//         ->appends(['search' => $query]);
+
+//     return view('documents.manuals')->with('documents', $documents);
+// }
+
+
+
+public function formats(Request $request)
+    {
+        $searchQuery = $request->input('search');
+        
+        $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
+                        ->when($searchQuery, function ($query) use ($searchQuery) {
+                            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('division', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
+                            $query->orWhere('status', 'LIKE', "%$searchQuery%");
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10)
+                        ->appends(['search' => $searchQuery]);
+    
+        return view('documents.formats')->with('documents', $documents);
     }
 
-    public function formats(Request $request)
-    {
-        // $documents = Document::paginate(10);
-        // return view ('documents.index')->with('documents', $documents);
-        // $documents = Document::paginate(5);
-        // return view('documents.index', compact('documents'));
-        $query = $request->input('search');
-        $documents = Document::where('doc_type', 'LIKE', "%$query%")
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(10)
-                    ->appends(['search' => $query]);
+
+
+
+// public function formats(Request $request)
+// {
+//     $query = $request->input('search');
+//     $documents = Document::where('doc_type', 'LIKE', "%$query%")
+//                 ->whereNotIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
+//                 ->orderBy('created_at', 'desc')
+//                 ->paginate(10)
+//                 ->appends(['search' => $query]);
+
+//      return view('documents.formats')->with('documents', $documents);
+// }
+
+
+
+
+    // public function formats(Request $request)
+    // {
+    //     // $documents = Document::paginate(10);
+    //     // return view ('documents.index')->with('documents', $documents);
+    //     // $documents = Document::paginate(5);
+    //     // return view('documents.index', compact('documents'));
+    //     $query = $request->input('search');
+    //     $documents = Document::where('doc_type', 'LIKE', "%$query%")
+    //                 ->orderBy('created_at', 'desc')
+    //                 ->paginate(10)
+    //                 ->appends(['search' => $query]);
     
-         return view('documents.formats')->with('documents', $documents);
-    }
+    //      return view('documents.formats')->with('documents', $documents);
+    // }
 
 
 

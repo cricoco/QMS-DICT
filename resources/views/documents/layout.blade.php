@@ -85,10 +85,10 @@
             <a class="nav-link" href="{{ route('documents.index') }}" role="button">Documents</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('manuals?search=manual') }}" role="button">Manuals</a>
+            <a class="nav-link" href="{{ route('documents.manuals') }}" role="button">Manuals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('formats?search=form') }}" role="button">Forms</a>
+            <a class="nav-link" href="{{ route('documents.formats') }}" role="button">Forms</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">

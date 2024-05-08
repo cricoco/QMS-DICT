@@ -8,7 +8,7 @@
   
   <div class="card-body">
         <div class="card-body">
-        <h5 class="card-title">Doc Ref. Code : {{ $documents->doc_ref_code }}</h5>
+        <h5 class="card-title">Document Reference Code : {{ $documents->doc_ref_code }}</h5>
         <p class="card-text">Document Title : {{ $documents->doc_title }}</p>
         <p class="card-text">DMT Incharged : {{ $documents->dmt_incharged }}</p>
         <p class="card-text">Division : {{ $documents->division }}</p>

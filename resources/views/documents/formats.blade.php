@@ -9,8 +9,8 @@
                     <h2>Forms</h2>
                 </div>
                 <div class="alert alert-light text-center">
-                    <form action="{{ route('documents.index') }}" method="GET" class="d-flex">
-                        <input class="form-control me-2" type="text" placeholder="Search" name="search">
+                    <form action="{{ route('documents.formats') }}" method="GET" class="d-flex">
+                        <input class="form-control me-2" type="text" placeholder="Search" name="search"> <!-- WHERE WE LEFT --->
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
@@ -22,7 +22,7 @@
                         <table class="table table-hover" style="white-space: wrap;">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <!-- <th>#</th> -->
                                     <th>Doc Ref. Code</th>
                                     <th>Document Title</th>
                                     <th>DMT Incharged</th>
@@ -34,9 +34,9 @@
                             </thead>
                             <tbody>
                                 @foreach($documents as $item)
-                                    @if(in_array($item->doc_type, ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template']))
+                                    <!-- @if(in_array($item->doc_type, ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])) -->
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>
                                             <td style="text-align: center;">{{ $item->dmt_incharged }}</td>
@@ -45,7 +45,12 @@
                                             <td>{{ $item->status }}</td>
                                             <td style="white-space: nowrap;">
                                                 <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i></a>
+
+                                                <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;" onclick="return confirm('This document is a protected copy. Click ok to download.');">
+                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                                </a>
+
+                                                <!-- <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i></a> -->
                                                 <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                 <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                     {{ method_field('DELETE') }}
@@ -54,7 +59,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endif
+                                    <!-- @endif -->
                                 @endforeach
                             </tbody>
                         </table>

@@ -9,9 +9,11 @@ class Division extends Model
 {
     use HasFactory;
 
+    protected $table = 'documents';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'division_name',
         'status',
-    
+        
     ];
 }

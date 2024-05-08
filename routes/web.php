@@ -47,8 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });   
 //Route::get('/download/{file}', 'DocumentController@download')->name('document.download');
 Route::get('/download/{file}', [DocumentController::class, 'download'])->name('document.download');
-Route::get('/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
-Route::get('/formats', [DocumentController::class, 'formats'])->name('documents.formats');
+Route::get('/documents/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
+Route::get('/documents/formats', [DocumentController::class, 'formats'])->name('documents.formats');
 // Route::get('/documents', [DocumentController::class, 'show'])->name('documents.index');
 
 //==================

@@ -16,4 +16,11 @@ class DivisionController extends Controller
 
         return redirect('/')->with('success', 'Form submitted successfully!');
     }
+
+    public function show($id)
+    {
+        $documents = Division::find($id);
+        return view('documents.show')->with('documents', $documents);
+        
+    }
 }
