@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Document;
 
-class DocumentController extends Controller
+class PublicDocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,7 +37,7 @@ class DocumentController extends Controller
                     ->paginate(10)
                     ->appends(['search' => $query]);
     
-         return view('documents.index')->with('documents', $documents);
+         return view('publicdocuments.index')->with('documents', $documents);
     }
      /**
      * Show the form for creating a new resource.
@@ -46,7 +46,7 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('documents.create');
+        return view('publicdocuments.create');
     }
     
     
@@ -71,7 +71,7 @@ class DocumentController extends Controller
             $input['file'] = $fileName;
         }
     
-        Document::create($input);   
+        Document::create($input);
         return redirect('document')->with('flash_message', 'Document Added!'); 
         
     }
@@ -85,7 +85,7 @@ class DocumentController extends Controller
     public function show($id)
     {
         $documents = Document::find($id);
-        return view('documents.show')->with('documents', $documents);
+        return view('publicdocuments.show')->with('documents', $documents);
         
     }
 
@@ -98,7 +98,7 @@ class DocumentController extends Controller
     public function edit($id)
     {
         $documents = Document::find($id);
-        return view('documents.edit')->with('documents', $documents);
+        return view('publicdocuments.edit')->with('documents', $documents);
     }
 
     /**
@@ -157,7 +157,7 @@ class DocumentController extends Controller
                         ->paginate(10)
                         ->appends(['search' => $searchQuery]);
     
-        return view('documents.manuals')->with('documents', $documents);
+        return view('publicdocuments.manuals')->with('documents', $documents);
     }
     
 
@@ -230,7 +230,7 @@ public function formats(Request $request)
                         ->paginate(10)
                         ->appends(['search' => $searchQuery]);
     
-        return view('documents.formats')->with('documents', $documents);
+        return view('publicdocuments.formats')->with('documents', $documents);
     }
 
 

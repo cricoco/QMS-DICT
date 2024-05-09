@@ -1,6 +1,6 @@
-@extends('documents.layout')
-@section('content')
- <br><br> 
+@extends('publicdocuments.layout')
+@section('publiccontent')
+  
 <div class="card" style="margin:20px;">
 </br>
   <div class="card-header">Create New Documents</div>

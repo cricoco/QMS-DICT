@@ -67,8 +67,9 @@ Route::middleware('auth')->group(function () {
     // Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
     // Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
     // Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('documents.download');
-    Route::get('documents/', [DocumentController::class, 'index'])->name('documents.index');
-    Route::post('documents/create', [DocumentController::class, 'create'])->name('documents.create');
-    Route::post('documents/store', [DocumentController::class, 'store'])->name('documents.store');
+    
+    // Route::get('documents/', [DocumentController::class, 'index'])->name('documents.index');
+    // Route::post('documents/create', [DocumentController::class, 'create'])->name('documents.create');
+    // Route::post('documents/store', [DocumentController::class, 'store'])->name('documents.store');
 
 });

@@ -82,17 +82,18 @@
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('documents.index') }}" role="button">Documents</a>
+            <a class="nav-link" href="{{ route('publicdocuments.index') }}" role="button">Documents</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('documents.manuals') }}" role="button">Manuals</a>
+            <a class="nav-link" href="{{ route('publicdocuments.manuals') }}" role="button">Manuals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('documents.formats') }}" role="button">Forms</a>
+            <a class="nav-link" href="{{ route('publicdocuments.formats') }}" role="button">Forms</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Welcome, {{ Auth::user()->name }}</a>
             <ul class="dropdown-menu">
               <!-- <li>
@@ -106,6 +107,10 @@
                   
                 </form>
               </li>
+
+            </ul>
+          </li>
+
         </ul>
 
       </div>
@@ -114,10 +119,10 @@
 
   <div class="document-background">
     <div class="container">
-      @yield('content')
+      @yield('publiccontent')
     </div>
   </div>
-  @yield('homeContent')
+  @yield('publichomeContent')
 
 
 

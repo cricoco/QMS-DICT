@@ -2,15 +2,18 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 //======================
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PageControllerAdmin;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicDocumentController;
 
 
  
-Route::resource("/document", DocumentController::class);
+// Route::resource("/document", DocumentController::class);
 
 //Route::get('/',[PageController::class,'index']);
 
@@ -30,6 +33,15 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     Route::get('/uploadpage',[PageControllerAdmin::class,'uploadpage']);
     Route::post('/uploadproduct',[PageControllerAdmin::class,'store']);
     Route::get('/a/show',[PageControllerAdmin::class,'show']);  
+
+    // Admin User Interactions
+    //Route::resource("/document", DocumentController::class);
+    Route::get('documents/', [DocumentController::class, 'index'])->name('documents.index');
+    Route::post('documents/create', [DocumentController::class, 'create'])->name('documents.create');
+    Route::post('documents/store', [DocumentController::class, 'store'])->name('documents.store');
+    Route::get('/documents/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
+    Route::get('/documents/formats', [DocumentController::class, 'formats'])->name('documents.formats');
+    Route::resource("/document", DocumentController::class);
 }); 
 
 //============== Normal user middleware
@@ -40,15 +52,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/index', function () {
         return view('admin.index');
     });
-    Route::get('/', function () {
-        return view('home');
-    });
+    // Route::get('/', function () {
+    //     return view('publichome')->name();
+    // });
+
+
+    // User Interactions
+    
+    Route::resource("/p/document", PublicDocumentController::class);
+    Route::get('/p/documents/', [PublicDocumentController::class, 'index'])->name('publicdocuments.index');
+    Route::post('/p/documents/create', [PublicDocumentController::class, 'create'])->name('publicdocuments.create');
+    Route::post('/p/documents/store', [PublicDocumentController::class, 'store'])->name('publicdocuments.store');
+    Route::get('/p/documents/manuals', [PublicDocumentController::class, 'manuals'])->name('publicdocuments.manuals');
+    Route::get('/p/documents/formats', [PublicDocumentController::class, 'formats'])->name('publicdocuments.formats');
 
 });   
 //Route::get('/download/{file}', 'DocumentController@download')->name('document.download');
+
 Route::get('/download/{file}', [DocumentController::class, 'download'])->name('document.download');
-Route::get('/documents/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
-Route::get('/documents/formats', [DocumentController::class, 'formats'])->name('documents.formats');
+// Route::get('/documents/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
+// Route::get('/documents/formats', [DocumentController::class, 'formats'])->name('documents.formats');
 // Route::get('/documents', [DocumentController::class, 'show'])->name('documents.index');
 
 //==================
@@ -57,16 +80,31 @@ Route::get('/documents/formats', [DocumentController::class, 'formats'])->name('
 //     return view('welcome');
 // });
 
-// Route::get('/', function () {
-//     // Auth check
-//     if (!Auth::check()) {
-//         // If not logged in, go login.
-//         return redirect()->route('login');
-//     } else {
-//         return redirect()->route('home');
-//     }
-// });
+Route::get('/', function () {
+    // Auth check
+    if (Auth::check()) {
+        $usertype = Auth::user()->role_id;
 
+        if ($usertype == 0) {
+            return view('publichome');
+        } elseif ($usertype == 1) {
+            return view('home');
+        } else {
+            return redirect()->back();
+        }
+    } else {
+        return redirect()->route('login'); // Redirect to login page if user is not logged in
+    }
+});
+
+
+
+
+// route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('name');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -74,7 +112,11 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', function () {
     return view('home');
-})->middleware(['auth', 'verified'])->name('home');
+})->middleware(['auth', 'verified', 'isAdmin'])->name('home');
+
+Route::get('/p/publichome', function () {
+    return view('publichome');
+})->middleware(['auth', 'verified'])->name('publichome');
 
 Route::get('/about-us', function () {
     return view('about-us');
