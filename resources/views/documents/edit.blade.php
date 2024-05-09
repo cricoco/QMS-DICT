@@ -1,7 +1,7 @@
 @extends('documents.layout')
 @section('content')
 
-
+<br>
 <div class="card" style="margin:20px;">
 </br>
   <div class="card-header">Edit Document</div>
@@ -64,8 +64,8 @@
         <input type="submit" value="Save" class="btn btn-success"></br> -->
         <!-- <a href="#" id="myBtn" class="btn btn-primary">Replace Document</a></br></br> -->
         <input type="submit" value="Update" class="btn btn-success"></br>
-        <!-- <a href="{{ route('documents.index') }}" class="btn btn-secondary">Abort</a> -->
-        <button class="btn btn-secondary" style="background-color: #dc3545; border-color: #dc3545;" onclick="history.back()">Abort</button>
+        <a href="{{ route('documents.index') }}" class="btn btn-secondary" style="background-color: #dc3545; border-color: #dc3545;">Abort</a>
+        <!-- <button class="btn btn-secondary" style="background-color: #dc3545; border-color: #dc3545;" onclick="history.back()">Abort</button> -->
     </form>
   </div>
 </div>

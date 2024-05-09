@@ -10,9 +10,9 @@ use App\Http\Controllers\PageControllerAdmin;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicDocumentController;
+use App\Http\Controllers\DocumentHistoryController;
+use App\Models\DocumentHistory;
 
-
- 
 // Route::resource("/document", DocumentController::class);
 
 //Route::get('/',[PageController::class,'index']);
@@ -101,6 +101,10 @@ Route::get('/', function () {
 
 
 // route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('name');
+
+// Route::get('/history', [DocumentHistoryController::class, 'history'])->name('history');
+
+Route::get('/history', [DocumentHistoryController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -71,7 +71,7 @@
                                         <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Are you sure you want to remove this document?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button> <!-- Delete -->
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Document" onclick="return confirm('Are you sure you want to archive this document?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button> <!-- Delete -->
                                         </form>
                                     </td>
                                 </tr>

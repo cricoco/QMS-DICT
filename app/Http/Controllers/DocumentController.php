@@ -71,7 +71,8 @@ class DocumentController extends Controller
             $input['file'] = $fileName;
         }
     
-        Document::create($input);   
+        Document::create($input);
+           
         return redirect('document')->with('flash_message', 'Document Added!'); 
         
     }
@@ -122,11 +123,25 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function destroy($id)
+    // {
+    //     Document::destroy($id);
+    //     return redirect('documents')->with('flash_message', 'Document deleted!');  
+    // }
+
     public function destroy($id)
     {
-        Document::destroy($id);
-        return redirect('documents')->with('flash_message', 'Document deleted!');  
+        $document = Document::findOrFail($id);
+        $document->delete(); // This soft deletes the document
+    
+        return redirect('documents')->with('flash_message', 'Document archived!');
     }
+    
+
+
+
+
+
      
     public function download(Request $request,$file)
     {
