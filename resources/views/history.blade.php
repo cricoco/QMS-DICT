@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>History</h4>
+                    <!-- <h4>History</h4> -->
                 </div>
                 <div class="card-body">
 
@@ -13,9 +13,9 @@
                                 <th>Name</th>
                                 <th>Operation</th>
                                 <th>Document</th>
-                                <th>Document title</th>
-                                <th>Created at</th>
-                                <th>Updated at</th>
+                                <th>Document Title</th>
+                                
+                                <th>Date and Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,7 +25,7 @@
                                 <td>{{ $item->operation }}</td>
                                 <td>{{ $item->document->doc_ref_code }}</td> 
                                 <td>{{ $item->document->doc_title }}</td> 
-                                <td>{{ $item->created_at }}</td> 
+                                
                                 <td>{{ $item->updated_at }}</td> 
                             
                             </tr>
@@ -35,6 +35,7 @@
 
                 </div>
             </div>
+            <div class="card-footer"> {{ $history->links() }}</div>
         </div>
     </div>
 </div>

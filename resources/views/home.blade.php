@@ -15,11 +15,11 @@
         <br>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary-tab-pane" type="button" role="tab" aria-controls="summary-tab-pane" aria-selected="true">Summary</button>
+                <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary-tab-pane" type="button" role="tab" aria-controls="summary-tab-pane" aria-selected="true">History Logs</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="false">History</button>
-            </li>
+            <!-- <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="true">History Logs</button>
+            </li> -->
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="visionmission-tab" data-bs-toggle="tab" data-bs-target="#visionmission-tab-pane" type="button" role="tab" aria-controls="visionmission-tab-pane" aria-selected="false">Vision & Mission</button>
             </li>
@@ -31,18 +31,18 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0"><br>
-                <h1 class="entry-title text-center"><strong>Summary</strong></h1>
+                <h1 class="entry-title text-center"><strong>History Logs</strong></h1>
                 <div class="card-body">
-                    summary
+                    @include('history', ['history' => $history])
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab" tabindex="0"><br>
-                <h1 class="entry-title text-center"><strong>History</strong></h1>
+            <!-- <div class="tab-pane fade" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab" tabindex="0"><br>
+                <h1 class="entry-title text-center"><strong>History Logs</strong></h1>
                 <div class="card-body">
-                    history
+                   
                 </div>
-            </div>
+            </div> -->
 
             <div class="tab-pane fade" id="visionmission-tab-pane" role="tabpanel" aria-labelledby="visionmission-tab" tabindex="0"><br>
             <h1 class="entry-title text-center"><strong>Mission and Vision</strong></h1>

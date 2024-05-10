@@ -29,33 +29,34 @@ class Document extends Model
                             'updated_at',
                             ];
 
-    protected static function booted()
-    {
-        static::created(function ($document) {
-            DocumentHistory::create([
-                'username_id' => auth()->id(), // Assuming you have authentication
-                'document_id' => $document->id,
-                'operation' => 'create',
-            ]);
-        });
+    // protected static function booted()
+    // {
+    //     static::created(function ($document) {
+    //         DocumentHistory::create([
+    //             'username_id' => auth()->id(), // Assuming you have authentication
+    //             'document_id' => $document->id,
+    //             'operation' => 'create',
+    //         ]);
+    //     });
 
-        static::updated(function ($document) {
-            DocumentHistory::create([
-                'username_id' => auth()->id(),
-                'document_id' => $document->id,
-                'operation' => 'update',
-            ]);
-        });
+    //     static::updated(function ($document) {
+    //         DocumentHistory::create([
+    //             'username_id' => auth()->id(),
+    //             'document_id' => $document->id,
+    //             'operation' => 'update',
+    //         ]);
+    //     });
 
-        static::deleted(function ($document) {
-            DocumentHistory::create([
-                'username_id' => auth()->id(),
-                'document_id' => $document->id,
-                'operation' => 'delete',
-            ]);
-        });
-    }
+    //     static::deleted(function ($document) {
+    //         DocumentHistory::create([
+    //             'username_id' => auth()->id(),
+    //             'document_id' => $document->id,
+    //             'operation' => 'delete',
+    //         ]);
+    //     });
+    // }
 
+    
     
 
 

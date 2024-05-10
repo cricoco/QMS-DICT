@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DocumentHistory;
 use App\Models\Document; 
 
+
 class DocumentHistoryController extends Controller
 {
     // public function show($id)
@@ -15,9 +16,11 @@ class DocumentHistoryController extends Controller
         
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        $history = DocumentHistory::all();
-        return view('history', compact('history'));
+        
+        $history = DocumentHistory::orderBy('updated_at', 'desc')->paginate(10);
+        
+        return view('history')->with('history', $history);
     }
 }

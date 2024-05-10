@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use App\Models\Document;
+use App\Models\DocumentHistory;
 
 class DocumentController extends Controller
 {
@@ -33,7 +34,7 @@ class DocumentController extends Controller
                     ->orWhere('revision_num', 'LIKE', "%$query%")
                     ->orWhere('effectivity_date', 'LIKE', "%$query%")
                     ->orWhere('file', 'LIKE', "%$query%")
-                    ->orderBy('created_at', 'desc')
+                    ->orderBy('revision_num', 'desc')
                     ->paginate(10)
                     ->appends(['search' => $query]);
     
@@ -71,7 +72,13 @@ class DocumentController extends Controller
             $input['file'] = $fileName;
         }
     
-        Document::create($input);
+        $documents = Document::create($input);
+
+        DocumentHistory::create([
+            'username_id' => auth()->id(), 
+            'document_id' => $documents->id,
+            'operation' => 'created',
+        ]);
            
         return redirect('document')->with('flash_message', 'Document Added!'); 
         
@@ -112,6 +119,13 @@ class DocumentController extends Controller
     public function update(Request $request, $id)
     {
         $documents = Document::find($id);
+
+        DocumentHistory::create([
+            'username_id' => auth()->id(), 
+            'document_id' => $documents->id,
+            'operation' => 'updated',
+        ]);
+
         $input = $request->all();
         $documents->update($input);
         return redirect('documents')->with('flash_message', 'Document Updated!');  
@@ -123,25 +137,22 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     Document::destroy($id);
-    //     return redirect('documents')->with('flash_message', 'Document deleted!');  
-    // }
-
     public function destroy($id)
     {
-        $document = Document::findOrFail($id);
-        $document->delete(); // This soft deletes the document
-    
-        return redirect('documents')->with('flash_message', 'Document archived!');
+        // Document::destroy($id);
+        $document = Document::find($id);
+
+        DocumentHistory::create([
+            'username_id' => auth()->id(), 
+            'document_id' => $document->id,
+            'operation' => 'archived',
+        ]);
+
+        $document->status = 'Obsolete';
+        $document->save();
+
+        return redirect('documents')->with('flash_message', 'Document archived!');  
     }
-    
-
-
-
-
-
      
     public function download(Request $request,$file)
     {

@@ -40,9 +40,9 @@
                             <thead>
                                 <tr>
                                     <!-- <th>#</th> -->
-                                    <th>Doc Ref. Code</th>
+                                    <th>Document Reference Code</th>
                                     <th>Document Title</th>
-                                    <th>DMT Incharged</th>
+                                    <th>Revision Number</th>
                                     <th>Division</th>
                                     <th>Process Owner</th>
                                     <th>Status</th>
@@ -51,11 +51,11 @@
                             </thead>
                             <tbody>
                                 @foreach($documents as $item)
-                                <tr>
+                                <tr @if($item->status === 'Obsolete') style="color: red; background-color: #dddddd; display: none;"  @endif>
                                     <!-- <td>{{ $loop->iteration }}</td> -->
                                     <td>{{ $item->doc_ref_code }}</td>
                                     <td>{{ $item->doc_title }}</td>
-                                    <td style="text-align: center;">{{ $item->dmt_incharged }}</td>
+                                    <td style="text-align: center;">{{ $item->revision_num }}</td>
                                     <td style="text-align: center;">{{ $item->division }}</td>
                                     <td>{{ $item->process_owner }}</td>
                                     <td>{{ $item->status }}</td>
