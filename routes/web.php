@@ -11,6 +11,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicDocumentController;
 use App\Http\Controllers\DocumentHistoryController;
+use App\Http\Controllers\DownloadTrackerController;
 use App\Models\DocumentHistory;
 use App\Models\Document;
 
@@ -100,12 +101,13 @@ Route::get('/', function () {
 
 
 
-
 // route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('name');
 
 // Route::get('/history', [DocumentHistoryController::class, 'history'])->name('history');
 // Route::get('/', [HomeController::class, 'index']);
 Route::get('/history', [DocumentHistoryController::class, 'index']);
+
+
 // Route::get('/home', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('home');;
 // Route::get('/', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('/');;
 

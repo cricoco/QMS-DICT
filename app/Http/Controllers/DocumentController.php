@@ -321,6 +321,35 @@ public function formats(Request $request)
     
     //      return view('documents.formats')->with('documents', $documents);
     // }
+   
+    public function autocreate($id)
+    {
+        $documents = Document::find($id);
+        return view('documents.autocreate')->with('documents', $documents);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function autocreatestore(Request $request, $id)
+    {
+        $documents = Document::find($id);
+
+        DocumentHistory::create([
+            'username_id' => auth()->id(), 
+            'document_id' => $documents->id,
+            'operation' => 'New Revision',
+        ]);
+
+        $input = $request->all();
+        $documents->update($input);
+        return redirect('documents')->with('flash_message', 'Document Updated!');  
+    }
+
 
 
 }

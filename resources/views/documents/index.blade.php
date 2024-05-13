@@ -33,6 +33,7 @@
 
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
                     <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
+                    <!-- <a href="{{ url('/document/autocreate') }}" class="btn btn-success btn-sm" title="Add Revision" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add Revision</a> -->
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -43,8 +44,8 @@
                                     <th>Document Reference Code</th>
                                     <th>Document Title</th>
                                     <th>Revision Number</th>
-                                    <th>Division</th>
-                                    <th>Process Owner</th>
+                                    <th>Effectivity Date</th>
+                                    <!-- <th>Process Owner</th> -->
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -56,8 +57,8 @@
                                     <td>{{ $item->doc_ref_code }}</td>
                                     <td>{{ $item->doc_title }}</td>
                                     <td style="text-align: center;">{{ $item->revision_num }}</td>
-                                    <td style="text-align: center;">{{ $item->division }}</td>
-                                    <td>{{ $item->process_owner }}</td>
+                                    <td style="text-align: center;">{{ $item->effectivity_date }}</td>
+                                    <!-- <td>{{ $item->process_owner }}</td> -->
                                     <td>{{ $item->status }}</td>
                                     <td style="white-space: nowrap;">
                                         <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a> <!-- View -->

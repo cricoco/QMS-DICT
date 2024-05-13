@@ -10,24 +10,24 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Operation</th>
-                                <th>Document</th>
+                                <th>Doc Ref. Code</th>
                                 <th>Document Title</th>
-                                
+                                <th>Reason</th>
+                                <th>Operation</th>
                                 <th>Date and Time</th>
+                                <th>Name</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($history as $item)
                             <tr>
-                                <td>{{ $item->user->name }}</td>
-                                <td>{{ $item->operation }}</td>
-                                <td>{{ $item->document->doc_ref_code }}</td> 
+                                <td>{{ $item->document->doc_ref_code }}</td>
                                 <td>{{ $item->document->doc_title }}</td> 
-                                
+                                <td>{{ $item->document->request_reason }}</td>  
+                                <td>{{ $item->operation }}</td>
                                 <td>{{ $item->updated_at }}</td> 
-                            
+                                <td>{{ $item->user->name }}</td>
                             </tr>
                             @endforeach
                         </tbody>

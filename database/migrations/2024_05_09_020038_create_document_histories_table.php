@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('document_id');
             $table->timestamps();
 
-            $table->foreign('username_id')->references('id')->on('users');
-            $table->foreign('document_id')->references('id')->on('documents');
+            $table->foreign('username_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
