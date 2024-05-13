@@ -106,7 +106,7 @@ Route::get('/', function () {
 // Route::get('/history', [DocumentHistoryController::class, 'history'])->name('history');
 // Route::get('/', [HomeController::class, 'index']);
 Route::get('/history', [DocumentHistoryController::class, 'index']);
-
+Route::get('document/{id}', [DocumentController::class, 'show'])->name('documents.show');
 
 // Route::get('/home', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('home');;
 // Route::get('/', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('/');;

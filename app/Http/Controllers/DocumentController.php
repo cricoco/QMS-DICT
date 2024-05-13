@@ -93,7 +93,8 @@ class DocumentController extends Controller
     public function show($id)
     {
         $documents = Document::find($id);
-        return view('documents.show')->with('documents', $documents);
+        // return view('documents.show')->with('documents', $documents);
+        return response()->json($documents);
         
     }
 
