@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('document_histories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('username_id');
+            $table->string('operation');
+            $table->unsignedBigInteger('document_id');
             $table->timestamps();
+
+            $table->foreign('username_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

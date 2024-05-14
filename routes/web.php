@@ -10,9 +10,11 @@ use App\Http\Controllers\PageControllerAdmin;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicDocumentController;
+use App\Http\Controllers\DocumentHistoryController;
+use App\Http\Controllers\DownloadTrackerController;
+use App\Models\DocumentHistory;
+use App\Models\Document;
 
-
- 
 // Route::resource("/document", DocumentController::class);
 
 //Route::get('/',[PageController::class,'index']);
@@ -84,11 +86,11 @@ Route::get('/', function () {
     // Auth check
     if (Auth::check()) {
         $usertype = Auth::user()->role_id;
-
+        $history = DocumentHistory::orderBy('updated_at', 'desc')->paginate(10);
         if ($usertype == 0) {
             return view('publichome');
         } elseif ($usertype == 1) {
-            return view('home');
+            return view('home')->with('history', $history);
         } else {
             return redirect()->back();
         }
@@ -99,8 +101,15 @@ Route::get('/', function () {
 
 
 
-
 // route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('name');
+
+// Route::get('/history', [DocumentHistoryController::class, 'history'])->name('history');
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/history', [DocumentHistoryController::class, 'index']);
+Route::get('document/{id}', [DocumentController::class, 'show'])->name('documents.show');
+
+// Route::get('/home', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('home');;
+// Route::get('/', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('/');;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -111,7 +120,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home', function () {
-    return view('home');
+    $history = DocumentHistory::orderBy('updated_at', 'desc')->paginate(10);
+   
+    return view('home')->with('history', $history);
 })->middleware(['auth', 'verified', 'isAdmin'])->name('home');
 
 Route::get('/p/publichome', function () {

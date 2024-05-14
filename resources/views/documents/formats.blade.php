@@ -23,11 +23,11 @@
                             <thead>
                                 <tr>
                                     <!-- <th>#</th> -->
-                                    <th>Doc Ref. Code</th>
+                                    <th>Document Reference Code</th>
                                     <th>Document Title</th>
-                                    <th>DMT Incharged</th>
-                                    <th>Division</th>
-                                    <th>Process Owner</th>
+                                    <th>Revision Number</th>
+                                    <th>Effectivity Date</th>
+                                    <!-- <th>Process Owner</th> -->
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -35,7 +35,7 @@
                             <tbody>
                                 @foreach($documents as $item)
                                     <!-- @if(in_array($item->doc_type, ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])) -->
-                                        <tr>
+                                    <tr @if($item->status === 'Obsolete') style="color: red; background-color: #dddddd; display: none;"  @endif>
                                             <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>

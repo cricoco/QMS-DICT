@@ -9,7 +9,7 @@
        
       <form action="{{ url('document/' .$documents->id) }}" method="post">
         {!! csrf_field() !!}
-        @method("PATCH")
+        
 
         <div class="row">
         <div class="col-md-2">
