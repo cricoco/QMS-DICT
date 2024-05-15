@@ -122,6 +122,8 @@
     </div>
   </div>
   @yield('homeContent')
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   @yield('script')
 
 
@@ -133,6 +135,11 @@
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes
 <script src="../../dist/js/demo.js"></script> -->
+
+  <!-- <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/bootstrap5.bundle.min.js') }}"></script> -->
+  
+  
 
 </body>
 
@@ -147,10 +154,10 @@
       <!-- Section: CTA -->
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
-          <span class="me-3">Register for free</span>
-          <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
+          <span class="me-3">DICT IX</span>
+          <!-- <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
             Sign up!
-          </button>
+          </button> -->
         </p>
       </section>
       <!-- Section: CTA -->

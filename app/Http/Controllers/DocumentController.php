@@ -107,7 +107,11 @@ class DocumentController extends Controller
     public function edit($id)
     {
         $documents = Document::find($id);
-        return view('documents.edit')->with('documents', $documents);
+        // return view('documents.edit')->with('documents', $documents);
+        return response()->json([
+            'status'=>200,
+            'document'=>$documents,
+        ]);
     }
 
     /**
@@ -117,19 +121,26 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $documents = Document::find($id);
-
-        DocumentHistory::create([
-            'username_id' => auth()->id(), 
-            'document_id' => $documents->id,
-            'operation' => 'updated',
-        ]);
+        $doc_id = $request->input('doc_id');
+        $documents = Document::find($doc_id);
 
         $input = $request->all();
         $documents->update($input);
         return redirect('documents')->with('flash_message', 'Document Updated!');  
+
+        // DocumentHistory::create([
+        //     'username_id' => auth()->id(), 
+        //     'document_id' => $documents->id,
+        //     'operation' => 'updated',
+        // ]);
+
+        // $input = $request->all();
+        // $documents->update($input);
+       
+
+        // return redirect('documents')->with('flash_message', 'Document Updated!');  
     }
 
     /**

@@ -11,11 +11,11 @@
         <div class="row">
         <div class="col-md-2">
           <label>Doc Ref. Code *</label><br>
-          <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control"></br>
+          <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" required></br>
         </div>
         <div class="col-md-6">
           <label>Document Title *</label><br>
-          <input type="text" name="doc_title" id="doc_title" class="form-control"></br>
+          <input type="text" name="doc_title" id="doc_title" class="form-control" required></br>
         </div>
         <!-- <div class="col-md-2">
           <label>DMT Incharged *</label><br>
@@ -23,7 +23,7 @@
         </div> -->
         <div class="col-md-2">
           <label>Division *</label><br>
-          <select name="division" id="division" class="form-control"></br>
+          <select name="division" id="division" class="form-control" required></br>
             <option value="N/A">N/A</option>
             <option value="AFD">AFD</option>
             <option value="ORD">ORD</option>
@@ -32,15 +32,15 @@
         </div>
         <div class="col-md-2">
           <label>Process Owner *</label><br>
-          <input type="text" name="process_owner" id="process_owner" class="form-control"></br>
+          <input type="text" name="process_owner" id="process_owner" class="form-control" required></br>
         </div><br>
         <div class="col-md-2">
           <label>Status *</label><br>
-          <input type="text" name="status" id="status" class="form-control"></br>
+          <input type="text" name="status" id="status" class="form-control" required></br>
         </div>
         <div class="col-md-4">
           <label>Document Type *</label><br>
-          <select name="doc_type" id="doc_type" class="form-control"></br>
+          <select name="doc_type" id="doc_type" class="form-control" required></br>
             <option value="Quality Manual">Quality Manual</option>
             <option value="Quality Procedure">Quality Procedure</option>
             <option value="Quality Procedure Form">Quality Procedure Form</option>
@@ -57,31 +57,31 @@
         </div>
         <div class="col-md-2">
           <label>Request Type *</label><br>
-          <input type="text" name="request_type" id="request_type" class="form-control"></br>
+          <input type="text" name="request_type" id="request_type" class="form-control" required></br>
         </div>
         <div class="col-md-2">
           <label>Request Reason *</label><br>
-          <input type="text" name="request_reason" id="request_reason" class="form-control"></br>
+          <input type="text" name="request_reason" id="request_reason" class="form-control" required></br>
         </div>
         <div class="col-md-2">
           <label>Requester *</label><br>
-          <input type="text" name="requester" id="requester" class="form-control"></br>
+          <input type="text" name="requester" id="requester" class="form-control" required></br>
         </div>
         <div class="col-md-2">
           <label>Request Date *</label><br>
-          <input type="date" name="request_date" id="request_date" class="form-control"></br>
+          <input type="date" name="request_date" id="request_date" class="form-control" required></br>
         </div>
         <div class="col-md-2">
           <label>Revision Number *</label><br>
-          <input type="text" name="revision_num" id="revision_num" class="form-control"></br>
+          <input type="text" name="revision_num" id="revision_num" class="form-control" required></br>
         </div>
         <div class="col-md-2">
           <label>Effectivity Date *</label><br>
-          <input type="date" name="effectivity_date" id="effectivity_date" class="form-control"></br>
+          <input type="date" name="effectivity_date" id="effectivity_date" class="form-control" required></br>
         </div>
         <div class="col-md-4">
           <label>File *</label><br>
-          <input type="file" name="file" id="file" class="form-control"></br>
+          <input type="file" name="file" id="file" class="form-control" required></br>
         </div>
         </div>
         <input type="submit" value="Save" class="btn btn-success">

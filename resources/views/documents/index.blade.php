@@ -32,7 +32,8 @@
                 </div>
 
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
-                    <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
+                    <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal" data-bs-target="#docCreateModal" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
+                    <!-- <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a> -->
                     <!-- <a href="{{ url('/document/autocreate') }}" class="btn btn-success btn-sm" title="Add Revision" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add Revision</a> -->
                     <br>
                     <br>
@@ -68,7 +69,9 @@
                                         </a>
 
                                         <!-- <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i></a> Download -->
-                                        <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <!-- Edit -->
+
+                                        <button type="button" id="edit-document" value="{{ $item->id }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <!-- <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>  -->
                                         <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
@@ -92,11 +95,19 @@
 <br>
 <!-- =============SCRIPTS================== -->
 @include('documents.modal-view')
+@include('documents.modal-create')
+@include('documents.modal-edit')
 @endsection
 
 @section('script')
 <script type="text/javascript">
     $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
         $('body').on('click', '#show-document', function() {
             var docURL = $(this).data('url');
@@ -119,6 +130,62 @@
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
             })
+        });
+
+        // $('#edit-document').on(click, function() {
+        //     $('#docEditModal').modal('show');
+
+        //     $tr = $(this).closest('tr');
+
+        //     var data = $tr.children("td").map(function() {
+        //         return $(this).text();
+        //     }).get();
+
+        //     console.log(data);
+        //     $('#doc_ref_code').val(data[0]);
+        //     $('#doc_title').val(data[1]);
+        //     $('#division').val(data[2]);
+        //     $('#process_owner').val(data[3]);
+        //     $('#status').val(data[4]);
+        //     $('#doc_type').val(data[5]);
+        //     $('#request_type').val(data[6]);
+        //     $('#request_reason').val(data[7]);
+        //     $('#requester').val(data[8]);
+        //     $('#request_date').val(data[9]);
+        //     $('#revision_num').val(data[10]);
+        //     $('#effectivity_date').val(data[11]);
+
+        // });
+
+        $('body').on('click', '#edit-document', function() {
+            var doc_id = $(this).val();
+            
+            //alert(doc_id);
+            $('#docEditModal').modal('show');
+
+            $.ajax({
+                type: "GET",
+                url: "/edit-document/" + doc_id,
+                // data: "data",
+                // dataType: "dataTypes",
+                success: function(response) {
+                    console.log(response);
+                    $('#docEditModal #doc_id').val(response.document.id);
+                    $('#docEditModal #doc_ref_code').val(response.document.doc_ref_code);
+                    $('#docEditModal #doc_title').val(response.document.doc_title);
+                    $('#docEditModal #division').val(response.document.division);
+                    $('#docEditModal #process_owner').val(response.document.process_owner);
+                    $('#docEditModal #status').val(response.document.status);
+                    $('#docEditModal #doc_type').val(response.document.doc_type);
+                    $('#docEditModal #request_type').val(response.document.request_type);
+                    $('#docEditModal #request_reason').val(response.document.request_reason);
+                    $('#docEditModal #requester').val(response.document.requester);
+                    $('#docEditModal #request_date').val(response.document.request_date);
+                    $('#docEditModal #revision_num').val(response.document.revision_num);
+                    $('#docEditModal #effectivity_date').val(response.document.effectivity_date);
+                }
+
+            });
         });
 
     });
