@@ -16,7 +16,7 @@
                     </form>
                 </div>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
-                    <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
+                    <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal" data-bs-target="#docCreateModal" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -36,16 +36,16 @@
                             <tbody>
                                 @foreach($documents as $item)
                                     <!-- @if(in_array($item->doc_type, ['Quality Manual', 'Operations Manual', 'Procedure Manual'])) -->
-                                    <tr @if($item->status === 'Obsolete') style="color: red; background-color: #dddddd; display: none;"  @endif>
+                                    <tr>
                                             <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>
-                                            <td style="text-align: center;">{{ $item->dmt_incharged }}</td>
+                                            <td style="text-align: center;">{{ $item->revision_num }}</td>
                                             <td style="text-align: center;">{{ $item->division }}</td>
                                             <td>{{ $item->process_owner }}</td>
                                             <td>{{ $item->status }}</td>
                                             <td style="white-space: nowrap;">
-                                                <a href="{{ url('/document/' . $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                <a href="javascript:void(0)" id="show-document" data-url="{{ route('documents.show', $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                                                 <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;" onclick="return confirm('This document is a protected copy. Click ok to download.');">
                                                 <i class="fa fa-download" aria-hidden="true"></i>
@@ -53,7 +53,7 @@
 
 
                                                 <!-- <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i></a> -->
-                                                <a href="{{ url('/document/' . $item->id . '/edit') }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <button type="button" id="edit-document" value="{{ $item->id }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                                 <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
@@ -76,5 +76,75 @@
     </div>
 </div>
 <br>
+@include('documents.modal-view')
+@include('documents.modal-create')
+@include('documents.modal-edit')
+@endsection
 
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('body').on('click', '#show-document', function() {
+            var docURL = $(this).data('url');
+            $.get(docURL, function(data) {
+                $('#docShowModal').modal('show');
+                $('#doc-ref-code').text(data.doc_ref_code);
+                $('#doc-title').text(data.doc_title);
+                $('#status').text(data.status);
+                $('#document-iframe').attr('src', "{{ asset('storage/documents/') }}/" + data.file);
+                $('#division').text(data.division);
+                // $('#dmt-incharged').text(data.dmt_incharged);
+                $('#process-owner').text(data.process_owner);
+                $('#doc-type').text(data.doc_type);
+                $('#req-reason').text(data.request_reason);
+                $('#req-type').text(data.request_type);
+                $('#requester').text(data.requester);
+                $('#req-date').text(data.request_date);
+                $('#rev-num').text(data.revision_num);
+                $('#effic-date').text(data.efficitivity_date);
+                $('#filename').text(data.file);
+                $('#created-at').text(data.created_at);
+            })
+        });
+
+        $('body').on('click', '#edit-document', function() {
+            var doc_id = $(this).val();
+            
+            //alert(doc_id);
+            $('#docEditModal').modal('show');
+
+            $.ajax({
+                type: "GET",
+                url: "/edit-document/" + doc_id,
+                // data: "data",
+                // dataType: "dataTypes",
+                success: function(response) {
+                    console.log(response);
+                    $('#docEditModal #doc_id').val(response.document.id);
+                    $('#docEditModal #doc_ref_code').val(response.document.doc_ref_code);
+                    $('#docEditModal #doc_title').val(response.document.doc_title);
+                    $('#docEditModal #division').val(response.document.division);
+                    $('#docEditModal #process_owner').val(response.document.process_owner);
+                    $('#docEditModal #status').val(response.document.status);
+                    $('#docEditModal #doc_type').val(response.document.doc_type);
+                    $('#docEditModal #request_type').val(response.document.request_type);
+                    $('#docEditModal #request_reason').val(response.document.request_reason);
+                    $('#docEditModal #requester').val(response.document.requester);
+                    $('#docEditModal #request_date').val(response.document.request_date);
+                    $('#docEditModal #revision_num').val(response.document.revision_num);
+                    $('#docEditModal #effectivity_date').val(response.document.effectivity_date);
+                }
+
+            });
+        });
+
+    });
+</script>
 @endsection

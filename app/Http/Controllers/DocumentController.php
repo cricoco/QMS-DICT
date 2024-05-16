@@ -20,25 +20,52 @@ class DocumentController extends Controller
         // $documents = Document::paginate(5);
         // return view('documents.index', compact('documents'));
         $query = $request->input('search');
-        $documents = Document::where('doc_ref_code', 'LIKE', "%$query%")
-                    ->orWhere('doc_title', 'LIKE', "%$query%")
-                    ->orWhere('dmt_incharged', 'LIKE', "%$query%")
-                    ->orWhere('division', 'LIKE', "%$query%")
-                    ->orWhere('process_owner', 'LIKE', "%$query%")
-                    ->orWhere('status', 'LIKE', "%$query%")
-                    ->orWhere('doc_type', 'LIKE', "%$query%")
-                    ->orWhere('request_type', 'LIKE', "%$query%")
-                    ->orWhere('request_reason', 'LIKE', "%$query%")
-                    ->orWhere('requester', 'LIKE', "%$query%")
-                    ->orWhere('request_date', 'LIKE', "%$query%")
-                    ->orWhere('revision_num', 'LIKE', "%$query%")
-                    ->orWhere('effectivity_date', 'LIKE', "%$query%")
-                    ->orWhere('file', 'LIKE', "%$query%")
-                    ->orderBy('revision_num', 'desc')
-                    ->paginate(10)
-                    ->appends(['search' => $query]);
-    
+        $documents = Document::where('status', 'Active') // Add this condition for active documents
+        ->where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
+            ->orWhere('doc_title', 'LIKE', "%$query%")
+                ->orWhere('dmt_incharged', 'LIKE', "%$query%")
+                ->orWhere('division', 'LIKE', "%$query%")
+                ->orWhere('process_owner', 'LIKE', "%$query%")
+                ->orWhere('status', 'LIKE', "%$query%")
+                ->orWhere('doc_type', 'LIKE', "%$query%")
+                ->orWhere('request_type', 'LIKE', "%$query%")
+                ->orWhere('request_reason', 'LIKE', "%$query%")
+                ->orWhere('requester', 'LIKE', "%$query%")
+                ->orWhere('request_date', 'LIKE', "%$query%")
+                ->orWhere('revision_num', 'LIKE', "%$query%")
+                ->orWhere('effectivity_date', 'LIKE', "%$query%")
+                ->orWhere('file', 'LIKE', "%$query%");
+        })
+        ->orderBy('revision_num', 'desc')
+        ->paginate(10)
+        ->appends(['search' => $query]);
+
+        foreach ($documents as $document) {
+            $this->archiveOlderRevisions($document);
+        }
          return view('documents.index')->with('documents', $documents);
+    }
+
+
+    private function archiveOlderRevisions($document)
+    {
+        $latestRevision = Document::where('doc_ref_code', $document->doc_ref_code)
+            ->orderBy('revision_num', 'desc')
+            ->first();
+
+        if ($document->id !== $latestRevision->id) {
+            // If this document is not the latest revision, mark it as obsolete
+            $document->status = 'Obsolete';
+            $document->save();
+
+            // Log the archival operation
+            DocumentHistory::create([
+                'username_id' => auth()->id(),
+                'document_id' => $document->id,
+                'operation' => 'archived',
+            ]);
+        }
     }
      /**
      * Show the form for creating a new resource.
@@ -71,7 +98,21 @@ class DocumentController extends Controller
             $file->storeAs('public/documents', $fileName); // Adjust storage path as needed
             $input['file'] = $fileName;
         }
-    
+        
+        $documentRefCode = $input['doc_ref_code'];
+        $existingDocument = Document::where('doc_ref_code', $documentRefCode)
+        ->orderBy('revision_num', 'desc') // Order by revision number descending
+        ->first();
+        if ($existingDocument) {
+            // If exists, get the maximum revision number and increment it
+            $revisionNumber = intval($existingDocument->revision_num) + 1;
+        } else {
+            // If doesn't exist, set revision number to 0
+            $revisionNumber = 0;
+        }
+        $input['revision_num'] = $revisionNumber;
+
+
         $documents = Document::create($input);
 
         DocumentHistory::create([
@@ -125,6 +166,12 @@ class DocumentController extends Controller
     {
         $doc_id = $request->input('doc_id');
         $documents = Document::find($doc_id);
+
+        DocumentHistory::create([
+            'username_id' => auth()->id(),
+            'document_id' => $documents->id,
+            'operation' => 'updated',
+        ]);
 
         $input = $request->all();
         $documents->update($input);
@@ -183,6 +230,7 @@ class DocumentController extends Controller
         $searchQuery = $request->input('search');
         
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
+                        ->where('status', 'Active')
                         ->when($searchQuery, function ($query) use ($searchQuery) {
                             $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
                             $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
@@ -194,6 +242,10 @@ class DocumentController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->paginate(10)
                         ->appends(['search' => $searchQuery]);
+
+                        foreach ($documents as $document) {
+                            $this->archiveOlderRevisions($document);
+                        }
     
         return view('documents.manuals')->with('documents', $documents);
     }
@@ -256,6 +308,7 @@ public function formats(Request $request)
         $searchQuery = $request->input('search');
         
         $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
+                        ->where('status', 'Active')
                         ->when($searchQuery, function ($query) use ($searchQuery) {
                             $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
                             $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
@@ -268,6 +321,9 @@ public function formats(Request $request)
                         ->paginate(10)
                         ->appends(['search' => $searchQuery]);
     
+                        foreach ($documents as $document) {
+                            $this->archiveOlderRevisions($document);
+                        }
         return view('documents.formats')->with('documents', $documents);
     }
 
