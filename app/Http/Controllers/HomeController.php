@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DocumentHistory;
 
 class HomeController extends Controller
 {
@@ -23,5 +24,10 @@ class HomeController extends Controller
         } else {
             return redirect()->route('login'); // Redirect to login page if user is not logged in
         }
+    }
+    public function history() 
+    {
+        $history = DocumentHistory::all();
+        return view('home')->with('history', $history);
     }
 }

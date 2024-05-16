@@ -4,6 +4,10 @@
 <head>
   <title>DICT - QMS Portal</title>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -119,6 +123,8 @@
   </div>
   @yield('homeContent')
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  @yield('script')
 
 
   <!-- jQuery -->
@@ -129,6 +135,11 @@
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes
 <script src="../../dist/js/demo.js"></script> -->
+
+  <!-- <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/bootstrap5.bundle.min.js') }}"></script> -->
+  
+  
 
 </body>
 
@@ -143,10 +154,10 @@
       <!-- Section: CTA -->
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
-          <span class="me-3">Register for free</span>
-          <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
+          <span class="me-3">DICT IX</span>
+          <!-- <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
             Sign up!
-          </button>
+          </button> -->
         </p>
       </section>
       <!-- Section: CTA -->
