@@ -45,7 +45,7 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     Route::get('/documents/formats', [DocumentController::class, 'formats'])->name('documents.formats');
     Route::resource("/document", DocumentController::class);
 
-    
+    Route::get('document/{id}', [DocumentController::class, 'show'])->name('documents.show');
     Route::get('edit-document/{id}', [DocumentController::class, 'edit']);
     Route::put('update-document', [DocumentController::class, 'update']);
 }); 
@@ -111,7 +111,6 @@ Route::get('/', function () {
 // Route::get('/history', [DocumentHistoryController::class, 'history'])->name('history');
 // Route::get('/', [HomeController::class, 'index']);
 Route::get('/history', [DocumentHistoryController::class, 'index']);
-Route::get('document/{id}', [DocumentController::class, 'show'])->name('documents.show');
 Route::get('/p/document/{id}', [PublicDocumentController::class, 'show'])->name('publicdocuments.show');
 // Route::get('edit-document/{id}', [DocumentController::class, 'edit']);
 // Route::put('update-document', [DocumentController::class, 'update']);
