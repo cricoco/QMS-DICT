@@ -30,11 +30,15 @@
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-
+                <div class="ml-auto" style="margin-right: 35px;">
+                    <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'doc_title', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-alpha-down" aria-hidden="true"></i></a>
+                    <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'desc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-down" aria-hidden="true"></i></a>
+                    <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info " style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-up" aria-hidden="true"></i></a>
+                </div>
+                <br>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
                     <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal" data-bs-target="#docCreateModal" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
-                    <!-- <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a> -->
-                    <!-- <a href="{{ url('/document/autocreate') }}" class="btn btn-success btn-sm" title="Add Revision" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add Revision</a> -->
+                    
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -134,7 +138,7 @@
 
         $('body').on('click', '#edit-document', function() {
             var doc_id = $(this).val();
-            
+
             //alert(doc_id);
             $('#docEditModal').modal('show');
 

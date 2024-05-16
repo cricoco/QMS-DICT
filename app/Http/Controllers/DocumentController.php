@@ -15,11 +15,10 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        // $documents = Document::paginate(10);
-        // return view ('documents.index')->with('documents', $documents);
-        // $documents = Document::paginate(5);
-        // return view('documents.index', compact('documents'));
         $query = $request->input('search');
+        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortDirection = $request->input('sort_dir', 'desc');
+
         $documents = Document::where('status', 'Active') // Add this condition for active documents
         ->where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
@@ -37,9 +36,11 @@ class DocumentController extends Controller
                 ->orWhere('effectivity_date', 'LIKE', "%$query%")
                 ->orWhere('file', 'LIKE', "%$query%");
         })
-        ->orderBy('revision_num', 'desc')
+        ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
-        ->appends(['search' => $query]);
+        ->appends(['search' => $query, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+
+        
 
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
@@ -86,9 +87,6 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        // $input = $request->all();
-        // Document::create($input);
-        // return redirect('document')->with('flash_message', 'Document Added!');
         $input = $request->all();
     
         if ($request->hasFile('file')) {
@@ -176,18 +174,6 @@ class DocumentController extends Controller
         $input = $request->all();
         $documents->update($input);
         return redirect('documents')->with('flash_message', 'Document Updated!');  
-
-        // DocumentHistory::create([
-        //     'username_id' => auth()->id(), 
-        //     'document_id' => $documents->id,
-        //     'operation' => 'updated',
-        // ]);
-
-        // $input = $request->all();
-        // $documents->update($input);
-       
-
-        // return redirect('documents')->with('flash_message', 'Document Updated!');  
     }
 
     /**
@@ -228,6 +214,8 @@ class DocumentController extends Controller
     public function manuals(Request $request)
     {
         $searchQuery = $request->input('search');
+        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortDirection = $request->input('sort_dir', 'desc');
         
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
                         ->where('status', 'Active')
@@ -239,9 +227,9 @@ class DocumentController extends Controller
                             $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
                             $query->orWhere('status', 'LIKE', "%$searchQuery%");
                         })
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy($sortBy, $sortDirection)
                         ->paginate(10)
-                        ->appends(['search' => $searchQuery]);
+                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
 
                         foreach ($documents as $document) {
                             $this->archiveOlderRevisions($document);
@@ -250,62 +238,11 @@ class DocumentController extends Controller
         return view('documents.manuals')->with('documents', $documents);
     }
     
-
-
-    // public function manuals(Request $request)
-    // {
-    //     $query = $request->input('search');
-    //     $documents = Document::where('doc_type', 'LIKE', "%$query%")
-    //                 ->whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
-    //                 ->orderBy('created_at', 'desc')
-    //                 ->paginate(10)
-    //                 ->appends(['search' => $query]);
-    
-    //      return view('documents.manuals')->with('documents', $documents);
-    // }
-
-
-
-
-    // public function manuals(Request $request)
-    // {
-    //     // $documents = Document::paginate(10);
-    //     // return view ('documents.index')->with('documents', $documents);
-    //     // $documents = Document::paginate(5);
-    //     // return view('documents.index', compact('documents'));
-    //     $query = $request->input('search');
-    //     $documents = Document::where('doc_type', 'LIKE', "%$query%")
-    //                 ->orderBy('created_at', 'desc')
-    //                 ->paginate(10)
-    //                 ->appends(['search' => $query]);
-    
-    //      return view('documents.manuals')->with('documents', $documents);
-    // }
-
-// public function manuals(Request $request)
-// {
-//     $query = $request->input('search');
-//     $documents = Document::where(function($queryBuilder) use ($query) {
-//             $queryBuilder->where('doc_type', 'LIKE', "%$query%")
-//                          ->orWhere('doc_ref_code', 'LIKE', "%$query%")
-//                          ->orWhere('doc_title', 'LIKE', "%$query%")
-//                          ->orWhere('dmt_incharged', 'LIKE', "%$query%")
-//                          ->orWhere('division', 'LIKE', "%$query%")
-//                          ->orWhere('process_owner', 'LIKE', "%$query%")
-//                          ->orWhere('status', 'LIKE', "%$query%");
-//         })
-//         ->orderBy('created_at', 'desc')
-//         ->paginate(10)
-//         ->appends(['search' => $query]);
-
-//     return view('documents.manuals')->with('documents', $documents);
-// }
-
-
-
 public function formats(Request $request)
     {
         $searchQuery = $request->input('search');
+        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortDirection = $request->input('sort_dir', 'desc');
         
         $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
                         ->where('status', 'Active')
@@ -317,107 +254,14 @@ public function formats(Request $request)
                             $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
                             $query->orWhere('status', 'LIKE', "%$searchQuery%");
                         })
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy($sortBy, $sortDirection)
                         ->paginate(10)
-                        ->appends(['search' => $searchQuery]);
+                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
     
                         foreach ($documents as $document) {
                             $this->archiveOlderRevisions($document);
                         }
         return view('documents.formats')->with('documents', $documents);
     }
-
-
-
-
-// public function formats(Request $request)
-// {
-//     $query = $request->input('search');
-//     $documents = Document::where('doc_type', 'LIKE', "%$query%")
-//                 ->whereNotIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
-//                 ->orderBy('created_at', 'desc')
-//                 ->paginate(10)
-//                 ->appends(['search' => $query]);
-
-//      return view('documents.formats')->with('documents', $documents);
-// }
-
-
-
-
-    // public function formats(Request $request)
-    // {
-    //     // $documents = Document::paginate(10);
-    //     // return view ('documents.index')->with('documents', $documents);
-    //     // $documents = Document::paginate(5);
-    //     // return view('documents.index', compact('documents'));
-    //     $query = $request->input('search');
-    //     $documents = Document::where('doc_type', 'LIKE', "%$query%")
-    //                 ->orderBy('created_at', 'desc')
-    //                 ->paginate(10)
-    //                 ->appends(['search' => $query]);
-    
-    //      return view('documents.formats')->with('documents', $documents);
-    // }
-
-
-
-    // public function formats(Request $request)
-    // {
-    //     // $documents = Document::paginate(10);
-    //     // return view ('documents.index')->with('documents', $documents);
-    //     // $documents = Document::paginate(5);
-    //     // return view('documents.index', compact('documents'));
-    //     $query = $request->input('search');
-    //     $documents = Document::where('doc_ref_code', 'LIKE', "%$query%")
-    //                 ->orWhere('doc_title', 'LIKE', "%$query%")
-    //                 ->orWhere('dmt_incharged', 'LIKE', "%$query%")
-    //                 ->orWhere('division', 'LIKE', "%$query%")
-    //                 ->orWhere('process_owner', 'LIKE', "%$query%")
-    //                 ->orWhere('status', 'LIKE', "%$query%")
-    //                 ->orWhere('doc_type', 'LIKE', "%$query%")
-    //                 ->orWhere('request_type', 'LIKE', "%$query%")
-    //                 ->orWhere('request_reason', 'LIKE', "%$query%")
-    //                 ->orWhere('requester', 'LIKE', "%$query%")
-    //                 ->orWhere('request_date', 'LIKE', "%$query%")
-    //                 ->orWhere('revision_num', 'LIKE', "%$query%")
-    //                 ->orWhere('effectivity_date', 'LIKE', "%$query%")
-    //                 ->orWhere('file', 'LIKE', "%$query%")
-    //                 ->orderBy('created_at', 'desc')
-    //                 ->paginate(10)
-    //                 ->appends(['search' => $query]);
-    
-    //      return view('documents.formats')->with('documents', $documents);
-    // }
-   
-    public function autocreate($id)
-    {
-        $documents = Document::find($id);
-        return view('documents.autocreate')->with('documents', $documents);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function autocreatestore(Request $request, $id)
-    {
-        $documents = Document::find($id);
-
-        DocumentHistory::create([
-            'username_id' => auth()->id(), 
-            'document_id' => $documents->id,
-            'operation' => 'New Revision',
-        ]);
-
-        $input = $request->all();
-        $documents->update($input);
-        return redirect('documents')->with('flash_message', 'Document Updated!');  
-    }
-
-
 
 }

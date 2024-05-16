@@ -16,6 +16,9 @@ class PublicDocumentController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
+        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortDirection = $request->input('sort_dir', 'desc');
+
         $documents = Document::where('status', 'Active') // Add this condition for active documents
         ->where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
@@ -33,9 +36,9 @@ class PublicDocumentController extends Controller
                 ->orWhere('effectivity_date', 'LIKE', "%$query%")
                 ->orWhere('file', 'LIKE', "%$query%");
         })
-        ->orderBy('revision_num', 'desc')
+        ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
-        ->appends(['search' => $query]);
+        ->appends(['search' => $query, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
 
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
@@ -93,6 +96,8 @@ class PublicDocumentController extends Controller
     public function manuals(Request $request)
     {
         $searchQuery = $request->input('search');
+        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortDirection = $request->input('sort_dir', 'desc');
         
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
                         ->where('status', 'Active')
@@ -104,9 +109,9 @@ class PublicDocumentController extends Controller
                             $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
                             $query->orWhere('status', 'LIKE', "%$searchQuery%");
                         })
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy($sortBy, $sortDirection)
                         ->paginate(10)
-                        ->appends(['search' => $searchQuery]);
+                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
 
                         foreach ($documents as $document) {
                             $this->archiveOlderRevisions($document);
@@ -120,6 +125,8 @@ class PublicDocumentController extends Controller
     public function formats(Request $request)
     {
         $searchQuery = $request->input('search');
+        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortDirection = $request->input('sort_dir', 'desc');
         
         $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
                         ->where('status', 'Active')
@@ -131,9 +138,9 @@ class PublicDocumentController extends Controller
                             $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
                             $query->orWhere('status', 'LIKE', "%$searchQuery%");
                         })
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy($sortBy, $sortDirection)
                         ->paginate(10)
-                        ->appends(['search' => $searchQuery]);
+                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
     
                         foreach ($documents as $document) {
                             $this->archiveOlderRevisions($document);
