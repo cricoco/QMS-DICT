@@ -4,6 +4,9 @@
 <head>
   <title>DICT - QMS Portal</title>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -124,7 +127,8 @@
   </div>
   @yield('publichomeContent')
 
-
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  @yield('pubscript')
 
   <!-- jQuery -->
   <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -148,10 +152,10 @@
       <!-- Section: CTA -->
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
-          <span class="me-3">Register for free</span>
-          <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
+          <span class="me-3">DICT IX</span>
+          <!-- <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
             Sign up!
-          </button>
+          </button> -->
         </p>
       </section>
       <!-- Section: CTA -->
@@ -168,13 +172,3 @@
   <!-- Footer -->
 </section>
 
-<!-- <div class="container">
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="{{ url('home#custom-tabs-four-messages') }}" class="nav-link px-2 text-muted">Vision & Mission</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contact Us</a></li>
-    </ul>
-    <p class="text-center text-muted">© Department of Information and Communications Technology</p>
-  </footer>
-</div> -->

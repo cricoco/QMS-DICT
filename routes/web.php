@@ -44,6 +44,10 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     Route::get('/documents/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');
     Route::get('/documents/formats', [DocumentController::class, 'formats'])->name('documents.formats');
     Route::resource("/document", DocumentController::class);
+
+    Route::get('document/{id}', [DocumentController::class, 'show'])->name('documents.show');
+    Route::get('edit-document/{id}', [DocumentController::class, 'edit']);
+    Route::put('update-document', [DocumentController::class, 'update']);
 }); 
 
 //============== Normal user middleware
@@ -62,6 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // User Interactions
     
     Route::resource("/p/document", PublicDocumentController::class);
+   
     Route::get('/p/documents/', [PublicDocumentController::class, 'index'])->name('publicdocuments.index');
     Route::post('/p/documents/create', [PublicDocumentController::class, 'create'])->name('publicdocuments.create');
     Route::post('/p/documents/store', [PublicDocumentController::class, 'store'])->name('publicdocuments.store');
@@ -106,9 +111,11 @@ Route::get('/', function () {
 // Route::get('/history', [DocumentHistoryController::class, 'history'])->name('history');
 // Route::get('/', [HomeController::class, 'index']);
 Route::get('/history', [DocumentHistoryController::class, 'index']);
-Route::get('document/{id}', [DocumentController::class, 'show'])->name('documents.show');
-Route::get('edit-document/{id}', [DocumentController::class, 'edit']);
-Route::put('update-document', [DocumentController::class, 'update']);
+
+Route::get('/p/document/{id}', [PublicDocumentController::class, 'show'])->name('publicdocuments.show');
+// Route::get('edit-document/{id}', [DocumentController::class, 'edit']);
+// Route::put('update-document', [DocumentController::class, 'update']);
+
 
 // Route::get('/home', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('home');;
 // Route::get('/', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('/');;

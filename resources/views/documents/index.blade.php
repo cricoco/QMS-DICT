@@ -30,11 +30,15 @@
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-
+                <div class="ml-auto" style="margin-right: 35px;">
+                    <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'doc_title', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-alpha-down" aria-hidden="true"></i></a>
+                    <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'desc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-down" aria-hidden="true"></i></a>
+                    <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info " style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-up" aria-hidden="true"></i></a>
+                </div>
+                <br>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
                     <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal" data-bs-target="#docCreateModal" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
-                    <!-- <a href="{{ url('/document/create') }}" class="btn btn-success btn-sm" title="Add New Document" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a> -->
-                    <!-- <a href="{{ url('/document/autocreate') }}" class="btn btn-success btn-sm" title="Add Revision" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add Revision</a> -->
+
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -64,7 +68,9 @@
                                     <td style="white-space: nowrap;">
                                         <a href="javascript:void(0)" id="show-document" data-url="{{ route('documents.show', $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a> <!-- View -->
 
-                                        <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;" onclick="return confirm('This document is a protected copy. Click ok to download.');">
+
+                                        <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;" onclick="return confirm('NOTICE: Only the softcopy of this document, available on the Regional Office IX and BASULTA QMS portal, is considered the CONTROLLED COPY. Any downloaded or printed copies of this document are deemed UNCONTROLLED.');">
+
                                             <i class="fa fa-download" aria-hidden="true"></i>
                                         </a>
 
@@ -132,34 +138,11 @@
             })
         });
 
-        // $('#edit-document').on(click, function() {
-        //     $('#docEditModal').modal('show');
-
-        //     $tr = $(this).closest('tr');
-
-        //     var data = $tr.children("td").map(function() {
-        //         return $(this).text();
-        //     }).get();
-
-        //     console.log(data);
-        //     $('#doc_ref_code').val(data[0]);
-        //     $('#doc_title').val(data[1]);
-        //     $('#division').val(data[2]);
-        //     $('#process_owner').val(data[3]);
-        //     $('#status').val(data[4]);
-        //     $('#doc_type').val(data[5]);
-        //     $('#request_type').val(data[6]);
-        //     $('#request_reason').val(data[7]);
-        //     $('#requester').val(data[8]);
-        //     $('#request_date').val(data[9]);
-        //     $('#revision_num').val(data[10]);
-        //     $('#effectivity_date').val(data[11]);
-
-        // });
 
         $('body').on('click', '#edit-document', function() {
             var doc_id = $(this).val();
-            
+
+
             //alert(doc_id);
             $('#docEditModal').modal('show');
 
