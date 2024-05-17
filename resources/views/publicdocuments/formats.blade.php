@@ -10,7 +10,7 @@
                 </div>
                 <div class="alert alert-light text-center">
                     <form action="{{ route('publicdocuments.formats') }}" method="GET" class="d-flex">
-                        <input class="form-control me-2" type="text" placeholder="Search" name="search"> <!-- WHERE WE LEFT --->
+                        <input class="form-control me-2" type="text" placeholder="Search" name="search">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
@@ -28,26 +28,23 @@
                         <table class="table table-hover" style="white-space: wrap;">
                             <thead>
                                 <tr>
-                                    <!-- <th>#</th> -->
-                                    <th>Doc Ref. Code</th>
+                                    <th>Document Reference Code</th>
                                     <th>Document Title</th>
-                                    <th>DMT Incharged</th>
-                                    <th>Division</th>
-                                    <th>Process Owner</th>
+                                    <th>Revision Number</th>
+                                    <th>Effectivity Date</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($documents as $item)
-                                    <!-- @if(in_array($item->doc_type, ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])) -->
+                                    
                                         <tr>
-                                            <!-- <td>{{ $loop->iteration }}</td> -->
+                                            
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>
-                                            <td style="text-align: center;">{{ $item->dmt_incharged }}</td>
-                                            <td style="text-align: center;">{{ $item->division }}</td>
-                                            <td>{{ $item->process_owner }}</td>
+                                            <td style="text-align: center;">{{ $item->revision_num }}</td>
+                                            <td style="text-align: center;">{{ $item->effectivity_date }}</td>
                                             <td>{{ $item->status }}</td>
                                             <td style="white-space: nowrap;">
                                             <a href="javascript:void(0)" id="pubshow-documents" data-url="{{ route('publicdocuments.show', $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a> <!-- View -->
@@ -59,13 +56,13 @@
                                         
                                             </td>
                                         </tr>
-                                    <!-- @endif -->
+                                    
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div>   
-                        <!-- {{ $documents->appends(['search' => request()->query('search')])->links() }} -->
+                        
                     </div>
                     </div>
                     <div class="card-footer">{{ $documents->appends(['search' => request()->query('search')])->links() }}</div>
@@ -98,7 +95,6 @@
                 $('#pub-status').text(data.status);
                 $('#pub-document-iframe').attr('src', "{{ asset('storage/documents/') }}/" + data.file);
                 $('#pub-division').text(data.division);
-                // $('#dmt-incharged').text(data.dmt_incharged);
                 $('#pub-process-owner').text(data.process_owner);
                 $('#pub-doc-type').text(data.doc_type);
                 $('#pub-req-reason').text(data.request_reason);

@@ -10,7 +10,7 @@
                 </div>
                 <div class="alert alert-light text-center">
                     <form action="{{ route('documents.formats') }}" method="GET" class="d-flex">
-                        <input class="form-control me-2" type="text" placeholder="Search" name="search"> <!-- WHERE WE LEFT --->
+                        <input class="form-control me-2" type="text" placeholder="Search" name="search"> 
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
@@ -28,26 +28,21 @@
                         <table class="table table-hover" style="white-space: wrap;">
                             <thead>
                                 <tr>
-                                    <!-- <th>#</th> -->
                                     <th>Document Reference Code</th>
                                     <th>Document Title</th>
                                     <th>Revision Number</th>
                                     <th>Effectivity Date</th>
-                                    <!-- <th>Process Owner</th> -->
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($documents as $item)
-                                    <!-- @if(in_array($item->doc_type, ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])) -->
                                     <tr>
-                                            <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>
                                             <td style="text-align: center;">{{ $item->revision_num }}</td>
-                                            <td style="text-align: center;">{{ $item->division }}</td>
-                                            <td>{{ $item->process_owner }}</td>
+                                            <td style="text-align: center;">{{ $item->effectivity_date }}</td>
                                             <td>{{ $item->status }}</td>
                                             <td style="white-space: nowrap;">
                                                 <a href="javascript:void(0)" id="show-document" data-url="{{ route('documents.show', $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -56,7 +51,6 @@
                                                 <i class="fa fa-download" aria-hidden="true"></i>
                                                 </a>
 
-                                                <!-- <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;"><i class="fa fa-download" aria-hidden="true"></i></a> -->
                                                 <button type="button" id="edit-document" value="{{ $item->id }}" title="Edit Document" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                                 <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                     {{ method_field('DELETE') }}
@@ -65,13 +59,12 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    <!-- @endif -->
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div>   
-                        <!-- {{ $documents->appends(['search' => request()->query('search')])->links() }} -->
+                        
                     </div>
                     </div>
                     <div class="card-footer">{{ $documents->appends(['search' => request()->query('search')])->links() }}</div>
@@ -97,14 +90,14 @@
 
         $('body').on('click', '#view-history', function() {
             var docID = $(this).data('id');
-            //alert(docID); // For debugging
-            //window.location.href = "/document/history/" + docID;
             window.open("/document/history/" + docID, '_blank');
 
         });
 
         $('body').on('click', '#show-document', function() {
             var docURL = $(this).data('url');
+            var docID = docURL.substring(docURL.lastIndexOf('/') + 1);  
+
             $.get(docURL, function(data) {
                 $('#docShowModal').modal('show');
                 $('#doc-ref-code').text(data.doc_ref_code);
@@ -112,7 +105,6 @@
                 $('#status').text(data.status);
                 $('#document-iframe').attr('src', "{{ asset('storage/documents/') }}/" + data.file);
                 $('#division').text(data.division);
-                // $('#dmt-incharged').text(data.dmt_incharged);
                 $('#process-owner').text(data.process_owner);
                 $('#doc-type').text(data.doc_type);
                 $('#req-reason').text(data.request_reason);
@@ -131,14 +123,11 @@
         $('body').on('click', '#edit-document', function() {
             var doc_id = $(this).val();
             
-            //alert(doc_id);
             $('#docEditModal').modal('show');
 
             $.ajax({
                 type: "GET",
                 url: "/edit-document/" + doc_id,
-                // data: "data",
-                // dataType: "dataTypes",
                 success: function(response) {
                     console.log(response);
                     $('#docEditModal #doc_id').val(response.document.id);
