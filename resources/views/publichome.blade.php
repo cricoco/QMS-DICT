@@ -16,7 +16,7 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="visionmission-tab" data-bs-toggle="tab" data-bs-target="#visionmission-tab-pane" type="button" role="tab" aria-controls="visionmission-tab-pane" aria-selected="false">Vision & Mission</button>
+                <button class="nav-link active" id="visionmission-tab" data-bs-toggle="tab" data-bs-target="#visionmission-tab-pane" type="button" role="tab" aria-controls="visionmission-tab-pane" aria-selected="true">Vision & Mission</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact Us</button>
@@ -26,7 +26,7 @@
         </ul>
         <div class="tab-content" id="myTabContent">
 
-            <div class="tab-pane fade" id="visionmission-tab-pane" role="tabpanel" aria-labelledby="visionmission-tab" tabindex="0"><br>
+            <div class="tab-pane fade show active" id="visionmission-tab-pane" role="tabpanel" aria-labelledby="visionmission-tab" tabindex="0"><br>
             <h1 class="entry-title text-center"><strong>Mission and Vision</strong></h1>
             <br><br>
                 <div class="card-body">
@@ -59,8 +59,10 @@
 
             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"><br>
                 <h1 class="entry-title text-center"><strong>Contact Us</strong></h1>
-                <div class="card-body">
-                    contacts
+                <div class="card-body text-center">
+                        <p>(062) 991 2742</p>
+                        <p>region9basulta@dict.gov.ph</p>
+                        <p>kryztle.evangelista@dict.gov.ph</p>
                 </div>
 
             </div>

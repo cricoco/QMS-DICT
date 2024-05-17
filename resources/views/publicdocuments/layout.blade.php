@@ -23,7 +23,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-    .document-background {
+    body {
       background-color: #6e70f5;
       animation: colorchange 45s;
       animation-timing-function: ease-in-out;
@@ -64,6 +64,19 @@
         background: #45b3e0;
       }
 
+    }
+
+    #myFooter {
+      position: fixed;
+      bottom: -100px;
+      /* Initially hide the footer below the viewport */
+      left: 0;
+      width: 100%;
+      background-color: #0a4275;
+      color: white;
+      text-align: center;
+      transition: bottom 0.3s ease;
+      z-index: 999;
     }
   </style>
 </head>
@@ -107,7 +120,7 @@
                 <a class="dropdown-item" role="button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                   @csrf
-                  
+
                 </form>
               </li>
 
@@ -126,6 +139,35 @@
     </div>
   </div>
   @yield('publichomeContent')
+  <br><br><br>
+
+  <section>
+    <!-- Footer -->
+    <footer id="myFooter" class="text-center text-white" style="background-color: #0a4275;">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: CTA -->
+        <section>
+          <p class="d-flex justify-content-center align-items-center">
+            <span class="me-3">DICT IX</span>
+            <!-- <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
+            Sign up!
+          </button> -->
+          </p>
+        </section>
+        <!-- Section: CTA -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © Department of Information and Communications Technology:
+        <a class="text-white" href="https://mdbootstrap.com/">dict.gov.ph</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   @yield('pubscript')
@@ -139,36 +181,34 @@
   <!-- AdminLTE for demo purposes
 <script src="../../dist/js/demo.js"></script> -->
 
+  <script>
+    window.addEventListener('scroll', function() {
+      // Calculate how far the user has scrolled from the top
+      var scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+      // Calculate the height of the viewport
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+
+      // Calculate the height of the entire document
+      var documentHeight = Math.max(
+        document.body.scrollHeight || 0,
+        document.documentElement.scrollHeight || 0,
+        document.body.offsetHeight || 0,
+        document.documentElement.offsetHeight || 0,
+        document.documentElement.clientHeight || 0
+      );
+
+      // Calculate how far from the bottom the user is (taking into account the height of the footer)
+      var distanceFromBottom = documentHeight - (scrollPosition + viewportHeight);
+
+      // If the user has scrolled to the bottom, show the footer, otherwise hide it
+      if (distanceFromBottom <= 10) { // You can adjust this value based on how close to the bottom you want the footer to appear
+        document.getElementById('myFooter').style.bottom = '0';
+      } else {
+        document.getElementById('myFooter').style.bottom = '-100px'; // Hide the footer again
+      }
+    });
+  </script>
 </body>
 
 </html>
-
-
-<section class="">
-  <!-- Footer -->
-  <footer class="text-center text-white" style="background-color: #0a4275;">
-    <!-- Grid container -->
-    <div class="container p-4 pb-0">
-      <!-- Section: CTA -->
-      <section class="">
-        <p class="d-flex justify-content-center align-items-center">
-          <span class="me-3">DICT IX</span>
-          <!-- <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
-            Sign up!
-          </button> -->
-        </p>
-      </section>
-      <!-- Section: CTA -->
-    </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © Department of Information and Communications Technology:
-      <a class="text-white" href="https://mdbootstrap.com/">dict.gov.ph</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
-</section>
-

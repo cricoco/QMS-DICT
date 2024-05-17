@@ -37,8 +37,9 @@
                     </table>
 
                 </div>
+                <div class="card-footer"> {{ $history->links() }}</div>
             </div>
-            <div class="card-footer"> {{ $history->links() }}</div>
+            
         </div>
     </div>
 </div>

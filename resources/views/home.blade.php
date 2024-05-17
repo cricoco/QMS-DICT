@@ -77,8 +77,10 @@
 
             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"><br>
                 <h1 class="entry-title text-center"><strong>Contact Us</strong></h1>
-                <div class="card-body">
-                    contacts
+                <div class="card-body text-center">
+                        <p>(062) 991 2742</p>
+                        <p>region9basulta@dict.gov.ph</p>
+                        <p>kryztle.evangelista@dict.gov.ph</p>
                 </div>
 
             </div>
