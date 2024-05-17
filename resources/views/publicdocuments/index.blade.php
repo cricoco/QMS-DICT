@@ -1,6 +1,15 @@
 @extends('publicdocuments.layout')
 @section('publiccontent')
+<style>
+    th a {
+        text-decoration: none;
+        color: inherit;
+    }
 
+    th i.fa {
+        margin-left: 5px;
+    }
+</style>
 <div class="container">
     <br><br><br>
     <div class="row" style="margin:20px;">
@@ -30,10 +39,62 @@
                         <table class="table table-hover" style="white-space: wrap;">
                             <thead>
                                 <tr>
-                                    <th>Document Reference Code</th>
-                                    <th>Document Title</th>
-                                    <th>Revision Number</th>
-                                    <th>Effectivity Date</th>
+                                    <th>
+                                        <a href="{{ route('publicdocuments.index', array_merge(request()->query(), ['sort_by' => 'doc_ref_code', 'sort_dir' => request('sort_dir') == 'asc' ? 'desc' : 'asc'])) }}" style="text-decoration: none; color: inherit;">
+                                            Document Reference Code
+                                            @if(request('sort_by') == 'doc_ref_code')
+                                            @if(request('sort_dir') == 'asc')
+                                            <i class="fa fa-sort-up"></i>
+                                            @else
+                                            <i class="fa fa-sort-down"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa fa-sort"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ route('publicdocuments.index', array_merge(request()->query(), ['sort_by' => 'doc_title', 'sort_dir' => request('sort_dir') == 'asc' ? 'desc' : 'asc'])) }}" style="text-decoration: none; color: inherit;">
+                                            Document Title
+                                            @if(request('sort_by') == 'doc_title')
+                                            @if(request('sort_dir') == 'asc')
+                                            <i class="fa fa-sort-up"></i>
+                                            @else
+                                            <i class="fa fa-sort-down"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa fa-sort"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <a href="{{ route('publicdocuments.index', array_merge(request()->query(), ['sort_by' => 'revision_num', 'sort_dir' => request('sort_dir') == 'asc' ? 'desc' : 'asc'])) }}" style="text-decoration: none; color: inherit;">
+                                            Revision Number
+                                            @if(request('sort_by') == 'revision_num')
+                                            @if(request('sort_dir') == 'asc')
+                                            <i class="fa fa-sort-up"></i>
+                                            @else
+                                            <i class="fa fa-sort-down"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa fa-sort"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <a href="{{ route('publicdocuments.index', array_merge(request()->query(), ['sort_by' => 'effectivity_date', 'sort_dir' => request('sort_dir') == 'asc' ? 'desc' : 'asc'])) }}" style="text-decoration: none; color: inherit;">
+                                            Effectivity Date
+                                            @if(request('sort_by') == 'effectivity_date')
+                                            @if(request('sort_dir') == 'asc')
+                                            <i class="fa fa-sort-up"></i>
+                                            @else
+                                            <i class="fa fa-sort-down"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa fa-sort"></i>
+                                            @endif
+                                        </a>
+                                    </th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -78,7 +139,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        
+
 
         $.ajaxSetup({
             headers: {
