@@ -111,9 +111,11 @@ Route::get('/', function () {
 // Route::get('/history', [DocumentHistoryController::class, 'history'])->name('history');
 // Route::get('/', [HomeController::class, 'index']);
 Route::get('/history', [DocumentHistoryController::class, 'index']);
+
 Route::get('/p/document/{id}', [PublicDocumentController::class, 'show'])->name('publicdocuments.show');
 // Route::get('edit-document/{id}', [DocumentController::class, 'edit']);
 // Route::put('update-document', [DocumentController::class, 'update']);
+
 
 // Route::get('/home', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('home');;
 // Route::get('/', [HomeController::class, 'history'])->middleware(['auth', 'verified', 'isAdmin'])->name('/');;

@@ -41,7 +41,9 @@
                             <tbody>
                                 @foreach($documents as $item)
                                     <!-- @if(in_array($item->doc_type, ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])) -->
+
                                     <tr>
+
                                             <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>

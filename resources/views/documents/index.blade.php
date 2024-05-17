@@ -38,7 +38,7 @@
                 <br>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
                     <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal" data-bs-target="#docCreateModal" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
-                    
+
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -57,7 +57,7 @@
                             </thead>
                             <tbody>
                                 @foreach($documents as $item)
-                                <tr>
+                                <tr @if($item->status === 'Obsolete') style="color: red; background-color: #dddddd; display: none;" @endif>
                                     <!-- <td>{{ $loop->iteration }}</td> -->
                                     <td>{{ $item->doc_ref_code }}</td>
                                     <td>{{ $item->doc_title }}</td>
@@ -68,7 +68,9 @@
                                     <td style="white-space: nowrap;">
                                         <a href="javascript:void(0)" id="show-document" data-url="{{ route('documents.show', $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a> <!-- View -->
 
+
                                         <a href="{{ route('document.download', $item->file) }}" title="Download Document" class="btn btn-info btn-sm" style="background-color: #ffd450; border-color: #ffd450;" onclick="return confirm('NOTICE: Only the softcopy of this document, available on the Regional Office IX and BASULTA QMS portal, is considered the CONTROLLED COPY. Any downloaded or printed copies of this document are deemed UNCONTROLLED.');">
+
                                             <i class="fa fa-download" aria-hidden="true"></i>
                                         </a>
 
@@ -136,8 +138,10 @@
             })
         });
 
+
         $('body').on('click', '#edit-document', function() {
             var doc_id = $(this).val();
+
 
             //alert(doc_id);
             $('#docEditModal').modal('show');

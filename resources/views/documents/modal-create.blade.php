@@ -3,6 +3,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
+
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Autofill
@@ -15,6 +16,7 @@
                         
                     </div>
                 </div>
+
                 <h5 class="modal-title" id="exampleModalLabel">Create New Document</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -50,7 +52,9 @@
                         </div><br>
                         <div class="col-md-2">
                             <label>Status *</label><br>
+
                             <input type="text" name="status" id="status" value="Active" class="form-control" disabled required></br>
+
                         </div>
                         <div class="col-md-4">
                             <label>Document Type *</label><br>
@@ -87,7 +91,9 @@
                         </div>
                         <div class="col-md-2">
                             <label>Revision Number *</label><br>
+
                             <input type="text" name="revision_num" id="revision_num" value="0" class="form-control" disabled required></br>
+
                         </div>
                         <div class="col-md-2">
                             <label>Effectivity Date *</label><br>
@@ -105,12 +111,15 @@
             <div class="modal-footer">
 
 
+
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
 
             </div>
         </div>
     </div>
 </div>
+
 
 </div>
 <style>

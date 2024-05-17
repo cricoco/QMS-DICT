@@ -16,6 +16,7 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
+
         $sortBy = $request->input('sort_by', 'revision_num');
         $sortDirection = $request->input('sort_dir', 'desc');
 
@@ -45,6 +46,7 @@ class DocumentController extends Controller
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
         }
+
          return view('documents.index')->with('documents', $documents);
     }
 
@@ -111,6 +113,7 @@ class DocumentController extends Controller
         $input['revision_num'] = $revisionNumber;
 
 
+
         $documents = Document::create($input);
 
         DocumentHistory::create([
@@ -165,15 +168,29 @@ class DocumentController extends Controller
         $doc_id = $request->input('doc_id');
         $documents = Document::find($doc_id);
 
+
         DocumentHistory::create([
             'username_id' => auth()->id(),
             'document_id' => $documents->id,
             'operation' => 'updated',
         ]);
 
+
         $input = $request->all();
         $documents->update($input);
         return redirect('documents')->with('flash_message', 'Document Updated!');  
+
+        // DocumentHistory::create([
+        //     'username_id' => auth()->id(), 
+        //     'document_id' => $documents->id,
+        //     'operation' => 'updated',
+        // ]);
+
+        // $input = $request->all();
+        // $documents->update($input);
+       
+
+        // return redirect('documents')->with('flash_message', 'Document Updated!');  
     }
 
     /**

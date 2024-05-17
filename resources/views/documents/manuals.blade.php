@@ -42,7 +42,9 @@
                             <tbody>
                                 @foreach($documents as $item)
                                     <!-- @if(in_array($item->doc_type, ['Quality Manual', 'Operations Manual', 'Procedure Manual'])) -->
+
                                     <tr>
+
                                             <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>
