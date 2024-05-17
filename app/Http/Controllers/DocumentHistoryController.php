@@ -23,4 +23,14 @@ class DocumentHistoryController extends Controller
         
         return view('history')->with('history', $history);
     }
+
+    public function specifichistory($id)
+    {
+        
+        $history = DocumentHistory::where('document_id', $id)
+                ->orderBy('updated_at', 'desc')
+                ->paginate(10);
+        
+        return view('specifichistory')->with('history', $history);
+    }
 }

@@ -42,6 +42,7 @@
 
             </div>
             <div class="modal-footer">
+                <button type="button" id="view-history" value="{{ $item->id }}" class="btn btn-secondary" style="background-color: #FF8C00; border-color: #FF8C00;">History</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

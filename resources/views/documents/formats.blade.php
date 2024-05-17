@@ -95,6 +95,14 @@
             }
         });
 
+        $('body').on('click', '#view-history', function() {
+            var docID = $(this).data('id');
+            //alert(docID); // For debugging
+            //window.location.href = "/document/history/" + docID;
+            window.open("/document/history/" + docID, '_blank');
+
+        });
+
         $('body').on('click', '#show-document', function() {
             var docURL = $(this).data('url');
             $.get(docURL, function(data) {
@@ -115,6 +123,8 @@
                 $('#effic-date').text(data.efficitivity_date);
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
+
+                $('#view-history').data('id', docID);
             })
         });
 

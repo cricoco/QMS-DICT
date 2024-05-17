@@ -38,7 +38,7 @@
                 <br>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
                     <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal" data-bs-target="#docCreateModal" style="background-color: #45b3e0; border-color: #45b3e0; color: black;"><i class="fa fa-plus"></i>Add New</a>
-                    
+
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -113,8 +113,19 @@
             }
         });
 
+        $('body').on('click', '#view-history', function() {
+            var docID = $(this).data('id');
+            //alert(docID); // For debugging
+            //window.location.href = "/document/history/" + docID;
+            window.open("/document/history/" + docID, '_blank');
+
+        });
+
         $('body').on('click', '#show-document', function() {
             var docURL = $(this).data('url');
+            var docID = docURL.substring(docURL.lastIndexOf('/') + 1);  // Get document id based on URL
+
+            //alert(docID);
             $.get(docURL, function(data) {
                 $('#docShowModal').modal('show');
                 $('#doc-ref-code').text(data.doc_ref_code);
@@ -133,6 +144,8 @@
                 $('#effic-date').text(data.efficitivity_date);
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
+
+                $('#view-history').data('id', docID);
             })
         });
 
@@ -148,7 +161,7 @@
                 // data: "data",
                 // dataType: "dataTypes",
                 success: function(response) {
-                    console.log(response);
+                    //console.log(response);
                     $('#docEditModal #doc_id').val(response.document.id);
                     $('#docEditModal #doc_ref_code').val(response.document.doc_ref_code);
                     $('#docEditModal #doc_title').val(response.document.doc_title);
