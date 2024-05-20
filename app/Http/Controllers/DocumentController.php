@@ -40,12 +40,16 @@ class DocumentController extends Controller
         ->paginate(10)
         ->appends(['search' => $query, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
 
+        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
+        ->where('status', 'Active')
+        ->distinct()
+            ->get();
         
 
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
         }
-         return view('documents.index')->with('documents', $documents);
+         return view('documents.index')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
     }
 
 
@@ -76,6 +80,21 @@ class DocumentController extends Controller
     public function create()
     {
         return view('documents.create');
+    }
+    // public function create()
+    // {
+    //     $availableDocuments = Document::select('doc_ref_code', 'doc_title')
+    //     ->where('status', 'Active')
+    //     ->distinct()
+    //         ->get();
+    //     return view('documents.create', compact('availableDocuments'));
+    // }
+
+    public function showByDocRefCode(Request $request)
+    {
+        // $document = Document::find($id)->first();
+        $document = Document::where('doc_ref_code', $request->doc_ref_code)->first();
+        return response()->json($document);
     }
     
     

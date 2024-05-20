@@ -9,10 +9,9 @@
                     </button>
                     <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
                         <input type="text" id="searchInput" onkeyup="filterDropdown()" placeholder="Search...">
-                        <!-- Add more options here if needed -->
-                        <a class="dropdown-item" href="#" onclick="loadDetails('QP01')">Load QP01</a>
-                        <a class="dropdown-item" href="#" onclick="loadDetails('QP02')">Load QP02</a>
-                        
+                        @foreach($availableDocuments as $document)
+                            <a class="dropdown-item" href="#" onclick="loadDetails('{{ $document->doc_ref_code }}')">Load {{ $document->doc_ref_code }}</a>
+                        @endforeach
                     </div>
                 </div>
                 <h5 class="modal-title" id="exampleModalLabel">Create New Document</h5>
@@ -188,58 +187,25 @@
 
 
 
-    function loadDetails(option) {
-        if (option === 'QP01') {
-            // Used to automatically fill up the fields
-            var details = {
-                doc_ref_code: 'QP01',
-                doc_title: 'Risk and Opportunity Management',
-                division: 'AFD',
-                process_owner: 'QMS Lead/Rep',
-                doc_type: 'Quality Procedure',
-                request_type: 'Online',
-                requester: 'Juan Dela Cruz',
-                request_date: '2024-05-16',
-
-            };
-
-            // Fill form fields with details
-            $('#docCreateModal #doc_ref_code').val(details.doc_ref_code);
-            $('#docCreateModal #doc_title').val(details.doc_title);
-            $('#docCreateModal #division').val(details.division);
-            $('#docCreateModal #process_owner').val(details.process_owner);
-            $('#docCreateModal #doc_type').val(details.doc_type);
-            $('#docCreateModal #request_type').val(details.request_type);
-            $('#docCreateModal #requester').val(details.requester);
-            $('#docCreateModal #request_date').val(details.request_date);
-
-        }
-        else if (option === 'QP02') {
-            // Used to automatically fill up the fields
-            var details = {
-                doc_ref_code: 'QP02',
-                doc_title: 'Control of Documented Information and Records',
-                division: 'N/A',
-                process_owner: 'Doc Mngt Team',
-                doc_type: 'Quality Procedure',
-                request_type: 'Online',
-                requester: 'Juan Dela Cruz',
-                request_date: '2024-05-16',
-
-            };
-
-            // Fill form fields with details
-            $('#docCreateModal #doc_ref_code').val(details.doc_ref_code);
-            $('#docCreateModal #doc_title').val(details.doc_title);
-            $('#docCreateModal #division').val(details.division);
-            $('#docCreateModal #process_owner').val(details.process_owner);
-            $('#docCreateModal #doc_type').val(details.doc_type);
-            $('#docCreateModal #request_type').val(details.request_type);
-            $('#docCreateModal #requester').val(details.requester);
-            $('#docCreateModal #request_date').val(details.request_date);
-
-        }
-        
-        // Add more cases for other options if needed
+    function loadDetails(docRefCode) {
+        $.ajax({
+            url: '/documentxx/' + docRefCode, // Adjust URL if necessary
+            method: 'GET',
+            success: function(data) {
+                if(data) {
+                    $('#docCreateModal #doc_ref_code').val(data.doc_ref_code);
+                    $('#docCreateModal #doc_title').val(data.doc_title);
+                    $('#docCreateModal #division').val(data.division);
+                    $('#docCreateModal #process_owner').val(data.process_owner);
+                    $('#docCreateModal #doc_type').val(data.doc_type);
+                    $('#docCreateModal #request_type').val(data.request_type);
+                    $('#docCreateModal #requester').val(data.requester);
+                    $('#docCreateModal #request_date').val(data.request_date);
+                }
+            },
+            error: function(err) {
+                console.error(err);
+            }
+        });
     }
 </script>

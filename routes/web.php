@@ -27,6 +27,8 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     Route::put('update-document', [DocumentController::class, 'update']);
 
     Route::get('/document/history/{id}', [DocumentHistoryController::class, 'specifichistory'])->name('specifichistory');
+    Route::get('documentxx/{doc_ref_code}', [DocumentController::class, 'showByDocRefCode']);
+
 }); 
 
 //============== Normal user middleware
