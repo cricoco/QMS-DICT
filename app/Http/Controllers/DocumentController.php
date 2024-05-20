@@ -250,11 +250,16 @@ class DocumentController extends Controller
                         ->paginate(10)
                         ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
 
+                        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
+                        ->where('status', 'Active')
+                        ->distinct()
+                            ->get();
+
                         foreach ($documents as $document) {
                             $this->archiveOlderRevisions($document);
                         }
     
-        return view('documents.manuals')->with('documents', $documents);
+        return view('documents.manuals')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
     }
     
 public function formats(Request $request)
@@ -276,11 +281,16 @@ public function formats(Request $request)
                         ->orderBy($sortBy, $sortDirection)
                         ->paginate(10)
                         ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+
+                        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
+                        ->where('status', 'Active')
+                        ->distinct()
+                            ->get();
     
                         foreach ($documents as $document) {
                             $this->archiveOlderRevisions($document);
                         }
-        return view('documents.formats')->with('documents', $documents);
+        return view('documents.formats')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
     }
 
 }
