@@ -16,7 +16,7 @@ class PublicDocumentController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
-        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
 
         $documents = Document::where('status', 'Active') // Add this condition for active documents
@@ -96,7 +96,7 @@ class PublicDocumentController extends Controller
     public function manuals(Request $request)
     {
         $searchQuery = $request->input('search');
-        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
         
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
@@ -125,7 +125,7 @@ class PublicDocumentController extends Controller
     public function formats(Request $request)
     {
         $searchQuery = $request->input('search');
-        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
         
         $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])

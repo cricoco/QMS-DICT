@@ -208,4 +208,34 @@
             }
         });
     }
+
+    $(document).ready(function() {
+        $('form').on('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            var docRefCode = $('#doc_ref_code').val();
+            var form = this;
+
+            $.ajax({
+                url: '{{ route("document.check") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    doc_ref_code: docRefCode
+                },
+                success: function(response) {
+                    if (response.exists) {
+                        if (confirm('A document with this reference code already exists. Do you still want to proceed?')) {
+                            form.submit(); // Submit the form if the user confirms
+                        }
+                    } else {
+                        form.submit(); // No existing document, submit the form
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while checking the document reference code.');
+                }
+            });
+        });
+    });
 </script>

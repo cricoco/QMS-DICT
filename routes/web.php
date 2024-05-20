@@ -10,6 +10,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PublicDocumentController;
 use App\Http\Controllers\DocumentHistoryController;
 use App\Models\DocumentHistory;
+use App\Models\Document;
 
 
 //============== Admin middleware
@@ -28,6 +29,10 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
 
     Route::get('/document/history/{id}', [DocumentHistoryController::class, 'specifichistory'])->name('specifichistory');
     Route::get('documentxx/{doc_ref_code}', [DocumentController::class, 'showByDocRefCode']);
+    
+    Route::get('archives/', [DocumentController::class, 'archives'])->name('archives');
+    Route::post('/document/check', [App\Http\Controllers\DocumentController::class, 'checkDocumentExists'])->name('document.check');
+
 
 }); 
 
@@ -56,10 +61,20 @@ Route::get('/', function () {
     if (Auth::check()) {
         $usertype = Auth::user()->role_id;
         $history = DocumentHistory::orderBy('updated_at', 'desc')->paginate(10);
+        $totalDocuments = Document::where('status', 'Active')->count();
+        $totalManuals = Document::where('status', 'Active')->whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])->count();
+        $totalForms = Document::where('status', 'Active')->whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])->count();
+        $totalArchives = Document::where('status', 'Obsolete')->count();
+
         if ($usertype == 0) {
             return view('publichome');
         } elseif ($usertype == 1) {
-            return view('home')->with('history', $history);
+            return view('home')->with('history', $history)
+                               ->with('totalDocuments', $totalDocuments)
+                               ->with('totalManuals', $totalManuals)
+                               ->with('totalForms', $totalForms)
+                               ->with('totalArchives', $totalArchives);
+
         } else {
             return redirect()->back();
         }

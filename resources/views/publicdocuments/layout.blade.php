@@ -98,7 +98,7 @@
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('publicdocuments.index') }}" role="button">Documents</a>
+            <a class="nav-link" href="{{ route('publicdocuments.index') }}" role="button">Masterlist</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('publicdocuments.manuals') }}" role="button">Manuals</a>

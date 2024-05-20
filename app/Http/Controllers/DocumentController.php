@@ -16,7 +16,7 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
-        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
 
         $documents = Document::where('status', 'Active') // Add this condition for active documents
@@ -233,7 +233,7 @@ class DocumentController extends Controller
     public function manuals(Request $request)
     {
         $searchQuery = $request->input('search');
-        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
         
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
@@ -261,36 +261,79 @@ class DocumentController extends Controller
     
         return view('documents.manuals')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
     }
-    
-public function formats(Request $request)
+
+    public function formats(Request $request)
     {
         $searchQuery = $request->input('search');
-        $sortBy = $request->input('sort_by', 'revision_num');
+        $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
-        
-        $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
-                        ->where('status', 'Active')
-                        ->when($searchQuery, function ($query) use ($searchQuery) {
-                            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('division', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('status', 'LIKE', "%$searchQuery%");
-                        })
-                        ->orderBy($sortBy, $sortDirection)
-                        ->paginate(10)
-                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
 
-                        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
-                        ->where('status', 'Active')
-                        ->distinct()
-                            ->get();
-    
-                        foreach ($documents as $document) {
-                            $this->archiveOlderRevisions($document);
-                        }
+        $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
+        ->where('status', 'Active')
+        ->when($searchQuery, function ($query) use ($searchQuery) {
+            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
+            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
+            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
+            $query->orWhere('division', 'LIKE', "%$searchQuery%");
+            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
+            $query->orWhere('status', 'LIKE', "%$searchQuery%");
+        })
+            ->orderBy($sortBy, $sortDirection)
+            ->paginate(10)
+            ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+
+        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
+        ->where('status', 'Active')
+        ->distinct()
+            ->get();
+
+        foreach ($documents as $document) {
+            $this->archiveOlderRevisions($document);
+        }
         return view('documents.formats')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
+    }
+
+    public function archives(Request $request)
+    {
+        $query = $request->input('search');
+        $sortBy = $request->input('sort_by', 'created_at');
+        $sortDirection = $request->input('sort_dir', 'desc');
+
+        $documents = Document::where('status', 'Obsolete') // Add this condition for active documents
+        ->where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
+            ->orWhere('doc_title', 'LIKE', "%$query%")
+                ->orWhere('dmt_incharged', 'LIKE', "%$query%")
+                ->orWhere('division', 'LIKE', "%$query%")
+                ->orWhere('process_owner', 'LIKE', "%$query%")
+                ->orWhere('status', 'LIKE', "%$query%")
+                ->orWhere('doc_type', 'LIKE', "%$query%")
+                ->orWhere('request_type', 'LIKE', "%$query%")
+                ->orWhere('request_reason', 'LIKE', "%$query%")
+                ->orWhere('requester', 'LIKE', "%$query%")
+                ->orWhere('request_date', 'LIKE', "%$query%")
+                ->orWhere('revision_num', 'LIKE', "%$query%")
+                ->orWhere('effectivity_date', 'LIKE', "%$query%")
+                ->orWhere('file', 'LIKE', "%$query%");
+        })
+        ->orderBy($sortBy, $sortDirection)
+        ->paginate(10)
+        ->appends(['search' => $query, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+
+        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
+        ->where('status', 'Active')
+        ->distinct()
+            ->get();
+        
+         return view('archives')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
+    }
+
+    public function checkDocumentExists(Request $request)
+    {
+        $docRefCode = $request->input('doc_ref_code');
+        $existingDocument = Document::where('doc_ref_code', $docRefCode)->first();
+
+        return response()->json(['exists' => !!$existingDocument]);
     }
 
 }
