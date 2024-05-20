@@ -92,7 +92,7 @@
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" styles="background-color: #0c3b8a;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url('/') }}"><img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/DICT-Logo-icon_only.png" width="auto" height="40px"></a>
+      <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('images_dict/dict-logo.png') }}" width="auto" height="40px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -133,10 +133,10 @@
     <div class="container">
       @yield('content')
     </div>
-    
+
   </div>
   @yield('homeContent')
-  <br><br><br>
+  <br><br><br><br><br>
 
   <section>
     <!-- Footer -->
@@ -146,7 +146,7 @@
         <!-- Section: CTA -->
         <section>
           <p class="d-flex justify-content-center align-items-center">
-            <span class="me-3">DICT IX</span>
+            <span class="me-1" style="font-size: 12px;">REGIONAL OFFICE IX & BASULTA<br>DICT Building, Corcuerra Extension, Zone IV, Port Area, Zamboanga City 7000, Philippines</span>
             <!-- <button data-mdb-ripple-init type="button" class="btn btn-outline-light btn-rounded">
             Sign up!
           </button> -->
@@ -157,9 +157,12 @@
       <!-- Grid container -->
 
       <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © Department of Information and Communications Technology:
-        <a class="text-white" href="https://mdbootstrap.com/">dict.gov.ph</a>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); font-size: 12px;">
+        <i class="fa fa-phone" aria-hidden="true" style="margin-right: 5px;"></i>(062) 991 2742
+        <i class="fa fa-envelope-o" aria-hidden="true" style="margin-right: 5px; margin-left: 10px;"></i>region9basulta@dict.gov.ph
+        <i class="fa fa-globe" aria-hidden="true" style="margin-right: 5px; margin-left: 10px;"></i>www.dict.gov.ph
+        <i class="fa fa-facebook-official" aria-hidden="true" style="margin-right: 5px; margin-left: 10px;"></i>@DICT.RO9BASULTA
+
       </div>
       <!-- Copyright -->
     </footer>

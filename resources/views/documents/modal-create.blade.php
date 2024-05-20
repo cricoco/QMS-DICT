@@ -225,7 +225,7 @@
                 },
                 success: function(response) {
                     if (response.exists) {
-                        if (confirm('A document with this reference code already exists. Do you still want to proceed?')) {
+                        if (confirm('A document with this reference code already exists. Proceeding will render the existing document obsolete and increment the revision number of this document. Do you still wish to proceed?')) {
                             form.submit(); // Submit the form if the user confirms
                         }
                     } else {
