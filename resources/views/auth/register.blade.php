@@ -56,4 +56,69 @@
             </x-primary-button>
         </div>
     </form>
+
+    <!-- Privacy Pop-up -->
+    <div id="privacy-popup" class="popup">
+        <div class="popup-content">
+            <h2><strong>Data Privacy Statement</strong></h2>
+            <p>I agree that the personal data and other sensitive data entrusted to the DICT shall be used with due diligence and prudence, for the sole purpose of the Quality Management System Portal. I acknowledge and agree that the information may be used and disclosed by the DICT in accordance with any legal and regulatory standards and in compliance with the “Data Privacy Act of 2012”.</p>
+            <label>
+                <input type="checkbox" id="agree-checkbox"> I agree
+            </label>
+            <button id="agree-button" class="btn btn-secondary" type="button" disabled>Submit</button>
+        </div>
+    </div>
+
+    <style>
+        .popup {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            margin-left: 50px;
+            margin-right: 50px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 20px 0;
+        }
+
+        
+    </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var popup = document.getElementById('privacy-popup');
+            var checkbox = document.getElementById('agree-checkbox');
+            var button = document.getElementById('agree-button');
+
+            // Show the popup when the page loads
+            popup.style.display = 'flex';
+
+            // Enable the submit button when the checkbox is checked
+            checkbox.addEventListener('change', function () {
+                button.disabled = !checkbox.checked;
+            });
+
+            // Hide the popup when the button is clicked
+            button.addEventListener('click', function () {
+                if (checkbox.checked) {
+                    popup.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </x-guest-layout>
