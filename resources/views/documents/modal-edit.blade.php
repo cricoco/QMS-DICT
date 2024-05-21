@@ -38,7 +38,7 @@
                         </div><br>
                         <div class="col-md-2">
                             <label>Status *</label><br>
-                            <input type="text" name="status" id="status" class="form-control"></br>
+                            <input type="text" name="status" id="status" class="form-control" disabled></br>
                         </div>
                         <div class="col-md-4">
                             <label>Document Type *</label><br>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-md-2">
                             <label>Revision Number *</label><br>
-                            <input type="text" name="revision_num" id="revision_num" class="form-control"></br>
+                            <input type="text" name="revision_num" id="revision_num" class="form-control" disabled></br>
                         </div>
                         <div class="col-md-2">
                             <label>Effectivity Date *</label><br>
