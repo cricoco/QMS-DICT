@@ -16,7 +16,7 @@
                                 <th>Doc Ref. Code</th>
                                 <th>Document Title</th>
                                 <th>Reason</th>
-                                <th>Operation</th>
+                                <th>Revision Number</th>
                                 <th>Date and Time</th>
                                 <th>Name</th>
                                 
@@ -28,7 +28,7 @@
                                 <td>{{ $item->document->doc_ref_code }}</td>
                                 <td>{{ $item->document->doc_title }}</td> 
                                 <td>{{ $item->document->request_reason }}</td>  
-                                <td>{{ $item->operation }}</td>
+                                <td>{{ $item->document->revision_num }}</td>
                                 <td>{{ $item->updated_at }}</td> 
                                 <td>{{ $item->user->name }}</td>
                             </tr>

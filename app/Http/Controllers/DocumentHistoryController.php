@@ -36,6 +36,7 @@ class DocumentHistoryController extends Controller
 
         // get history for the related documents along with the current document
         $history = DocumentHistory::whereIn('document_id', $related_documents->push($id)->toArray())
+            ->where('operation', 'created')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
