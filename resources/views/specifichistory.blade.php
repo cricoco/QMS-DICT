@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center">
-                    <h1>History</h1>
+                    <h1>Revision History Tracking Log</h1>
                 </div>
                 <div class="card-body">
 
@@ -15,10 +15,10 @@
                             <tr>
                                 <th>Doc Ref. Code</th>
                                 <th>Document Title</th>
-                                <th>Reason</th>
+                                <th>Description of Change</th>
                                 <th>Revision Number</th>
-                                <th>Date and Time</th>
-                                <th>Name</th>
+                                <th>Effectivity Date</th>
+                                <th>Owner</th>
                                 
                             </tr>
                         </thead>
@@ -29,8 +29,8 @@
                                 <td>{{ $item->document->doc_title }}</td> 
                                 <td>{{ $item->document->request_reason }}</td>  
                                 <td>{{ $item->document->revision_num }}</td>
-                                <td>{{ $item->updated_at }}</td> 
-                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->document->effectivity_date }}</td> 
+                                <td>{{ $item->document->process_owner }}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -34,7 +34,8 @@ class DocumentController extends Controller
                 ->orWhere('request_date', 'LIKE', "%$query%")
                 ->orWhere('revision_num', 'LIKE', "%$query%")
                 ->orWhere('effectivity_date', 'LIKE', "%$query%")
-                ->orWhere('file', 'LIKE', "%$query%");
+                ->orWhere('file', 'LIKE', "%$query%")
+                ->orWhere('type_intext', 'LIKE', "%$query%");
         })
         ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
@@ -93,7 +94,9 @@ class DocumentController extends Controller
     public function showByDocRefCode(Request $request)
     {
         // $document = Document::find($id)->first();
-        $document = Document::where('doc_ref_code', $request->doc_ref_code)->first();
+        $document = Document::where('doc_ref_code', $request->doc_ref_code)
+                            ->orderBy('revision_num', 'desc')
+                            ->first();
         return response()->json($document);
     }
     

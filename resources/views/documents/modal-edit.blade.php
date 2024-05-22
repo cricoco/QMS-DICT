@@ -10,18 +10,18 @@
             
             <div class="modal-body">
 
-                <form action="{{ url('update-document') }}" method="post">
+                <form id="editDocForm" action="{{ url('update-document') }}" method="post">
                     @csrf
                     @method("PUT")
                     <input type="hidden" name="doc_id" id="doc_id">
                     <div class="row">
                         <div class="col-md-2">
                             <label>Doc Ref. Code *</label><br>
-                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control"></br>
+                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" required></br>
                         </div>
                         <div class="col-md-6">
                             <label>Document Title *</label><br>
-                            <input type="text" name="doc_title" id="doc_title" class="form-control"></br>
+                            <input type="text" name="doc_title" id="doc_title" class="form-control" required></br>
                         </div>
                         <div class="col-md-2">
                             <label>Division *</label><br>
@@ -33,8 +33,8 @@
                             </select></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Process Owner *</label><br>
-                            <input type="text" name="process_owner" id="process_owner" class="form-control"></br>
+                            <label>Owner *</label><br>
+                            <input type="text" name="process_owner" id="process_owner" class="form-control" required></br>
                         </div><br>
                         <div class="col-md-2">
                             <label>Status *</label><br>
@@ -55,20 +55,25 @@
                                 <option value="Corrective Action Request Form">Corrective Action Request Form</option>
                                 <option value="Form/Template">Form/Template</option>
                                 <option value="Resolution">Resolution</option>
+                                <option value="Other">Other</option>
                             </select></br>
                         </div>
                         <div class="col-md-2">
                             <label>Request Type *</label><br>
-                            <input type="text" name="request_type" id="request_type" class="form-control"></br>
+                            <select type="text" name="request_type" id="request_type" class="form-control" required></br>
+                                <option value="Creation">Creation</option>
+                                <option value="Revision">Revision</option>
+                                <option value="Deletion">Deletion</option>
+                            </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label>Request Reason *</label><br>
                             <input type="text" name="request_reason" id="request_reason" class="form-control"></br>
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <label>Requester *</label><br>
                             <input type="text" name="requester" id="requester" class="form-control"></br>
-                        </div>
+                        </div> -->
                         <div class="col-md-2">
                             <label>Request Date *</label><br>
                             <input type="date" name="request_date" id="request_date" class="form-control"></br>
@@ -81,13 +86,20 @@
                             <label>Effectivity Date *</label><br>
                             <input type="date" name="effectivity_date" id="effectivity_date" class="form-control"></br>
                         </div>
-
+                        <div class="col-md-2">
+                            <label>Type *</label><br>
+                            <select type="text" name="type_intext" id="type_intext" class="form-control" required></br>
+                                <option value="Internal">Internal</option>
+                                <option value="External">External</option>
+                            </select>
+                        </div>
                     </div>
-                    <input type="submit" value="Update" class="btn btn-success">
+                    
                 </form>
 
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-success" onclick="submitEditForm();">Update</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -95,3 +107,16 @@
 </div>
 
 </div>
+
+<script>
+    function submitEditForm() {
+        var form = document.getElementById('editDocForm');
+        if (form.checkValidity()) {
+            form.submit();
+        } else {
+            form.reportValidity();
+        }
+    }
+</script>
+
+

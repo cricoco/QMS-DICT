@@ -23,7 +23,8 @@
                         </div>
                         <div class="col-md-6">
                             <p><strong>Request Type:</strong> <span id="pub-req-type"></span></p>
-                            <p><strong>Requester:</strong> <span id="pub-requester"></span></p>
+                            <!-- <p><strong>Requester:</strong> <span id="pub-requester"></span></p> -->
+                            <p><strong>Type:</strong> <span id="pub-type-intext"></span></p>
                             <p><strong>Request Date:</strong> <span id="pub-req-date"></span></p>
                             <p><strong>Revision Number:</strong> <span id="pub-rev-num"></span></p>
                             <p><strong>Effectivity Date:</strong> <span id="pub-effic-date"></span></p>

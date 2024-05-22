@@ -1,3 +1,4 @@
+<!-- Connected From View Document -->
 <!-- Modal -->
 <div class="modal fade" id="docShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -23,7 +24,8 @@
                         </div>
                         <div class="col-md-6">
                             <p><strong>Request Type:</strong> <span id="req-type"></span></p>
-                            <p><strong>Requester:</strong> <span id="requester"></span></p>
+                            <!-- <p><strong>Requester:</strong> <span id="requester"></span></p> -->
+                            <p><strong>Type:</strong> <span id="type-intext"></span></p>
                             <p><strong>Request Date:</strong> <span id="req-date"></span></p>
                             <p><strong>Revision Number:</strong> <span id="rev-num"></span></p>
                             <p><strong>Effectivity Date:</strong> <span id="effic-date"></span></p>

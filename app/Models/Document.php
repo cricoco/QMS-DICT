@@ -25,6 +25,7 @@ class Document extends Model
                             'revision_num',
                             'effectivity_date',
                             'file',
+                            'type_intext',
                             'created_at',
                             'updated_at',
                             ];

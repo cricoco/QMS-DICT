@@ -95,6 +95,8 @@
                                             @endif
                                         </a>
                                     </th>
+                                    <th>Owner</th>
+                                    <th>Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -106,6 +108,8 @@
                                     <td>{{ $item->doc_title }}</td>
                                     <td style="text-align: center;">{{ $item->revision_num }}</td>
                                     <td style="text-align: center;">{{ $item->effectivity_date }}</td>
+                                    <td>{{ $item->process_owner }}</td>
+                                    <td>{{ $item->type_intext }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td style="white-space: nowrap;">
                                         <a href="javascript:void(0)" id="show-document" data-url="{{ route('documents.show', $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -173,12 +177,13 @@
                 $('#doc-type').text(data.doc_type);
                 $('#req-reason').text(data.request_reason);
                 $('#req-type').text(data.request_type);
-                $('#requester').text(data.requester);
+                //$('#requester').text(data.requester);
                 $('#req-date').text(data.request_date);
                 $('#rev-num').text(data.revision_num);
-                $('#effic-date').text(data.efficitivity_date);
+                $('#effic-date').text(data.effectivity_date);
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
+                $('#type-intext').text(data.type_intext);
 
                 $('#view-history').data('id', docID);
             })
@@ -205,10 +210,11 @@
                     $('#docEditModal #doc_type').val(response.document.doc_type);
                     $('#docEditModal #request_type').val(response.document.request_type);
                     $('#docEditModal #request_reason').val(response.document.request_reason);
-                    $('#docEditModal #requester').val(response.document.requester);
+                    //$('#docEditModal #requester').val(response.document.requester);
                     $('#docEditModal #request_date').val(response.document.request_date);
                     $('#docEditModal #revision_num').val(response.document.revision_num);
                     $('#docEditModal #effectivity_date').val(response.document.effectivity_date);
+                    $('#docEditModal #type_intext').val(response.document.type_intext);
                 }
 
             });

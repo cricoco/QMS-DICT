@@ -19,7 +19,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{ url('document') }}" method="post" enctype="multipart/form-data">
+                <form id="createDocForm" action="{{ url('document') }}" method="post" enctype="multipart/form-data">
                     {!! csrf_field() !!}
                     <div class="row">
                         <div class="col-md-2">
@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label>Process Owner *</label><br>
+                            <label>Owner *</label><br>
                             <input type="text" name="process_owner" id="process_owner" class="form-control" required></br>
                         </div><br>
                         <div class="col-md-2">
@@ -66,20 +66,26 @@
                                 <option value="Corrective Action Request Form">Corrective Action Request Form</option>
                                 <option value="Form/Template">Form/Template</option>
                                 <option value="Resolution">Resolution</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label>Request Type *</label><br>
-                            <input type="text" name="request_type" id="request_type" class="form-control" required></br>
+                            <select name="request_type" id="request_type" class="form-control" required></br>
+                                <option value="Creation">Creation</option>
+                                <option value="Revision">Revision</option>
+                                <option value="Deletion">Deletion</option>
+                                
+                            </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label>Request Reason *</label><br>
                             <input type="text" name="request_reason" id="request_reason" class="form-control" required></br>
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <label>Requester *</label><br>
                             <input type="text" name="requester" id="requester" class="form-control" required></br>
-                        </div>
+                        </div> -->
                         <div class="col-md-2">
                             <label>Request Date *</label><br>
                             <input type="date" name="request_date" id="request_date" class="form-control" required></br>
@@ -96,14 +102,21 @@
                             <label>File *</label><br>
                             <input type="file" name="file" id="file" class="form-control" required></br>
                         </div>
+                        <div class="col-md-2">
+                            <label>Type *</label><br>
+                            <select name="type_intext" id="type_intext" class="form-control" required></br>
+                                <option value="Internal">Internal</option>
+                                <option value="External">External</option>
+                            </select>
+                        </div>
                     </div>
-                    <input type="submit" value="Save" class="btn btn-success">
+                    
                 </form>
 
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-between">
 
-
+                <button type="button" class="btn btn-success" onclick="submitCreateForm();">Save</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
             </div>
@@ -192,6 +205,7 @@
             url: '/documentxx/' + docRefCode, // Adjust URL if necessary
             method: 'GET',
             success: function(data) {
+                console.log(data);
                 if(data) {
                     $('#docCreateModal #doc_ref_code').val(data.doc_ref_code);
                     $('#docCreateModal #doc_title').val(data.doc_title);
@@ -201,6 +215,7 @@
                     $('#docCreateModal #request_type').val(data.request_type);
                     $('#docCreateModal #requester').val(data.requester);
                     $('#docCreateModal #request_date').val(data.request_date);
+                    $('#docCreateModal #type_intext').val(data.type_intext);
                 }
             },
             error: function(err) {
@@ -238,4 +253,13 @@
             });
         });
     });
+
+    function submitCreateForm() {
+        var form = document.getElementById('createDocForm');
+        if (form.checkValidity()) {
+            form.submit();
+        } else {
+            form.reportValidity();
+        }
+    }
 </script>
