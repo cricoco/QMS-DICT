@@ -1,16 +1,14 @@
 @extends('documents.layout')
 @section('homeContent')
 <div class="document-background">
+<br>
+    <div class="container" width="20px" height="20px" style="background-color: white; padding: 0;">
+        
 
-    <div class="container" width="20px" height="20px" style="background-color: white;">
-        </br></br>
-
-        <div class="card-header" style="background-color: white; text-align: center; border-top-left-radius: 20px; border-top-right-radius: 20px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/DICT-Logo-Final-2-300x153.png/1200px-DICT-Logo-Final-2-300x153.png" width="auto" height="190px">
+        <div class="image-container" style="width: 100%; background-color: white; margin-top: 40px;">
+            <img src="{{ url('images_dict/QMS-Portal-cover.jpg') }}" style="display: block; width: 100%; height: auto;">
         </div>
-        <div class="card-header" style="background-color: #0693e3; text-align: center; color: #ffffff; ">
-            <h1><strong>Quality Management System</strong></h1>
-        </div>
+        
 
         <br>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
