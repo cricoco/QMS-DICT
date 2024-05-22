@@ -37,7 +37,13 @@
                 <div class="alert alert-light text-center">
                     <form action="{{ route('documents.index') }}" method="GET" class="d-flex">
                         <input class="form-control me-2" type="text" placeholder="Search" name="search">
+                        <select name="type" class="form-select" style="width: auto; min-width: 120px; margin-right: 5px;">
+                            <option value="">All Types</option>
+                            <option value="Internal" {{ request('type') == 'Internal' ? 'selected' : '' }}>Internal</option>
+                            <option value="External" {{ request('type') === 'External' ? 'selected' : '' }}>External</option>
+                        </select>
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+
                     </form>
                 </div>
                 <div class="ml-auto" style="margin-right: 35px;">
@@ -185,7 +191,7 @@
         $('body').on('click', '#show-document', function() {
             var docURL = $(this).data('url');
             var docID = docURL.substring(docURL.lastIndexOf('/') + 1);
-          
+
             // For View Document
             $.get(docURL, function(data) {
                 $('#docShowModal').modal('show');

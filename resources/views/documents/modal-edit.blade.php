@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-2">
                             <label>Division *</label><br>
-                            <select type="text" name="division" id="division" class="form-control">
+                            <select type="text" name="division" id="division" class="custom-dropdown">
                                 <option value="N/A">N/A</option>
                                 <option value="AFD">AFD</option>
                                 <option value="ORD">ORD</option>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-md-4">
                             <label>Document Type *</label><br>
-                            <select type="text" name="doc_type" id="doc_type" class="form-control">
+                            <select type="text" name="doc_type" id="doc_type" class="custom-dropdown">
                                 <option value="Quality Manual">Quality Manual</option>
                                 <option value="Quality Procedure">Quality Procedure</option>
                                 <option value="Quality Procedure Form">Quality Procedure Form</option>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-2">
                             <label>Request Type *</label><br>
-                            <select type="text" name="request_type" id="request_type" class="form-control" required></br>
+                            <select type="text" name="request_type" id="request_type" class="custom-dropdown" required></br>
                                 <option value="Creation">Creation</option>
                                 <option value="Revision">Revision</option>
                                 <option value="Deletion">Deletion</option>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-md-2">
                             <label>Type *</label><br>
-                            <select type="text" name="type_intext" id="type_intext" class="form-control" required></br>
+                            <select type="text" name="type_intext" id="type_intext" class="custom-dropdown" required></br>
                                 <option value="Internal">Internal</option>
                                 <option value="External">External</option>
                             </select>

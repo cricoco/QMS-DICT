@@ -18,8 +18,13 @@ class PublicDocumentController extends Controller
         $query = $request->input('search');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
+        $type = $request->input('type');
 
         $documents = Document::where('status', 'Active') // Add this condition for active documents
+        ->when($type, function ($query) use ($type) {
+            // Filter by selected type (Internal or External)
+            $query->where('type_intext', $type);
+        })
         ->where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
             ->orWhere('doc_title', 'LIKE', "%$query%")
@@ -34,7 +39,8 @@ class PublicDocumentController extends Controller
                 ->orWhere('request_date', 'LIKE', "%$query%")
                 ->orWhere('revision_num', 'LIKE', "%$query%")
                 ->orWhere('effectivity_date', 'LIKE', "%$query%")
-                ->orWhere('file', 'LIKE', "%$query%");
+                ->orWhere('file', 'LIKE', "%$query%")
+                ->orWhere('type_intext', 'LIKE', "%$query%");
         })
         ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
@@ -98,24 +104,29 @@ class PublicDocumentController extends Controller
         $searchQuery = $request->input('search');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
+        $type = $request->input('type');
         
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
-                        ->where('status', 'Active')
-                        ->when($searchQuery, function ($query) use ($searchQuery) {
-                            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('division', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('status', 'LIKE', "%$searchQuery%");
-                        })
-                        ->orderBy($sortBy, $sortDirection)
-                        ->paginate(10)
-                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
-
-                        foreach ($documents as $document) {
-                            $this->archiveOlderRevisions($document);
-                        }
+        ->where('status', 'Active')
+        ->when($type, function ($query) use ($type) {
+            // Filter by selected type (Internal or External)
+            $query->where('type_intext', $type);
+        })
+        ->when($searchQuery, function ($query) use ($searchQuery) {
+            $query->where(function ($queryBuilder) use ($searchQuery) {
+                $queryBuilder->orWhere('doc_ref_code', 'LIKE', "%$searchQuery%")
+                ->orWhere('doc_title', 'LIKE', "%$searchQuery%")
+                ->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%")
+                ->orWhere('division', 'LIKE', "%$searchQuery%")
+                ->orWhere('process_owner', 'LIKE', "%$searchQuery%");
+            });
+        })
+        ->orderBy($sortBy, $sortDirection)
+        ->paginate(10)
+        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        foreach ($documents as $document) {
+            $this->archiveOlderRevisions($document);
+        }
     
         return view('publicdocuments.manuals')->with('documents', $documents);
     }
@@ -127,24 +138,29 @@ class PublicDocumentController extends Controller
         $searchQuery = $request->input('search');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
+        $type = $request->input('type');
         
         $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
-                        ->where('status', 'Active')
-                        ->when($searchQuery, function ($query) use ($searchQuery) {
-                            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('division', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('status', 'LIKE', "%$searchQuery%");
-                        })
-                        ->orderBy($sortBy, $sortDirection)
-                        ->paginate(10)
-                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
-    
-                        foreach ($documents as $document) {
-                            $this->archiveOlderRevisions($document);
-                        }
+        ->where('status', 'Active')
+        ->when($type, function ($query) use ($type) {
+            // Filter by selected type (Internal or External)
+            $query->where('type_intext', $type);
+        })
+        ->when($searchQuery, function ($query) use ($searchQuery) {
+            $query->where(function ($queryBuilder) use ($searchQuery) {
+                $queryBuilder->orWhere('doc_ref_code', 'LIKE', "%$searchQuery%")
+                ->orWhere('doc_title', 'LIKE', "%$searchQuery%")
+                ->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%")
+                ->orWhere('division', 'LIKE', "%$searchQuery%")
+                ->orWhere('process_owner', 'LIKE', "%$searchQuery%");
+            });
+        })
+        ->orderBy($sortBy, $sortDirection)
+        ->paginate(10)
+        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        foreach ($documents as $document) {
+            $this->archiveOlderRevisions($document);
+        }
         return view('publicdocuments.formats')->with('documents', $documents);
     }
 

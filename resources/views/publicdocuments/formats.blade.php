@@ -21,6 +21,11 @@
                 <div class="alert alert-light text-center">
                     <form action="{{ route('publicdocuments.formats') }}" method="GET" class="d-flex">
                         <input class="form-control me-2" type="text" placeholder="Search" name="search">
+                        <select name="type" class="form-select" style="width: auto; min-width: 120px; margin-right: 5px;">
+                            <option value="">All Types</option>
+                            <option value="Internal" {{ request('type') == 'Internal' ? 'selected' : '' }}>Internal</option>
+                            <option value="External" {{ request('type') === 'External' ? 'selected' : '' }}>External</option>
+                        </select>
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>

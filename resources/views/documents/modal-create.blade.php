@@ -36,7 +36,7 @@
         </div> -->
                         <div class="col-md-2">
                             <label>Division *</label><br>
-                            <select name="division" id="division" class="form-control" required></br>
+                            <select name="division" id="division" class="custom-dropdown" required></br>
                                 <option value="N/A">N/A</option>
                                 <option value="AFD">AFD</option>
                                 <option value="ORD">ORD</option>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-4">
                             <label>Document Type *</label><br>
-                            <select name="doc_type" id="doc_type" class="form-control" required></br>
+                            <select name="doc_type" id="doc_type" class="custom-dropdown" required></br>
                                 <option value="Quality Manual">Quality Manual</option>
                                 <option value="Quality Procedure">Quality Procedure</option>
                                 <option value="Quality Procedure Form">Quality Procedure Form</option>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-md-2">
                             <label>Request Type *</label><br>
-                            <select name="request_type" id="request_type" class="form-control" required></br>
+                            <select name="request_type" id="request_type" class="custom-dropdown" required></br>
                                 <option value="Creation">Creation</option>
                                 <option value="Revision">Revision</option>
                                 <option value="Deletion">Deletion</option>
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-md-2">
                             <label>Type *</label><br>
-                            <select name="type_intext" id="type_intext" class="form-control" required></br>
+                            <select name="type_intext" id="type_intext" class="custom-dropdown" required></br>
                                 <option value="Internal">Internal</option>
                                 <option value="External">External</option>
                             </select>
@@ -180,6 +180,20 @@
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
     }
+    
+    .custom-dropdown {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 </style>
 <script>
     function filterDropdown() {
@@ -224,13 +238,10 @@
         });
     }
 
-    $(document).ready(function() {
-        $('form').on('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-            
+    function submitCreateForm() {
+        var form = document.getElementById('createDocForm');
+        if (form.checkValidity()) {
             var docRefCode = $('#doc_ref_code').val();
-            var form = this;
-
             $.ajax({
                 url: '{{ route("document.check") }}',
                 method: 'POST',
@@ -251,13 +262,6 @@
                     alert('An error occurred while checking the document reference code.');
                 }
             });
-        });
-    });
-
-    function submitCreateForm() {
-        var form = document.getElementById('createDocForm');
-        if (form.checkValidity()) {
-            form.submit();
         } else {
             form.reportValidity();
         }

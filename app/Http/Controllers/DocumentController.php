@@ -18,8 +18,13 @@ class DocumentController extends Controller
         $query = $request->input('search');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
+        $type = $request->input('type');
 
         $documents = Document::where('status', 'Active') // Add this condition for active documents
+        ->when($type, function ($query) use ($type) {
+            // Filter by selected type (Internal or External)
+            $query->where('type_intext', $type);
+        })
         ->where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
             ->orWhere('doc_title', 'LIKE', "%$query%")
@@ -238,48 +243,61 @@ class DocumentController extends Controller
         $searchQuery = $request->input('search');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
-        
+        $type = $request->input('type');
+
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
-                        ->where('status', 'Active')
-                        ->when($searchQuery, function ($query) use ($searchQuery) {
-                            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('division', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
-                            $query->orWhere('status', 'LIKE', "%$searchQuery%");
-                        })
-                        ->orderBy($sortBy, $sortDirection)
-                        ->paginate(10)
-                        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        ->where('status', 'Active')
+        ->when($type, function ($query) use ($type) {
+            // Filter by selected type (Internal or External)
+            $query->where('type_intext', $type);
+        })
+        ->when($searchQuery, function ($query) use ($searchQuery) {
+            $query->where(function ($queryBuilder) use ($searchQuery) {
+                $queryBuilder->orWhere('doc_ref_code', 'LIKE', "%$searchQuery%")
+                ->orWhere('doc_title', 'LIKE', "%$searchQuery%")
+                ->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%")
+                ->orWhere('division', 'LIKE', "%$searchQuery%")
+                ->orWhere('process_owner', 'LIKE', "%$searchQuery%");
+            });
+        })
+            ->orderBy($sortBy, $sortDirection)
+            ->paginate(10)
+            ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
 
-                        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
-                        ->where('status', 'Active')
-                        ->distinct()
-                            ->get();
+        $availableDocuments = Document::select('doc_ref_code', 'doc_title')
+        ->where('status', 'Active')
+        ->distinct()
+            ->get();
 
-                        foreach ($documents as $document) {
-                            $this->archiveOlderRevisions($document);
-                        }
-    
+        foreach ($documents as $document) {
+            $this->archiveOlderRevisions($document);
+        }
+
         return view('documents.manuals')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
     }
 
-    public function formats(Request $request)
+
+    public function formats(Request $request)    // FIX SEARCHING. IT INCLUDED THE OBSOLETE
     {
         $searchQuery = $request->input('search');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
+        $type = $request->input('type');
 
         $documents = Document::whereIn('doc_type', ['Quality Procedure Form', 'Corrective Action Request Form', 'Form/Template'])
         ->where('status', 'Active')
+        ->when($type, function ($query) use ($type) {
+            // Filter by selected type (Internal or External)
+            $query->where('type_intext', $type);
+        })
         ->when($searchQuery, function ($query) use ($searchQuery) {
-            $query->where('doc_ref_code', 'LIKE', "%$searchQuery%");
-            $query->orWhere('doc_title', 'LIKE', "%$searchQuery%");
-            $query->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%");
-            $query->orWhere('division', 'LIKE', "%$searchQuery%");
-            $query->orWhere('process_owner', 'LIKE', "%$searchQuery%");
-            $query->orWhere('status', 'LIKE', "%$searchQuery%");
+            $query->where(function ($queryBuilder) use ($searchQuery) {
+                $queryBuilder->orWhere('doc_ref_code', 'LIKE', "%$searchQuery%")
+                ->orWhere('doc_title', 'LIKE', "%$searchQuery%")
+                ->orWhere('dmt_incharged', 'LIKE', "%$searchQuery%")
+                ->orWhere('division', 'LIKE', "%$searchQuery%")
+                ->orWhere('process_owner', 'LIKE', "%$searchQuery%");
+            });
         })
             ->orderBy($sortBy, $sortDirection)
             ->paginate(10)
@@ -334,7 +352,9 @@ class DocumentController extends Controller
     public function checkDocumentExists(Request $request)
     {
         $docRefCode = $request->input('doc_ref_code');
-        $existingDocument = Document::where('doc_ref_code', $docRefCode)->first();
+        $existingDocument = Document::where('doc_ref_code', $docRefCode)
+                                    ->orderBy('revision_num', 'desc')
+                                    ->first();
 
         return response()->json(['exists' => !!$existingDocument]);
     }
