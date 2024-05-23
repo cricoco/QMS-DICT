@@ -30,16 +30,18 @@
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-                <div class="ml-auto" style="margin-right: 35px;">
-                    <a href="{{ route('publicdocuments.manuals', ['search' => request('search'), 'sort_by' => 'doc_title', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-alpha-down" aria-hidden="true"></i></a>
-                    <a href="{{ route('publicdocuments.manuals', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-down" aria-hidden="true"></i></a>
-                    <a href="{{ route('publicdocuments.manuals', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'desc']) }}" class="btn btn-sm btn-info " style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-up" aria-hidden="true"></i></a>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-right: 20px; margin-left: 20px;">
+                    <div>
+                        <strong>NOTICE:</strong> Only the softcopy of documents available on the QMS portal is considered the <strong>CONTROLLED COPY.</strong><br>
+                        <span style="margin-left: 67px; display: block;">Any downloaded or printed copies of documents are deemed <strong>UNCONTROLLED</strong>.</span>
+                    </div>
+                    <div>
+                        <a href="{{ route('publicdocuments.manuals', ['search' => request('search'), 'sort_by' => 'doc_title', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-alpha-down" aria-hidden="true"></i></a>
+                        <a href="{{ route('publicdocuments.manuals', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-down" aria-hidden="true"></i></a>
+                        <a href="{{ route('publicdocuments.manuals', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'desc']) }}" class="btn btn-sm btn-info " style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-up" aria-hidden="true"></i></a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <strong>NOTICE:</strong> Only the softcopy of documents available on the QMS portal is considered the <strong>CONTROLLED COPY.</strong><br>
-                    <span style="margin-left: 67px; display: block;">Any downloaded or printed copies of documents are deemed <strong>UNCONTROLLED</strong>.</span>
-                </div>
-                <!-- <br> -->
+                <br>
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
 
                     <br>
