@@ -1,9 +1,9 @@
 @extends('publicdocuments.layout')
 @section('publichomeContent')
 <div class="document-background">
-<br>
+    <br>
     <div class="container" width="20px" height="20px" style="background-color: white; padding: 0;">
-        
+
 
         <div class="image-container" style="width: 100%; background-color: white; margin-top: 40px;">
             <img src="{{ url('images_dict/QMS-Portal-cover.jpg') }}" style="display: block; width: 100%; height: auto;">
@@ -17,7 +17,7 @@
 
         <br>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            
+
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="visionmission-tab" data-bs-toggle="tab" data-bs-target="#visionmission-tab-pane" type="button" role="tab" aria-controls="visionmission-tab-pane" aria-selected="true">Vision & Mission</button>
             </li>
@@ -36,19 +36,19 @@
         <div class="tab-content" id="myTabContent">
 
             <div class="tab-pane fade show active" id="visionmission-tab-pane" role="tabpanel" aria-labelledby="visionmission-tab" tabindex="0"><br>
-            <h1 class="entry-title text-center"><strong>Mission and Vision</strong></h1>
-            <br><br>
+                <h1 class="entry-title text-center"><strong>Mission and Vision</strong></h1>
+                <br><br>
                 <div class="card-body">
                     <strong>Mission</strong>
                     <i>DICT of the people and for the people.”</i>
                     <p>The Department of Information and Communications Technology commits to:</p>
 
                     <ul>
-                    <li>Provide every Filipino access to vital ICT infostructure and services</li>
-                    <li>Ensure sustainable growth of Philippine ICT-enabled industries resulting to creation of more jobs</li>
-                    <li>Establish a One Digitized Government, One Nation</li>
-                    <li>Support the administration in fully achieving its goals</li>
-                    <li>Be the enabler, innovator, achiever and leader in pushing the country’s development and transition towards a world-class digital economy</li>
+                        <li>Provide every Filipino access to vital ICT infostructure and services</li>
+                        <li>Ensure sustainable growth of Philippine ICT-enabled industries resulting to creation of more jobs</li>
+                        <li>Establish a One Digitized Government, One Nation</li>
+                        <li>Support the administration in fully achieving its goals</li>
+                        <li>Be the enabler, innovator, achiever and leader in pushing the country’s development and transition towards a world-class digital economy</li>
                     </ul>
 
                     <strong>Vision</strong>
@@ -67,9 +67,9 @@
             </div>
 
             <div class="tab-pane fade" id="qualitypolicy-tab-pane" role="tabpanel" aria-labelledby="qualitypolicy-tab" tabindex="0"><br>
-                <h1 class="entry-title text-center"><strong>QUALITY POLICY</strong></h1>
-                <h2 class="entry-title text-center"><strong>The Department of Information and <br>Communications Technology RIX BASULTA <br>commits to: </strong></h2>
-                <div class="card-body" style="font-size: 20px;"><br>
+                <h3 class="entry-title text-center"><strong>QUALITY POLICY</strong></h3>
+                <h3 class="entry-title text-center"><strong>The Department of Information and <br>Communications Technology RIX BASULTA <br>commits to: </strong></h3>
+                <div class="card-body" style="font-size: 16px;"><br>
                     <ul>
                         <li>lead in pushing the National ICT Development agenda
                             in transitioning the Philippines toward a world-class
@@ -156,7 +156,12 @@
 
 
             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"><br>
-                <h1 class="entry-title text-center"><strong>Contact Us</strong></h1>
+                <div class="card-body text-center">
+                    <img src="{{ url('images_dict/DMT-Members.jpg') }}" style="display: block; width: 100%; height: auto;">
+
+                </div>
+
+                <h3 class="entry-title text-center"><strong>Contact Us</strong></h3>
                 <div class="card-body text-center">
                     <i class="fa fa-phone" aria-hidden="true" style="margin-right: 5px;"></i>(062) 991 2742<br>
                     <i class="fa fa-envelope-o" aria-hidden="true" style="margin-right: 5px;"></i>region9basulta@dict.gov.ph<br>

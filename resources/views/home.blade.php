@@ -1,14 +1,14 @@
 @extends('documents.layout')
 @section('homeContent')
 <div class="document-background">
-<br>
+    <br>
     <div class="container" width="20px" height="20px" style="background-color: white; padding: 0;">
-        
+
 
         <div class="image-container" style="width: 100%; background-color: white; margin-top: 40px;">
             <img src="{{ url('images_dict/QMS-Portal-cover.jpg') }}" style="display: block; width: 100%; height: auto;">
         </div>
-        
+
 
         <br>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -83,10 +83,6 @@
                             </div>
                         </div>
 
-
-
-                    </div>
-                    <div class="row justify-content-center">
                         <div class="col-lg-3 col-6">
 
                             <div class="small-box bg-danger">
@@ -100,7 +96,9 @@
                                 <a href="{{ route('archives') }}" class="small-box-footer">Visit <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
+
                     </div>
+
 
                 </div>
             </div>
@@ -151,9 +149,9 @@
             </div>
 
             <div class="tab-pane fade" id="qualitypolicy-tab-pane" role="tabpanel" aria-labelledby="qualitypolicy-tab" tabindex="0"><br>
-                <h1 class="entry-title text-center"><strong>QUALITY POLICY</strong></h1>
-                <h2 class="entry-title text-center"><strong>The Department of Information and <br>Communications Technology RIX BASULTA <br>commits to: </strong></h2>
-                <div class="card-body" style="font-size: 20px;"><br>
+                <h3 class="entry-title text-center"><strong>QUALITY POLICY</strong></h3>
+                <h3 class="entry-title text-center"><strong>The Department of Information and <br>Communications Technology RIX BASULTA <br>commits to: </strong></h3>
+                <div class="card-body" style="font-size: 16px;"><br>
                     <ul>
                         <li>lead in pushing the National ICT Development agenda
                             in transitioning the Philippines toward a world-class
@@ -240,7 +238,12 @@
 
 
             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"><br>
-                <h1 class="entry-title text-center"><strong>Contact Us</strong></h1>
+                <div class="card-body text-center">
+                    <img src="{{ url('images_dict/DMT-Members.jpg') }}" style="display: block; width: 100%; height: auto;">
+                    
+                </div>
+
+                <h3 class="entry-title text-center"><strong>Contact Us</strong></h3>
                 <div class="card-body text-center">
                     <i class="fa fa-phone" aria-hidden="true" style="margin-right: 5px;"></i>(062) 991 2742<br>
                     <i class="fa fa-envelope-o" aria-hidden="true" style="margin-right: 5px;"></i>region9basulta@dict.gov.ph<br>
