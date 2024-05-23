@@ -109,6 +109,18 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.users') }}">
+              <i class="fas fa-user" style="font-size:24px"></i>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.unverifiedusers') }}">
+              <i class='fas fa-user-check' style='font-size:24px'></i>
+            </a>
+          </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Welcome, {{ Auth::user()->name }}</a>
             <ul class="dropdown-menu">

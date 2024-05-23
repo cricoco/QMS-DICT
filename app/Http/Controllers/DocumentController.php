@@ -44,7 +44,12 @@ class DocumentController extends Controller
         })
         ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
-        ->appends(['search' => $query, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        ->appends([
+            'search' => $query,
+            'sort_by' => $sortBy,
+            'sort_dir' => $sortDirection,
+            'type' => $type
+        ]);
 
         $availableDocuments = Document::select('doc_ref_code', 'doc_title')
         ->where('status', 'Active')
@@ -262,7 +267,12 @@ class DocumentController extends Controller
         })
             ->orderBy($sortBy, $sortDirection)
             ->paginate(10)
-            ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+            ->appends([
+                'search' => $searchQuery,
+                'sort_by' => $sortBy,
+                'sort_dir' => $sortDirection,
+                'type' => $type
+            ]);
 
         $availableDocuments = Document::select('doc_ref_code', 'doc_title')
         ->where('status', 'Active')
@@ -301,7 +311,12 @@ class DocumentController extends Controller
         })
             ->orderBy($sortBy, $sortDirection)
             ->paginate(10)
-            ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+            ->appends([
+                'search' => $searchQuery,
+                'sort_by' => $sortBy,
+                'sort_dir' => $sortDirection,
+                'type' => $type
+            ]);
 
         $availableDocuments = Document::select('doc_ref_code', 'doc_title')
         ->where('status', 'Active')
@@ -319,8 +334,13 @@ class DocumentController extends Controller
         $query = $request->input('search');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
+        $type = $request->input('type');
 
         $documents = Document::where('status', 'Obsolete') // Add this condition for active documents
+        ->when($type, function ($query) use ($type) {
+            // Filter by selected type (Internal or External)
+            $query->where('type_intext', $type);
+        })
         ->where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
             ->orWhere('doc_title', 'LIKE', "%$query%")
@@ -335,11 +355,17 @@ class DocumentController extends Controller
                 ->orWhere('request_date', 'LIKE', "%$query%")
                 ->orWhere('revision_num', 'LIKE', "%$query%")
                 ->orWhere('effectivity_date', 'LIKE', "%$query%")
-                ->orWhere('file', 'LIKE', "%$query%");
+                ->orWhere('file', 'LIKE', "%$query%")
+                ->orWhere('type_intext', 'LIKE', "%$query%");
         })
         ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
-        ->appends(['search' => $query, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        ->appends([
+            'search' => $query,
+            'sort_by' => $sortBy,
+            'sort_dir' => $sortDirection,
+            'type' => $type
+        ]);
 
         $availableDocuments = Document::select('doc_ref_code', 'doc_title')
         ->where('status', 'Active')

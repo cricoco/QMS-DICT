@@ -21,6 +21,11 @@
                 <div class="alert alert-light text-center">
                     <form action="{{ route('archives') }}" method="GET" class="d-flex">
                         <input class="form-control me-2" type="text" placeholder="Search" name="search">
+                        <select name="type" class="form-select" style="width: auto; min-width: 120px; margin-right: 5px;">
+                            <option value="">All Types</option>
+                            <option value="Internal" {{ request('type') == 'Internal' ? 'selected' : '' }}>Internal</option>
+                            <option value="External" {{ request('type') === 'External' ? 'selected' : '' }}>External</option>
+                        </select>
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
@@ -95,6 +100,8 @@
                                             @endif
                                         </a>
                                     </th>
+                                    <th>Owner</th>
+                                    <th>Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -106,6 +113,8 @@
                                     <td>{{ $item->doc_title }}</td>
                                     <td style="text-align: center;">{{ $item->revision_num }}</td>
                                     <td style="text-align: center;">{{ $item->effectivity_date }}</td>
+                                    <td>{{ $item->process_owner }}</td>
+                                    <td>{{ $item->type_intext }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td style="white-space: nowrap;">
                                         <a href="javascript:void(0)" id="show-document" data-url="{{ route('documents.show', $item->id) }}" title="View Document" class="btn btn-info btn-sm" style="background-color: #a881af; border-color: #a881af;"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -173,12 +182,13 @@
                 $('#doc-type').text(data.doc_type);
                 $('#req-reason').text(data.request_reason);
                 $('#req-type').text(data.request_type);
-                $('#requester').text(data.requester);
+                //$('#requester').text(data.requester);
                 $('#req-date').text(data.request_date);
                 $('#rev-num').text(data.revision_num);
-                $('#effic-date').text(data.efficitivity_date);
+                $('#effic-date').text(data.effectivity_date);
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
+                $('#type-intext').text(data.type_intext);
 
                 $('#view-history').data('id', docID);
             })
