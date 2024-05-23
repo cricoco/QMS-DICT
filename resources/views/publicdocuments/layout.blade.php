@@ -91,7 +91,7 @@
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" styles="background-color: #0c3b8a;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('images_dict/dict-logo.png') }}" width="auto" height="40px"></a>
+      <a class="navbar-brand" href="{{ url('/') }}" title="Home"><img src="{{ url('images_dict/dict-logo.png') }}" width="auto" height="40px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>

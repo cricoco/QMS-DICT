@@ -92,7 +92,7 @@
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" styles="background-color: #0c3b8a;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('images_dict/dict-logo.png') }}" width="auto" height="40px"></a>
+      <a class="navbar-brand" href="{{ url('/') }}" title="Home"><img src="{{ url('images_dict/dict-logo.png') }}" width="auto" height="40px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -110,13 +110,13 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.users') }}">
+            <a class="nav-link" href="{{ route('admin.users') }}" title="Users">
               <i class="fas fa-user" style="font-size:24px"></i>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.unverifiedusers') }}">
+            <a class="nav-link" href="{{ route('admin.unverifiedusers') }}" title="Unverified users">
               <i class='fas fa-user-check' style='font-size:24px'></i>
             </a>
           </li>
@@ -124,9 +124,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Welcome, {{ Auth::user()->name }}</a>
             <ul class="dropdown-menu">
-              <!-- <li>
-                <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
-              </li> -->
+              
 
               <li>
                 <a class="dropdown-item" role="button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

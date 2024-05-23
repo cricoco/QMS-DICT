@@ -14,7 +14,7 @@
                         @endforeach
                     </div>
                 </div>
-                <h5 class="modal-title" id="exampleModalLabel">Create New Document</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="margin-left: 30px">Create New Document</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -141,7 +141,7 @@
     .dropdown {
         position: relative;
         display: inline-block;
-        margin-right: 30px;
+        
     }
 
     .dropdown-content {

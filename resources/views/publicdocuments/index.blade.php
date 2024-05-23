@@ -34,7 +34,11 @@
                     <a href="{{ route('publicdocuments.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-down" aria-hidden="true"></i></a>
                     <a href="{{ route('publicdocuments.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'desc']) }}" class="btn btn-sm btn-info " style="background-color: #45b3e0;"><i class="fa fa-sort-numeric-up" aria-hidden="true"></i></a>
                 </div>
-                <br>
+                <div class="card-body">
+                    <strong>NOTICE:</strong> Only the softcopy of documents available on the QMS portal is considered the <strong>CONTROLLED COPY.</strong><br>
+                    <span style="margin-left: 67px; display: block;">Any downloaded or printed copies of documents are deemed <strong>UNCONTROLLED</strong>.</span>
+                </div>
+                <!-- <br> -->
 
                 <div class="card-body" style="height: 100vh; overflow-y: auto;">
 
