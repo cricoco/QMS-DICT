@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'isAdmin' => \App\Http\Middleware\IsAdmin::class,
-            'isVerifiedMan' => \App\Http\Middleware\IsVerifiedMan::class,
+            'isVerifiedMan' => \App\Http\Middleware\isVerifiedMan::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
