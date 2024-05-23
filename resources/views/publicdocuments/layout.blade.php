@@ -97,13 +97,13 @@
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('p/documents') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('publicdocuments.index') }}" role="button">Masterlist</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('p/documents/manuals*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('publicdocuments.manuals') }}" role="button">Manuals</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('p/documents/formats*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('publicdocuments.formats') }}" role="button">Forms</a>
           </li>
         </ul>

@@ -98,24 +98,24 @@
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('documents') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('documents.index') }}" role="button">Masterlist</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('documents/manuals*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('documents.manuals') }}" role="button">Manuals</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('documents/formats*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('documents.formats') }}" role="button">Forms</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('admin/users') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin.users') }}" title="Users">
               <i class="fas fa-user" style="font-size:24px"></i>
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('admin/unverifiedusers') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin.unverifiedusers') }}" title="Unverified users">
               <i class='fas fa-user-check' style='font-size:24px'></i>
             </a>
@@ -124,7 +124,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Welcome, {{ Auth::user()->name }}</a>
             <ul class="dropdown-menu">
-              
+
 
               <li>
                 <a class="dropdown-item" role="button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
