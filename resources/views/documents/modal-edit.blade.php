@@ -19,7 +19,7 @@
                             <label>Doc Ref. Code *</label><br>
                             <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" required></br>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Document Title *</label><br>
                             <input type="text" name="doc_title" id="doc_title" class="form-control" required></br>
                         </div>

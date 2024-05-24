@@ -10,7 +10,7 @@
                     <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
                         <input type="text" id="searchInput" onkeyup="filterDropdown()" placeholder="Search...">
                         @foreach($availableDocuments as $document)
-                            <a class="dropdown-item" href="#" onclick="loadDetails('{{ $document->doc_ref_code }}')">Load {{ $document->doc_ref_code }}</a>
+                        <a class="dropdown-item" href="#" onclick="loadDetails('{{ $document->doc_ref_code }}')">Load {{ $document->doc_ref_code }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -36,7 +36,7 @@
         </div> -->
                         <div class="col-md-2">
                             <label>Division *</label><br>
-                            <select name="division" id="division" class="custom-dropdown" required></br>
+                            <select name="division" id="divisioncreatemodal" class="custom-dropdown" required onchange="updateUnitDropdown()"></br>
                                 <option value="N/A">N/A</option>
                                 <option value="AFD">AFD</option>
                                 <option value="ORD">ORD</option>
@@ -48,21 +48,6 @@
                             <select name="unit" id="unit" class="custom-dropdown" required></br>
                                 <option value="N/A">N/A</option>
 
-                                <option value="COMMS">COMMS</option>
-                                <option value="QMR">QMR</option>
-
-                                <option value="HR">HR</option>
-                                <option value="Finance">Finance</option>
-                                <option value="Supply">Supply</option>
-                                <option value="General Services">General Services</option>
-                                <option value="eLGU/eGOV">eLGU/eGOV</option>
-                                <option value="GovNet">GovNet</option>
-                                <option value="FW4A">FW4A</option>
-
-                                <option value="ILCD">ILCD</option>
-                                <option value="IID">IID</option>
-                                <option value="PNPKI">PNPKI</option>
-                                <option value="DRRM">DRRM</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -97,7 +82,7 @@
                                 <option value="Creation">Creation</option>
                                 <option value="Revision">Revision</option>
                                 <option value="Deletion">Deletion</option>
-                                
+
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -132,7 +117,7 @@
                             </select>
                         </div>
                     </div>
-                    
+
                 </form>
 
             </div>
@@ -163,7 +148,7 @@
     .dropdown {
         position: relative;
         display: inline-block;
-        
+
     }
 
     .dropdown-content {
@@ -202,7 +187,7 @@
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
     }
-    
+
     .custom-dropdown {
         display: block;
         width: 100%;
@@ -242,16 +227,18 @@
             method: 'GET',
             success: function(data) {
                 console.log(data);
-                if(data) {
+                if (data) {
                     $('#docCreateModal #doc_ref_code').val(data.doc_ref_code);
                     $('#docCreateModal #doc_title').val(data.doc_title);
-                    $('#docCreateModal #division').val(data.division);
+                    $('#docCreateModal #divisioncreatemodal').val(data.division);
                     $('#docCreateModal #process_owner').val(data.process_owner);
                     $('#docCreateModal #doc_type').val(data.doc_type);
                     $('#docCreateModal #request_type').val(data.request_type);
                     $('#docCreateModal #requester').val(data.requester);
                     $('#docCreateModal #request_date').val(data.request_date);
                     $('#docCreateModal #type_intext').val(data.type_intext);
+
+                    updateUnitDropdown()
                     $('#docCreateModal #unit').val(data.unit);
                 }
             },
@@ -288,5 +275,42 @@
         } else {
             form.reportValidity();
         }
+    }
+
+    function updateUnitDropdown() {
+        
+        var divisionDropdown = document.getElementById('divisioncreatemodal');
+        var division = divisionDropdown.value;
+        var unitDropdown = document.getElementById('unit');
+
+
+        // Clear existing options
+        unitDropdown.innerHTML = '';
+
+        // Add options based on division
+        if (division === 'AFD') {
+            addOption(unitDropdown, 'HR', 'HR');
+            addOption(unitDropdown, 'Finance', 'Finance');
+            addOption(unitDropdown, 'Supply', 'Supply');
+            addOption(unitDropdown, 'General Services', 'General Services');
+            addOption(unitDropdown, 'eLGU/eGOV', 'eLGU/eGOV');
+            addOption(unitDropdown, 'GovNet', 'GovNet');
+            addOption(unitDropdown, 'FW4A', 'FW4A');
+        } else if (division === 'ORD') {
+            addOption(unitDropdown, 'COMMS', 'COMMS');
+            addOption(unitDropdown, 'QMR', 'QMR');
+        } else if (division === 'TOD') {
+            addOption(unitDropdown, 'ILCD', 'ILCD');
+            addOption(unitDropdown, 'IID', 'IID');
+            addOption(unitDropdown, 'PNPKI', 'PNPKI');
+            addOption(unitDropdown, 'DRRM', 'DRRM');
+        }
+    }
+
+    function addOption(selectElement, value, text) {
+        var option = document.createElement('option');
+        option.value = value;
+        option.text = text;
+        selectElement.appendChild(option);
     }
 </script>
