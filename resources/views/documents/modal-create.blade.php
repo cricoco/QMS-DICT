@@ -26,7 +26,7 @@
                             <label>Doc Ref. Code *</label><br>
                             <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" required></br>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Document Title *</label><br>
                             <input type="text" name="doc_title" id="doc_title" class="form-control" required></br>
                         </div>
@@ -41,6 +41,28 @@
                                 <option value="AFD">AFD</option>
                                 <option value="ORD">ORD</option>
                                 <option value="TOD">TOD</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Project/Unit *</label><br>
+                            <select name="unit" id="unit" class="custom-dropdown" required></br>
+                                <option value="N/A">N/A</option>
+
+                                <option value="COMMS">COMMS</option>
+                                <option value="QMR">QMR</option>
+
+                                <option value="HR">HR</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Supply">Supply</option>
+                                <option value="General Services">General Services</option>
+                                <option value="eLGU/eGOV">eLGU/eGOV</option>
+                                <option value="GovNet">GovNet</option>
+                                <option value="FW4A">FW4A</option>
+
+                                <option value="ILCD">ILCD</option>
+                                <option value="IID">IID</option>
+                                <option value="PNPKI">PNPKI</option>
+                                <option value="DRRM">DRRM</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -230,6 +252,7 @@
                     $('#docCreateModal #requester').val(data.requester);
                     $('#docCreateModal #request_date').val(data.request_date);
                     $('#docCreateModal #type_intext').val(data.type_intext);
+                    $('#docCreateModal #unit').val(data.unit);
                 }
             },
             error: function(err) {

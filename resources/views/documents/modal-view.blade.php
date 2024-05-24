@@ -16,6 +16,7 @@
                             <p><strong>Document Title:</strong> <span id="doc-title"></span></p>
                             <!-- <p><strong>DMT Incharged:</strong> <span id="dmt-incharged"></span></p> -->
                             <p><strong>Division:</strong> <span id="division"></span></p>
+                            <p><strong>Project/Unit:</strong> <span id="unit-text"></span></p>
                             <p><strong>Process Owner:</strong> <span id="process-owner"></span></p>
                             <p><strong>Status:</strong> <span id="status"></span></p>
                             <p><strong>Document Type:</strong> <span id="doc-type"></span></p>

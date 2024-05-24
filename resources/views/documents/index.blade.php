@@ -223,6 +223,7 @@
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
                 $('#type-intext').text(data.type_intext);
+                $('#unit-text').text(data.unit);
 
                 $('#view-history').data('id', docID);
             })
@@ -255,6 +256,7 @@
                     $('#docEditModal #revision_num').val(response.document.revision_num);
                     $('#docEditModal #effectivity_date').val(response.document.effectivity_date);
                     $('#docEditModal #type_intext').val(response.document.type_intext);
+                    $('#docEditModal #unit').val(response.document.unit);
                 }
 
             });
