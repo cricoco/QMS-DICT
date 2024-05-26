@@ -107,18 +107,28 @@
           <li class="nav-item {{ Request::is('documents/formats*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('documents.formats') }}" role="button">Forms</a>
           </li>
+          <li class="nav-item {{ Request::is('archives*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('archives') }}" role="button">Archives</a>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item {{ Request::is('admin/users') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.users') }}" title="Users">
-              <i class="fas fa-user" style="font-size:24px"></i>
-            </a>
-          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-user" style="font-size:24px"></i></a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{{ route('admin.users') }}" title="Users">
+                  Make User an Admin
+                </a>
+              </li>
 
-          <li class="nav-item {{ Request::is('admin/unverifiedusers') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.unverifiedusers') }}" title="Unverified users">
-              <i class='fas fa-user-check' style='font-size:24px'></i>
-            </a>
+              <li>
+                <a class="dropdown-item" href="{{ route('admin.unverifiedusers') }}" title="Unverified users">
+                  Approve User
+                </a>
+              </li>
+
+            </ul>
           </li>
 
           <li class="nav-item dropdown">
