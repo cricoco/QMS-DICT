@@ -184,6 +184,7 @@
                 $('#pub-filename').text(data.file);
                 $('#pub-created-at').text(data.created_at);
                 $('#pub-type-intext').text(data.type_intext);
+                $('#pub-unit-text').text(data.unit);
             })
         });
 

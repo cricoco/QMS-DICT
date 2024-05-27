@@ -15,11 +15,11 @@
                             <p><strong>Document Title:</strong> <span id="pub-doc-title"></span></p>
                             <!-- <p><strong>DMT Incharged:</strong> <span id="dmt-incharged"></span></p> -->
                             <p><strong>Division:</strong> <span id="pub-division"></span></p>
-                            <p><strong>Division:</strong> <span id="pub-unit-text"></span></p>
+                            <p><strong>Project/Unit:</strong> <span id="pub-unit-text"></span></p>
                             <p><strong>Process Owner:</strong> <span id="pub-process-owner"></span></p>
                             <p><strong>Status:</strong> <span id="pub-status"></span></p>
                             <p><strong>Document Type:</strong> <span id="pub-doc-type"></span></p>
-                            <p><strong>Request Reason:</strong> <span id="pub-req-reason"></span></p>
+                            
                     
                         </div>
                         <div class="col-md-6">
@@ -33,7 +33,7 @@
                             <p><strong>Created at:</strong> <span id="pub-created-at"></span></p>
 
                         </div>
-                    
+                        <p><strong>Request Reason:</strong> <span id="pub-req-reason"></span></p>
                     </div>
                 </div>
 

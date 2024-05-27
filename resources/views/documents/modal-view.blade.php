@@ -20,7 +20,7 @@
                             <p><strong>Process Owner:</strong> <span id="process-owner"></span></p>
                             <p><strong>Status:</strong> <span id="status"></span></p>
                             <p><strong>Document Type:</strong> <span id="doc-type"></span></p>
-                            <p><strong>Request Reason:</strong> <span id="req-reason"></span></p>
+                            
                     
                         </div>
                         <div class="col-md-6">
@@ -34,7 +34,7 @@
                             <p><strong>Created at:</strong> <span id="created-at"></span></p>
 
                         </div>
-                    
+                        <p><strong>Request Reason:</strong> <span id="req-reason"></span></p>
                     </div>
                 </div>
 

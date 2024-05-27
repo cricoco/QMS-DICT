@@ -195,6 +195,7 @@
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
                 $('#type-intext').text(data.type_intext);
+                $('#unit-text').text(data.unit);
 
                 $('#view-history').data('id', docID);
             })
