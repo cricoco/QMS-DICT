@@ -19,12 +19,15 @@ class PublicDocumentController extends Controller
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
         $type = $request->input('type');
+        //$userUnit = auth()->user()->unit;
 
         $documents = Document::where('status', 'Active') // Add this condition for active documents
+        //->where('unit', $userUnit)
         ->when($type, function ($query) use ($type) {
             // Filter by selected type (Internal or External)
             $query->where('type_intext', $type);
         })
+        
         ->where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('doc_ref_code', 'LIKE', "%$query%")
             ->orWhere('doc_title', 'LIKE', "%$query%")
@@ -44,7 +47,12 @@ class PublicDocumentController extends Controller
         })
         ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
-        ->appends(['search' => $query, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        ->appends([
+            'search' => $query,
+            'sort_by' => $sortBy,
+            'sort_dir' => $sortDirection,
+            'type' => $type
+        ]);
 
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
@@ -105,9 +113,12 @@ class PublicDocumentController extends Controller
         $sortBy = $request->input('sort_by', 'created_at');
         $sortDirection = $request->input('sort_dir', 'desc');
         $type = $request->input('type');
+
+        //$userUnit = auth()->user()->unit;
         
         $documents = Document::whereIn('doc_type', ['Quality Manual', 'Operations Manual', 'Procedure Manual'])
         ->where('status', 'Active')
+        //->where('unit', $userUnit)
         ->when($type, function ($query) use ($type) {
             // Filter by selected type (Internal or External)
             $query->where('type_intext', $type);
@@ -123,7 +134,12 @@ class PublicDocumentController extends Controller
         })
         ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
-        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        ->appends([
+            'search' => $searchQuery,
+            'sort_by' => $sortBy,
+            'sort_dir' => $sortDirection,
+            'type' => $type
+        ]);
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
         }
@@ -157,7 +173,12 @@ class PublicDocumentController extends Controller
         })
         ->orderBy($sortBy, $sortDirection)
         ->paginate(10)
-        ->appends(['search' => $searchQuery, 'sort_by' => $sortBy, 'sort_dir' => $sortDirection]);
+        ->appends([
+            'search' => $searchQuery,
+            'sort_by' => $sortBy,
+            'sort_dir' => $sortDirection,
+            'type' => $type
+        ]);
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
         }

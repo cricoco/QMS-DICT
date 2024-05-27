@@ -25,6 +25,8 @@ class User extends Authenticatable
         'designation',
         'role_id',
         'is_verifiedman',
+        'division',
+        'unit',
     ];
 
     /**

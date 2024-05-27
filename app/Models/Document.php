@@ -28,6 +28,7 @@ class Document extends Model
                             'type_intext',
                             'created_at',
                             'updated_at',
+                            'unit', 
                             ];
 
     // protected static function booted()

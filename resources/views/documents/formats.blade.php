@@ -31,7 +31,7 @@
                 </div>
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-right: 20px; margin-left: 20px;">
                     <div>
-                        <strong>NOTICE:</strong> Only the softcopy of documents available on the QMS portal is considered the <strong>CONTROLLED COPY.</strong><br>
+                        <strong>IMPORTANT:</strong> Only the softcopy of documents available on the QMS portal is considered the <strong>CONTROLLED COPY.</strong><br>
                         <span style="margin-left: 67px; display: block;">Any downloaded or printed copies of documents are deemed <strong>UNCONTROLLED</strong>.</span>
                     </div>
                     <div>
@@ -193,6 +193,7 @@
                 $('#filename').text(data.file);
                 $('#created-at').text(data.created_at);
                 $('#type-intext').text(data.type_intext);
+                $('#unit-text').text(data.unit);
 
                 $('#view-history').data('id', docID);
             })
