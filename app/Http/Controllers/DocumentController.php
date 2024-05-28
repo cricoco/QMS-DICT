@@ -385,4 +385,15 @@ class DocumentController extends Controller
         return response()->json(['exists' => !!$existingDocument]);
     }
 
+    // public function uploadCsv(Request $request){
+    //     //parse csv 
+    //     //check if id exist doc_ref
+    //     //array of object $docs
+    //     for $doc in $docs{
+    //         if not Document::find($doc);
+    //             Document::create($docs);
+    //             DocumentHistory::create default id -> id ng admin 
+    //     }
+    // }
+    
 }
