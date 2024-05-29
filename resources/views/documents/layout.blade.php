@@ -25,8 +25,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
     body {
-      background-color: #6e70f5;
-      animation: colorchange 45s;
+      background-color: #6b819c;
+      /* animation: colorchange 45s; */
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
       animation-play-state: running;

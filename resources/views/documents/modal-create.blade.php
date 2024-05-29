@@ -3,18 +3,8 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Autofill
-                    </button>
-                    <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
-                        <input type="text" id="searchInput" onkeyup="filterDropdown()" placeholder="Search...">
-                        @foreach($availableDocuments as $document)
-                        <a class="dropdown-item" href="#" onclick="loadDetails('{{ $document->doc_ref_code }}')">Load {{ $document->doc_ref_code }}</a>
-                        @endforeach
-                    </div>
-                </div>
-                <h5 class="modal-title" id="exampleModalLabel" style="margin-left: 30px">Create New Document</h5>
+
+                <h5 class="modal-title" id="exampleModalLabel">Create New Document</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -24,7 +14,12 @@
                     <div class="row">
                         <div class="col-md-2">
                             <label>Doc Ref. Code *</label><br>
-                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" required></br>
+                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" list="docRefCodes" required oninput="handleDocRefCodeInput(this.value)"><br>
+                            <datalist id="docRefCodes">
+                                @foreach($availableDocuments as $document)
+                                <option value="{{ $document->doc_ref_code }}">{{ $document->doc_ref_code }}</option>
+                                @endforeach
+                            </datalist>
                         </div>
                         <div class="col-md-4">
                             <label>Document Title *</label><br>
@@ -203,23 +198,32 @@
     }
 </style>
 <script>
-    function filterDropdown() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('searchInput');
-        filter = input.value.toUpperCase();
-        div = document.getElementsByClassName('dropdown-content')[0];
-        a = div.getElementsByTagName('a');
-        for (i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = '';
-            } else {
-                a[i].style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function() {
+        var docRefCodeInput = document.getElementById('doc_ref_code');
+        var typingTimer;
+
+        docRefCodeInput.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(function() {
+                handleDocRefCodeInput(docRefCodeInput.value);
+            }, 500); // Adjust the delay as needed (in milliseconds)
+        });
+    });
+
+    function handleDocRefCodeInput(value) {
+        var exactMatch = false;
+        var datalist = document.getElementById('docRefCodes');
+        var options = datalist.querySelectorAll('option');
+        options.forEach(function(option) {
+            if (option.value === value) {
+                exactMatch = true;
+                return;
             }
+        });
+        if (exactMatch) {
+            loadDetails(value);
         }
     }
-
-
 
     function loadDetails(docRefCode) {
         $.ajax({
@@ -238,7 +242,7 @@
                     $('#docCreateModal #request_date').val(data.request_date);
                     $('#docCreateModal #type_intext').val(data.type_intext);
 
-                    updateUnitDropdown()
+                    updateUnitDropdown();
                     $('#docCreateModal #unit').val(data.unit);
                 }
             },
@@ -278,11 +282,9 @@
     }
 
     function updateUnitDropdown() {
-        
         var divisionDropdown = document.getElementById('divisioncreatemodal');
         var division = divisionDropdown.value;
         var unitDropdown = document.getElementById('unit');
-
 
         // Clear existing options
         unitDropdown.innerHTML = '';
