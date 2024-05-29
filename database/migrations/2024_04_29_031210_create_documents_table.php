@@ -19,12 +19,13 @@ return new class extends Migration
             $table->enum("division", ['N/A','AFD', 'ORD', 'TOD'])->nullable();
             $table->string("process_owner");
             $table->string("status")->default('Active');
-            $table->enum("doc_type", ['Quality Manual', 'Quality Procedure', 'Quality Procedure Form', 'Quality Policy', 'Operations Manual', 'Procedure Manual', 'Special Order', 'Travel Order', 'Memorandum', 'Corrective Action Request Form', 'Form/Template', 'Resolution']);
-            $table->string("request_type")->nullable();
+            $table->enum("doc_type", ['Quality Manual', 'Quality Procedure', 'Quality Procedure Form', 'Quality Policy', 'Operations Manual', 'Procedure Manual', 'Special Order', 'Travel Order', 'Memorandum', 'Corrective Action Request Form', 'Form/Template', 'Resolution', 'Other']);
+            $table->enum("request_type", ['Creation','Revision', 'Deletion'])->nullable();
             $table->text("request_reason")->nullable();
             $table->string("requester")->nullable();
+            $table->enum("type_intext", ['Internal', 'External'])->nullable();
             $table->date("request_date");
-            $table->string("revision_num")->nullable();
+            $table->unsignedInteger("revision_num")->nullable();
             $table->date("effectivity_date");
             $table->string('file');
             $table->timestamps();
