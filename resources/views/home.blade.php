@@ -15,9 +15,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary-tab-pane" type="button" role="tab" aria-controls="summary-tab-pane" aria-selected="true">Dashboard</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="false">History Logs</button>
-            </li>
+        
             <!-- <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="true">History Logs</button>
             </li> -->
@@ -29,6 +27,9 @@
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="r9basulta-tab" data-bs-toggle="tab" data-bs-target="#r9basulta-tab-pane" type="button" role="tab" aria-controls="r9basulta-tab-pane" aria-selected="false">Quality Objectives</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="false">History Logs</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact Us</button>
@@ -109,13 +110,7 @@
                    
                 </div>
             </div> -->
-            <div class="tab-pane fade" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab" tabindex="0"><br>
-                <h1 class="entry-title text-center"><strong>History Logs</strong></h1>
-                <div class="card-body text-center">
-                    @include('history', ['history' => $history])
-                </div>
-
-            </div>
+            
 
             <div class="tab-pane fade" id="visionmission-tab-pane" role="tabpanel" aria-labelledby="visionmission-tab" tabindex="0"><br>
                 <h1 class="entry-title text-center"><strong>Mission and Vision</strong></h1>
@@ -232,6 +227,14 @@
                     </ol>
                 </div>
 
+
+            </div>
+            
+            <div class="tab-pane fade" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab" tabindex="0"><br>
+                <h1 class="entry-title text-center"><strong>History Logs</strong></h1>
+                <div class="card-body text-center">
+                    @include('history', ['history' => $history])
+                </div>
 
             </div>
 
