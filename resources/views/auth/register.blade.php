@@ -144,9 +144,9 @@
             
             const units = {
                 'N/A': ['N/A'],
-                'ORD': ['COMMS', 'QMR'],
-                'AFD': ['HR', 'Finance', 'Supply', 'General Services', 'Records'],
-                'TOD': ['eLGU/eGOV', 'GovNet', 'FW4A', 'ILCD', 'IID', 'PNPKI', 'DRRM']
+                'ORD': ['COMMS', 'QMR', 'ORD', 'Others'],
+                'AFD': ['HR', 'Finance', 'Supply', 'General Services', 'Records', 'Others'],
+                'TOD': ['eLGU/eGOV', 'GovNet', 'FW4A', 'ILCD', 'IID', 'PNPKI', 'DRRM', 'Others']
             };
 
             divisionSelect.addEventListener('change', function() {
