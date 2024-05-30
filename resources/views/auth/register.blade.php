@@ -4,21 +4,21 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label-reg-name for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label-reg for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label-reg for="password" :value="__('Password')" />
 
             <x-passwd-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
 
@@ -27,7 +27,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label-reg for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-passwd-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
 
@@ -36,14 +36,14 @@
 
         <!-- Designation -->
         <div>
-            <x-input-label for="designation" :value="__('Designation')" />
+            <x-input-label-reg for="designation" :value="__('Designation')" />
             <x-text-input id="designation" class="block mt-1 w-full" type="text" name="designation" :value="old('designation')" required autofocus autocomplete="designation" />
             <x-input-error :messages="$errors->get('designation')" class="mt-2" />
         </div>
 
         <!-- Division -->
         <div>
-            <x-input-label for="division" :value="__('Division')" />
+            <x-input-label-reg for="division" :value="__('Division')" />
             <!-- <x-text-input id="division" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required autofocus autocomplete="division" /> -->
             <x-select-input id="division" class="block mt-1 w-full" name="division" :options="[
                 'N/A' => 'N/A',
@@ -56,7 +56,7 @@
 
         <!-- Project/Unit -->
         <div>
-            <x-input-label for="unit" :value="__('Project/Unit')" />
+            <x-input-label-reg for="unit" :value="__('Project/Unit')" />
             <x-select-input id="unit" class="block mt-1 w-full" name="unit" :value="old('unit')" required autofocus autocomplete="unit">
                 <option value="N/A">N/A</option>
                 <!-- Load options here from JS -->

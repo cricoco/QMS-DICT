@@ -11,13 +11,14 @@ class AdminUserController extends Controller
     {
         $search = $request->input('search');
 
-        $users = User::where(function ($query) use ($search) {
-            if ($search) {
-                $query->where('name', 'LIKE', "%$search%")
-                    ->orWhere('email', 'LIKE', "%$search%")
-                    ->orWhere('designation', 'LIKE', "%$search%");
-            }
-        })
+        $users = User::where('is_verifiedman', true) // Filter only verified users
+            ->where(function ($query) use ($search) {
+                if ($search) {
+                    $query->where('name', 'LIKE', "%$search%")
+                        ->orWhere('email', 'LIKE', "%$search%")
+                        ->orWhere('designation', 'LIKE', "%$search%");
+                }
+            })
         ->orderBy('name', 'asc')
         ->paginate(10)
         ->appends(['search' => $search]);

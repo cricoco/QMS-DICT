@@ -13,7 +13,7 @@
                     {!! csrf_field() !!}
                     <div class="row">
                         <div class="col-md-2">
-                            <label>Doc Ref. Code *</label><br>
+                            <label>Doc Ref. Code</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" list="docRefCodes" required oninput="handleDocRefCodeInput(this.value)"><br>
                             <datalist id="docRefCodes">
                                 @foreach($availableDocuments as $document)
@@ -22,7 +22,7 @@
                             </datalist>
                         </div>
                         <div class="col-md-4">
-                            <label>Document Title *</label><br>
+                            <label>Document Title</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="doc_title" id="doc_title" class="form-control" required></br>
                         </div>
                         <!-- <div class="col-md-2">
@@ -30,7 +30,7 @@
           <input type="text" name="dmt_incharged" id="dmt_incharged" class="form-control"></br>
         </div> -->
                         <div class="col-md-2">
-                            <label>Division *</label><br>
+                            <label>Division</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select name="division" id="divisioncreatemodal" class="custom-dropdown" required onchange="updateUnitDropdown()"></br>
                                 <option value="N/A">N/A</option>
                                 <option value="AFD">AFD</option>
@@ -39,22 +39,22 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label>Project/Unit *</label><br>
+                            <label>Project/Unit</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select name="unit" id="unit" class="custom-dropdown" required></br>
                                 <option value="N/A">N/A</option>
 
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label>Owner *</label><br>
+                            <label>Owner</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="process_owner" id="process_owner" class="form-control" required></br>
                         </div><br>
                         <div class="col-md-2">
-                            <label>Status *</label><br>
+                            <label>Status</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="status" id="status" value="Active" class="form-control" disabled required></br>
                         </div>
                         <div class="col-md-4">
-                            <label>Document Type *</label><br>
+                            <label>Document Type</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select name="doc_type" id="doc_type" class="custom-dropdown" required></br>
                                 <option value="Quality Manual">Quality Manual</option>
                                 <option value="Quality Procedure">Quality Procedure</option>
@@ -72,7 +72,7 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label>Request Type *</label><br>
+                            <label>Request Type</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select name="request_type" id="request_type" class="custom-dropdown" required></br>
                                 <option value="Creation">Creation</option>
                                 <option value="Revision">Revision</option>
@@ -81,7 +81,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label>Request Reason *</label><br>
+                            <label>Request Reason</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="request_reason" id="request_reason" class="form-control" required></br>
                         </div>
                         <!-- <div class="col-md-2">
@@ -89,23 +89,23 @@
                             <input type="text" name="requester" id="requester" class="form-control" required></br>
                         </div> -->
                         <div class="col-md-2">
-                            <label>Request Date *</label><br>
+                            <label>Request Date</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="date" name="request_date" id="request_date" class="form-control" required></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Revision Number *</label><br>
+                            <label>Revision Number</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="revision_num" id="revision_num" value="0" class="form-control" disabled required></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Effectivity Date *</label><br>
+                            <label>Effectivity Date</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="date" name="effectivity_date" id="effectivity_date" class="form-control" required></br>
                         </div>
                         <div class="col-md-4">
-                            <label>File *</label><br>
+                            <label>File</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="file" name="file" id="file" class="form-control" required></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Type *</label><br>
+                            <label>Type</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select name="type_intext" id="type_intext" class="custom-dropdown" required></br>
                                 <option value="Internal">Internal</option>
                                 <option value="External">External</option>
@@ -254,7 +254,28 @@
 
     function submitCreateForm() {
         var form = document.getElementById('createDocForm');
+        var divisionDropdown = document.getElementById('divisioncreatemodal');
+        var unitDropdown = document.getElementById('unit');
+        var divisionValue = divisionDropdown.value;
+        var unitValue = unitDropdown.value;
+
         if (form.checkValidity()) {
+            // Check if both division and unit are set to "N/A"
+            if (divisionValue === 'N/A' && unitValue === 'N/A') {
+                alert('Division and Project/Unit cannot be N/A.');
+                // Stop the submission process and allow the user to fill out the division field
+                divisionDropdown.focus();
+                return;
+            }
+            // Check if only division is set to "N/A"
+            else if (divisionValue === 'N/A') {
+                alert('Division and Project/Unit cannot be N/A.');
+                // Stop the submission process and allow the user to fill out the division field
+                divisionDropdown.focus();
+                return;
+            }
+
+            // Proceed with the submission
             var docRefCode = $('#doc_ref_code').val();
             $.ajax({
                 url: '{{ route("document.check") }}',
@@ -280,6 +301,8 @@
             form.reportValidity();
         }
     }
+
+
 
     function updateUnitDropdown() {
         var divisionDropdown = document.getElementById('divisioncreatemodal');
