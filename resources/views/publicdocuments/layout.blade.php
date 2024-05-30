@@ -115,6 +115,11 @@
               <!-- <li>
                 <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
               </li> -->
+              <li>
+                <a class="dropdown-item" href="{{ url('/profile') }}">
+                  Change Password
+                </a>
+              </li>
 
               <li>
                 <a class="dropdown-item" role="button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

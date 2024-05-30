@@ -1,0 +1,1 @@
+@include('profile.partials.update-password-form')

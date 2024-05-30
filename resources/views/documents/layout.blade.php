@@ -112,7 +112,7 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-user" style="font-size:24px"></i></a>
             <ul class="dropdown-menu">
@@ -134,7 +134,11 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Welcome, {{ Auth::user()->name }}</a>
             <ul class="dropdown-menu">
-
+              <li>
+                <a class="dropdown-item" href="{{ url('/profile') }}">
+                  Change Password
+                </a>
+              </li>
 
               <li>
                 <a class="dropdown-item" role="button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
