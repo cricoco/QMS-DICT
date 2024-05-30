@@ -29,12 +29,27 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([      /* Validating the quest of client before proceeding */
+        // $request->validate([      /* Validating the quest of client before proceeding */
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        //     'designation' => ['required', 'string', 'max:255'],
+        // ]);
+
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class, function ($attribute, $value, $fail) {
+                if (!str_ends_with($value, '@dict.gov.ph')) {
+                    $fail('The email must be an @dict.gov.ph address.');
+                }
+            }],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'designation' => ['required', 'string', 'max:255'],
         ]);
+
+        if ($request->division === 'N/A' && $request->unit === 'N/A') {
+            return redirect()->back()->withErrors(['division' => 'Division should not be marked as N/A'])->withInput();
+        }
 
         $user = User::create([          /* If validation success, go here and run to fill out database */
             'name' => $request->name,
@@ -50,6 +65,6 @@ class RegisteredUserController extends Controller
 
         //Auth::login($user);         /* Logs in user */
 
-        return redirect(route('login', absolute: false)); /* Sends user to homepage */
+        return redirect(route('login'))->with('status', 'Registration successful! Please wait for confirmation.');
     }
 }

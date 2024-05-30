@@ -18,7 +18,7 @@ class isVerifiedMan
     {
         if (Auth::check() && !Auth::user()->is_verifiedman) {
             Auth::logout();
-            return redirect()->route('login')->withErrors(['email' => 'Your account is not verified yet.']);
+            return redirect()->route('login')->withErrors(['email' => 'Your account has not been verified yet. Please contact the QMS Admin.']);
         }
         return $next($request);
     }

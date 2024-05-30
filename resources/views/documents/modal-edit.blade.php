@@ -16,15 +16,15 @@
                     <input type="hidden" name="doc_id" id="doc_id">
                     <div class="row">
                         <div class="col-md-2">
-                            <label>Doc Ref. Code *</label><br>
+                            <label>Doc Ref. Code</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" required></br>
                         </div>
                         <div class="col-md-4">
-                            <label>Document Title *</label><br>
+                            <label>Document Title</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="doc_title" id="doc_title" class="form-control" required></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Division *</label><br>
+                            <label>Division</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select type="text" name="division" id="division" class="custom-dropdown">
                                 <option value="N/A">N/A</option>
                                 <option value="AFD">AFD</option>
@@ -33,7 +33,7 @@
                             </select></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Project/Unit *</label><br>
+                            <label>Project/Unit</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select type="text" name="unit" id="unit" class="custom-dropdown" required></br>
                                 <option value="N/A">N/A</option>
 
@@ -44,10 +44,11 @@
                                 <option value="Finance">Finance</option>
                                 <option value="Supply">Supply</option>
                                 <option value="General Services">General Services</option>
+                                <option value="Records">Records</option>
+
                                 <option value="eLGU/eGOV">eLGU/eGOV</option>
                                 <option value="GovNet">GovNet</option>
                                 <option value="FW4A">FW4A</option>
-
                                 <option value="ILCD">ILCD</option>
                                 <option value="IID">IID</option>
                                 <option value="PNPKI">PNPKI</option>
@@ -55,15 +56,15 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label>Owner *</label><br>
+                            <label>Owner</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="process_owner" id="process_owner" class="form-control" required></br>
                         </div><br>
                         <div class="col-md-2">
-                            <label>Status *</label><br>
+                            <label>Status</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="status" id="status" class="form-control" disabled></br>
                         </div>
                         <div class="col-md-4">
-                            <label>Document Type *</label><br>
+                            <label>Document Type</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select type="text" name="doc_type" id="doc_type" class="custom-dropdown">
                                 <option value="Quality Manual">Quality Manual</option>
                                 <option value="Quality Procedure">Quality Procedure</option>
@@ -81,7 +82,7 @@
                             </select></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Request Type *</label><br>
+                            <label>Request Type</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select type="text" name="request_type" id="request_type" class="custom-dropdown" required></br>
                                 <option value="Creation">Creation</option>
                                 <option value="Revision">Revision</option>
@@ -89,7 +90,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label>Request Reason *</label><br>
+                            <label>Request Reason</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="request_reason" id="request_reason" class="form-control"></br>
                         </div>
                         <!-- <div class="col-md-2">
@@ -97,19 +98,19 @@
                             <input type="text" name="requester" id="requester" class="form-control"></br>
                         </div> -->
                         <div class="col-md-2">
-                            <label>Request Date *</label><br>
+                            <label>Request Date</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="date" name="request_date" id="request_date" class="form-control"></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Revision Number *</label><br>
+                            <label>Revision Number</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="text" name="revision_num" id="revision_num" class="form-control" disabled></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Effectivity Date *</label><br>
+                            <label>Effectivity Date</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <input type="date" name="effectivity_date" id="effectivity_date" class="form-control"></br>
                         </div>
                         <div class="col-md-2">
-                            <label>Type *</label><br>
+                            <label>Type</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select type="text" name="type_intext" id="type_intext" class="custom-dropdown" required></br>
                                 <option value="Internal">Internal</option>
                                 <option value="External">External</option>
