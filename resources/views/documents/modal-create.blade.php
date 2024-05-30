@@ -319,9 +319,12 @@
             addOption(unitDropdown, 'Supply', 'Supply');
             addOption(unitDropdown, 'General Services', 'General Services');
             addOption(unitDropdown, 'Records', 'Records');
+            addOption(unitDropdown, 'Others', 'Others');
         } else if (division === 'ORD') {
             addOption(unitDropdown, 'COMMS', 'COMMS');
             addOption(unitDropdown, 'QMR', 'QMR');
+            addOption(unitDropdown, 'ORD', 'ORD');
+            addOption(unitDropdown, 'Others', 'Others');
         } else if (division === 'TOD') {
             addOption(unitDropdown, 'eLGU/eGOV', 'eLGU/eGOV');
             addOption(unitDropdown, 'GovNet', 'GovNet');
@@ -330,6 +333,7 @@
             addOption(unitDropdown, 'IID', 'IID');
             addOption(unitDropdown, 'PNPKI', 'PNPKI');
             addOption(unitDropdown, 'DRRM', 'DRRM');
+            addOption(unitDropdown, 'Others', 'Others');
         }
     }
 
