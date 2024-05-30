@@ -32,7 +32,7 @@
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-right: 20px; margin-left: 20px;">
                     <div>
                         <strong>IMPORTANT:</strong> Only the softcopy of documents available on the QMS portal is considered the <strong>CONTROLLED COPY.</strong><br>
-                        <span style="margin-left: 67px; display: block;">Any downloaded or printed copies of documents are deemed <strong>UNCONTROLLED</strong>.</span>
+                        <span style="margin-left: 103px; display: block;">Any downloaded or printed copies of documents are deemed <strong>UNCONTROLLED</strong>.</span>
                     </div>
                     <div>
                         <a href="{{ route('publicdocuments.formats', ['search' => request('search'), 'sort_by' => 'doc_title', 'sort_dir' => 'asc']) }}" class="btn btn-sm btn-info" style="background-color: #45b3e0;"><i class="fa fa-sort-alpha-down" aria-hidden="true"></i></a>
