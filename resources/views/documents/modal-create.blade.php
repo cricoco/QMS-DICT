@@ -295,13 +295,14 @@
             addOption(unitDropdown, 'Finance', 'Finance');
             addOption(unitDropdown, 'Supply', 'Supply');
             addOption(unitDropdown, 'General Services', 'General Services');
-            addOption(unitDropdown, 'eLGU/eGOV', 'eLGU/eGOV');
-            addOption(unitDropdown, 'GovNet', 'GovNet');
-            addOption(unitDropdown, 'FW4A', 'FW4A');
+            addOption(unitDropdown, 'Records', 'Records');
         } else if (division === 'ORD') {
             addOption(unitDropdown, 'COMMS', 'COMMS');
             addOption(unitDropdown, 'QMR', 'QMR');
         } else if (division === 'TOD') {
+            addOption(unitDropdown, 'eLGU/eGOV', 'eLGU/eGOV');
+            addOption(unitDropdown, 'GovNet', 'GovNet');
+            addOption(unitDropdown, 'FW4A', 'FW4A');
             addOption(unitDropdown, 'ILCD', 'ILCD');
             addOption(unitDropdown, 'IID', 'IID');
             addOption(unitDropdown, 'PNPKI', 'PNPKI');
