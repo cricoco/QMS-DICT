@@ -23,24 +23,26 @@
                     <div class="mb-3">
                         <label for="update_password_current_password" class="form-label">{{ __('Current Password') }}</label>
                         <input id="update_password_current_password" name="current_password" type="password" class="form-control">
+                        <input type="checkbox" onclick="togglePassword('update_password_current_password')"> Show Password
                         <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
                     </div>
 
                     <div class="mb-3">
                         <label for="update_password_password" class="form-label">{{ __('New Password') }}</label>
                         <input id="update_password_password" name="password" type="password" class="form-control">
+                        <input type="checkbox" onclick="togglePassword('update_password_password')"> Show Password
                         <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
                     </div>
 
                     <div class="mb-3">
                         <label for="update_password_password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
                         <input id="update_password_password_confirmation" name="password_confirmation" type="password" class="form-control">
-                        
+                        <input type="checkbox" onclick="togglePassword('update_password_password_confirmation')"> Show Password
                         <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
                     </div>
 
                     <div class="flex items-center gap-4">
-                        
+
 
                         @if (session('status') === 'password-updated')
                         <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
@@ -52,4 +54,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function togglePassword(id) {
+        var x = document.getElementById(id);
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 @endsection
