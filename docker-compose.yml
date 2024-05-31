@@ -1,38 +1,36 @@
-version: "3.8"
-
 services:
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        ports:
-            - "8080:80" # Change this to "80:80" if you want to access directly via port 80 without specifying 8080
-        volumes:
-            - .:/var/www/html
-        environment:
-            - APACHE_RUN_USER=www-data
-            - APACHE_RUN_GROUP=www-data
-            - APP_ENV=local
-            - APP_DEBUG=true
-            - APP_KEY=base64:YOUR_APP_KEY # Replace YOUR_APP_KEY with your actual app key
-            - DB_CONNECTION=mysql
-            - DB_HOST=db
-            - DB_PORT=3306
-            - DB_DATABASE=dict_qms
-            - DB_USERNAME=dictroot
-            - DB_PASSWORD=D1CTQMS4DM1N
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4403:80"
+    volumes:
+      - .:/var/www/html:cached
+      - /var/www/html/vendor
+    env_file:
+      - .env
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=dict_qms
+      - DB_USERNAME=dictroot
+      - DB_PASSWORD=D1CTQMS4DM1N
 
-    db:
-        image: mysql:8.0
-        ports:
-            - "3306:3306"
-        environment:
-            MYSQL_DATABASE: dict_qms
-            MYSQL_USER: dictroot
-            MYSQL_PASSWORD: D1CTQMS4DM1N
-            MYSQL_ROOT_PASSWORD: D1CTQMS4DM1N
-        volumes:
-            - dbdata:/var/lib/mysql
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: dict_qms
+      MYSQL_USER: dictroot
+      MYSQL_PASSWORD: D1CTQMS4DM1N
+      MYSQL_ROOT_PASSWORD: D1CTQMS4DM1N
+    volumes:
+      - dbdata:/var/lib/mysql
 
 volumes:
-    dbdata:
+  dbdata:
