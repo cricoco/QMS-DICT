@@ -112,7 +112,9 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('user_manual/DICT-QMS-User-Manual.pdf') }}" target="_blank" role="button" title="User Manual"><i class="fas fa-book" style="font-size:24px"></i></a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-user" style="font-size:24px"></i></a>
             <ul class="dropdown-menu">
@@ -244,4 +246,5 @@
 
 </body>
 <!-- Created by AdZU OJT Group April 15, 2024 to May 31, 2024 Batch -->
+
 </html>

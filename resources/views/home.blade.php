@@ -145,8 +145,9 @@
 
             <div class="tab-pane fade" id="qualitypolicy-tab-pane" role="tabpanel" aria-labelledby="qualitypolicy-tab" tabindex="0"><br>
                 <h3 class="entry-title text-center"><strong>QUALITY POLICY</strong></h3>
-                <h3 class="entry-title text-center"><strong>The Department of Information and <br>Communications Technology RIX BASULTA <br>commits to: </strong></h3>
+                <p class="entry-title text-center"><i>QPL/r0/01Feb24</i></p>
                 <div class="card-body" style="font-size: 16px;"><br>
+                <strong>The Department of Information and Communications Technology RIX BASULTA commits to: </strong><br>
                     <ul>
                         <li>lead in pushing the National ICT Development agenda
                             in transitioning the Philippines toward a world-class
@@ -173,7 +174,8 @@
             </div>
 
             <div class="tab-pane fade" id="r9basulta-tab-pane" role="tabpanel" aria-labelledby="r9basulta-tab" tabindex="0"><br>
-                <h3 class="entry-title text-center"><strong>R9 and BASULTA Quality Objectives</strong></h3>
+                <h3 class="entry-title text-center"><strong>DICT REGIONAL OFFICE IX AND BASULTA QUALITY OBJECTIVES</strong></h3>
+                <p class="entry-title text-center"><i>QP-01/r0/01Feb24</i></p>
                 <div class="card-body" style="font-size: 16px;">
                     <ol>
                         <li>
@@ -190,20 +192,8 @@
                     </ol>
                 </div>
                 <br>
-                <h3 class="entry-title text-center"><strong>TOD Quality Objectives</strong></h3>
-                <div class="card-body" style="font-size: 16px;">
-                    <ol>
-                        <li>
-                            To deliver the required ICT products and services according to mutually agreed terms and conditions and existing applicable statutory and regulatory requirements; and
-                        </li>
-
-                        <li>
-                            To attain at least a very satisfactory customer satisfaction rating from 80% of customers surveyed.
-                        </li>
-                    </ol>
-                </div>
-                <br>
-                <h3 class="entry-title text-center"><strong>Administrative and Finance Division Quality Objectives</strong></h3>
+                <h3 class="entry-title text-center"><strong>ADMINISTRATIVE AND FINANCE DIVISION (AFD) QUALITY OBJECTIVES</strong></h3>
+                <p class="entry-title text-center"><i>QP-02/r0/01Feb24</i></p>
                 <div class="card-body" style="font-size: 16px;">
                     <ol>
                         <li>
@@ -226,6 +216,21 @@
                         </li>
                     </ol>
                 </div>
+                <br>
+                <h3 class="entry-title text-center"><strong>TECHNICAL OPERATIONS DIVISION (TOD) QUALITY OBJECTIVES</strong></h3>
+                <p class="entry-title text-center"><i>QP-03/r0/01Feb24</i></p>
+                <div class="card-body" style="font-size: 16px;">
+                    <ol>
+                        <li>
+                            To deliver the required ICT products and services according to mutually agreed terms and conditions and existing applicable statutory and regulatory requirements; and
+                        </li>
+
+                        <li>
+                            To attain at least a very satisfactory customer satisfaction rating from 80% of customers surveyed.
+                        </li>
+                    </ol>
+                </div>
+                
 
 
             </div>
