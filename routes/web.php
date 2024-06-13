@@ -14,10 +14,9 @@ use App\Http\Controllers\AdminUserController;
 use App\Models\DocumentHistory;
 use App\Models\Document;
 
-
 //============== Admin middleware
 Route::middleware(['auth', 'verified', 'isAdmin', 'isVerifiedMan'])->group(function () {
-   
+
 
     Route::get('documents/', [DocumentController::class, 'index'])->name('documents.index');
     Route::post('documents/create', [DocumentController::class, 'create'])->name('documents.create');
@@ -32,7 +31,7 @@ Route::middleware(['auth', 'verified', 'isAdmin', 'isVerifiedMan'])->group(funct
 
     Route::get('/document/history/{id}', [DocumentHistoryController::class, 'specifichistory'])->name('specifichistory');
     Route::get('documentxx/{doc_ref_code}', [DocumentController::class, 'showByDocRefCode']);
-    
+
     Route::get('archives/', [DocumentController::class, 'archives'])->name('archives');
     Route::post('/document/check', [App\Http\Controllers\DocumentController::class, 'checkDocumentExists'])->name('document.check');
 
@@ -40,21 +39,22 @@ Route::middleware(['auth', 'verified', 'isAdmin', 'isVerifiedMan'])->group(funct
     Route::post('/admin/unverifiedusers/{user}/verify', [VerifyManUsersController::class, 'verify'])->name('admin.unverifiedusers.verify');
 
     Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users');
+    Route::post('/admin/users/upload', [AdminUserController::class, 'upload'])->name('admin.users.upload');
     Route::post('/admin/users/{user}/promote', [AdminUserController::class, 'promote'])->name('admin.users.promote');
     Route::post('/admin/users/{user}/demote', [AdminUserController::class, 'demote'])->name('admin.users.demote');
 
 
-}); 
+});
 
 //============== Normal user middleware
 Route::middleware(['auth', 'verified', 'isVerifiedMan'])->group(function () {
-    
+
     // Route::get('/index', function () {
     //     return view('admin.index');
     // });
-    
+
     Route::resource("/p/document", PublicDocumentController::class);
-   
+
     Route::get('/p/documents/', [PublicDocumentController::class, 'index'])->name('publicdocuments.index');
     Route::post('/p/documents/create', [PublicDocumentController::class, 'create'])->name('publicdocuments.create');
     Route::post('/p/documents/store', [PublicDocumentController::class, 'store'])->name('publicdocuments.store');
@@ -63,7 +63,7 @@ Route::middleware(['auth', 'verified', 'isVerifiedMan'])->group(function () {
     Route::get('/p/document/{id}', [PublicDocumentController::class, 'show'])->name('publicdocuments.show');
     Route::get('/download/{file}', [DocumentController::class, 'download'])->name('document.download');
 
-});   
+});
 
 
 
@@ -99,7 +99,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     $history = DocumentHistory::orderBy('updated_at', 'desc')->paginate(10);
-   
+
     return view('home')->with('history', $history);
 })->middleware(['auth', 'verified', 'isAdmin', 'isVerifiedMan'])->name('home');
 
