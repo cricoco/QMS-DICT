@@ -395,11 +395,23 @@ class DocumentController extends Controller
         $file = $request->file('csv_file');
         $csvData = array_map('str_getcsv', file($file->getRealPath()));
 
-        // Assuming the CSV has a header row
-        $header = array_shift($csvData);
+        // Validate CSV header
+        $requiredHeaders = [
+            'id', 'doc_ref_code', 'doc_title', 'dmt_incharged', 'division',
+            'unit', 'process_owner', 'status', 'doc_type', 'request_type',
+            'request_reason', 'requester', 'request_date', 'revision_num',
+            'effectivity_date', 'file', 'type_intext', 'created_at', 'update_at', 'user_history_id'
+        ];
+
+        $csvHeader = array_shift($csvData);
+        $missingHeaders = array_diff($requiredHeaders, $csvHeader);
+
+        if (!empty($missingHeaders)) {
+            return redirect()->back()->withErrors(['csv_file' => 'The CSV file must contain all required headers.']);
+        }
 
         foreach ($csvData as $row) {
-            $data = array_combine($header, $row);
+            $data = array_combine($csvHeader, $row);
 
             // Check if the document with the same doc_ref_code and revision_num exists
             $documentExists = Document::where('doc_ref_code', $data['doc_ref_code'])
@@ -445,9 +457,6 @@ class DocumentController extends Controller
             foreach ($request->file('document_files') as $uploadedFile) {
                 $filename = $uploadedFile->getClientOriginalName();
                 $path = $uploadedFile->storeAs('public/documents', $filename);
-
-                // Save file information to the database if needed
-                // You can link these files to the corresponding documents or create new records
             }
         }
 
