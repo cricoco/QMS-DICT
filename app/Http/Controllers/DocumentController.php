@@ -397,7 +397,7 @@ class DocumentController extends Controller
 
         // Validate CSV header
         $requiredHeaders = [
-            'id', 'doc_ref_code', 'doc_title', 'dmt_incharged', 'division',
+            'id', 'doc_ref_code', 'doc_title', 'dmt_incharge', 'division',
             'unit', 'process_owner', 'status', 'doc_type', 'request_type',
             'request_reason', 'requester', 'request_date', 'revision_num',
             'effectivity_date', 'file', 'type_intext', 'created_at', 'update_at', 'user_history_id'
@@ -405,7 +405,7 @@ class DocumentController extends Controller
 
         $csvHeader = array_shift($csvData);
         $missingHeaders = array_diff($requiredHeaders, $csvHeader);
-
+        // dd($csvHeader, $missingHeaders);
         if (!empty($missingHeaders)) {
             return redirect()->back()->withErrors(['csv_file' => 'The CSV file must contain all required headers.']);
         }
@@ -442,10 +442,10 @@ class DocumentController extends Controller
             ]);
             $document->save();
 
-            $user_history_id = $data['revision_num'] == 0 ? auth()->id() : $data['user_revision_id'];
+            $user_history_id = $data['revision_num'] == 0 ? auth()->id() : $data['user_history_id'];
 
             DocumentHistory::create([
-                'username_id' => $user_history_id,
+                'username_id' => auth()->id(),
                 'document_id' => $document->id,
                 'operation' => 'created',
                 'created_at' => $data['created_at']
