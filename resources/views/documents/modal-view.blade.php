@@ -20,8 +20,8 @@
                             <p><strong>Process Owner:</strong> <span id="process-owner"></span></p>
                             <p><strong>Status:</strong> <span id="status"></span></p>
                             <p><strong>Document Type:</strong> <span id="doc-type"></span></p>
-                            
-                    
+
+
                         </div>
                         <div class="col-md-6">
                             <p><strong>Request Type:</strong> <span id="req-type"></span></p>
@@ -41,12 +41,16 @@
 
                 <div class="card-body text-center">
                     <iframe id="document-iframe" width="900" height="900" src=""></iframe>
+                    <div id="no-preview" style="display: none;">
+                        <p>Preview not available for this file type.</p>
+                    </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="view-history" class="btn btn-secondary" style="background-color: #FF8C00; border-color: #FF8C00;">History</a>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="view-history" class="btn btn-secondary"
+                    style="background-color: #FF8C00; border-color: #FF8C00;">History</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -19,6 +19,7 @@ Route::middleware(['auth', 'verified', 'isAdmin', 'isVerifiedMan'])->group(funct
 
 
     Route::get('documents/', [DocumentController::class, 'index'])->name('documents.index');
+    Route::post('documents/upload', [DocumentController::class, 'uploadCsv'])->name('documents.upload');
     Route::post('documents/create', [DocumentController::class, 'create'])->name('documents.create');
     Route::post('documents/store', [DocumentController::class, 'store'])->name('documents.store');
     Route::get('/documents/manuals', [DocumentController::class, 'manuals'])->name('documents.manuals');

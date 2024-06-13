@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use App\Models\Document;
 use App\Models\DocumentHistory;
@@ -55,12 +55,12 @@ class DocumentController extends Controller
         ->where('status', 'Active')
         ->distinct()
             ->get();
-        
+
 
         foreach ($documents as $document) {
             $this->archiveOlderRevisions($document);
         }
-         return view('documents.index')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
+        return view('documents.index')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
     }
 
 
@@ -83,11 +83,11 @@ class DocumentController extends Controller
             ]);
         }
     }
-     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
         return view('documents.create');
@@ -109,8 +109,8 @@ class DocumentController extends Controller
                             ->first();
         return response()->json($document);
     }
-    
-    
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -120,7 +120,7 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-    
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             // $fileName = time() . '_' . $file->getClientOriginalName();
@@ -128,7 +128,7 @@ class DocumentController extends Controller
             $file->storeAs('public/documents', $fileName); // Adjust storage path as needed
             $input['file'] = $fileName;
         }
-        
+
         $documentRefCode = $input['doc_ref_code'];
         $existingDocument = Document::where('doc_ref_code', $documentRefCode)
         ->orderBy('revision_num', 'desc') // Order by revision number descending
@@ -146,13 +146,13 @@ class DocumentController extends Controller
         $documents = Document::create($input);
 
         DocumentHistory::create([
-            'username_id' => auth()->id(), 
+            'username_id' => auth()->id(),
             'document_id' => $documents->id,
             'operation' => 'created',
         ]);
-           
-        return redirect('document')->with('flash_message', 'Document Added!'); 
-        
+
+        return redirect('document')->with('flash_message', 'Document Added!');
+
     }
 
     /**
@@ -166,22 +166,22 @@ class DocumentController extends Controller
         $documents = Document::find($id);
         // return view('documents.show')->with('documents', $documents);
         return response()->json($documents);
-        
+
     }
 
-     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function edit($id)
     {
         $documents = Document::find($id);
         // return view('documents.edit')->with('documents', $documents);
         return response()->json([
-            'status'=>200,
-            'document'=>$documents,
+            'status' => 200,
+            'document' => $documents,
         ]);
     }
 
@@ -205,7 +205,7 @@ class DocumentController extends Controller
 
         $input = $request->all();
         $documents->update($input);
-        return redirect('documents')->with('flash_message', 'Document Updated!');  
+        return redirect('documents')->with('flash_message', 'Document Updated!');
     }
 
     /**
@@ -220,7 +220,7 @@ class DocumentController extends Controller
         $document = Document::find($id);
 
         DocumentHistory::create([
-            'username_id' => auth()->id(), 
+            'username_id' => auth()->id(),
             'document_id' => $document->id,
             'operation' => 'archived',
         ]);
@@ -228,10 +228,10 @@ class DocumentController extends Controller
         $document->status = 'Obsolete';
         $document->save();
 
-        return redirect('documents')->with('flash_message', 'Document archived!');  
+        return redirect('documents')->with('flash_message', 'Document archived!');
     }
-     
-    public function download(Request $request,$file)
+
+    public function download(Request $request, $file)
     {
 
         $filePath = storage_path('app/public/documents/' . $file); // Adjust storage path as needed
@@ -239,7 +239,7 @@ class DocumentController extends Controller
         if (file_exists($filePath)) {
             return response()->download($filePath);
         }
-    
+
         return redirect()->back()->with('error', 'File not found.');
     }
 
@@ -371,8 +371,8 @@ class DocumentController extends Controller
         ->where('status', 'Active')
         ->distinct()
             ->get();
-        
-         return view('archives')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
+
+        return view('archives')->with('documents', $documents)->with('availableDocuments', $availableDocuments);
     }
 
     public function checkDocumentExists(Request $request)
@@ -385,15 +385,72 @@ class DocumentController extends Controller
         return response()->json(['exists' => !!$existingDocument]);
     }
 
-    // public function uploadCsv(Request $request){
-    //     //parse csv 
-    //     //check if id exist doc_ref
-    //     //array of object $docs
-    //     for $doc in $docs{
-    //         if not Document::find($doc);
-    //             Document::create($docs);
-    //             DocumentHistory::create default id -> id ng admin 
-    //     }
-    // }
-    
+    public function uploadCsv(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt',
+            'document_files.*' => 'file|mimes:doc,docx,xls,xlsx,pdf|max:30720'
+        ]);
+
+        $file = $request->file('csv_file');
+        $csvData = array_map('str_getcsv', file($file->getRealPath()));
+
+        // Assuming the CSV has a header row
+        $header = array_shift($csvData);
+
+        foreach ($csvData as $row) {
+            $data = array_combine($header, $row);
+
+            // Check if the document with the same doc_ref_code and revision_num exists
+            $documentExists = Document::where('doc_ref_code', $data['doc_ref_code'])
+                                      ->where('revision_num', $data['revision_num'])
+                                      ->exists();
+
+            if ($documentExists) {
+                // Skip this iteration if the document already exists
+                continue;
+            }
+
+            $document = new Document([
+                'doc_ref_code' => $data['doc_ref_code'],
+                'doc_title' => $data['doc_title'],
+                'request_date' => $data['request_date'],
+                'revision_num' => $data['revision_num'],
+                'effectivity_date' => $data['effectivity_date'],
+                'process_owner' => $data['process_owner'],
+                'type_intext' => $data['type_intext'],
+                'file' => $data['file'],
+                'division' => $data['division'],
+                'unit' => $data['unit'],
+                'request_reason' => $data['request_reason'],
+                'request_type' => $data['request_type'],
+                'requester' => $data['requester'],
+                'created_at' => $data['created_at'],
+                'updated_at' => $data['update_at']
+            ]);
+            $document->save();
+
+            $user_history_id = $data['revision_num'] == 0 ? auth()->id() : $data['user_revision_id'];
+
+            DocumentHistory::create([
+                'username_id' => $user_history_id,
+                'document_id' => $document->id,
+                'operation' => 'created',
+                'created_at' => $data['created_at']
+            ]);
+        }
+
+        // Handle the document files
+        if ($request->hasFile('document_files')) {
+            foreach ($request->file('document_files') as $uploadedFile) {
+                $filename = $uploadedFile->getClientOriginalName();
+                $path = $uploadedFile->storeAs('public/documents', $filename);
+
+                // Save file information to the database if needed
+                // You can link these files to the corresponding documents or create new records
+            }
+        }
+
+        return redirect()->route('documents.index')->with('flash_message', 'CSV uploaded successfully.');
+    }
 }
