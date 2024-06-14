@@ -14,6 +14,22 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (session()->has('errors'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <strong>Error!</strong> The following rows were skipped due to validation errors:
+                            <ul>
+                                @foreach (session('errors') as $error)
+                                    <li>
+                                        <strong>Row:</strong> {{ implode(', ', $error['row']) }} <br>
+                                        <strong>Errors:</strong> {{ implode(', ', $error['errors']) }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card-header text-center">
                         <h1>Users</h1>
                     </div>

@@ -47,11 +47,12 @@ class AdminUserController extends Controller
         ]);
 
         $file = $request->file('csv_file');
-        $data = array_map('str_getcsv', file($file));
+        $data = array_map('str_getcsv', file($file->getRealPath()));
 
         // Assuming the first row contains the header
         $header = array_shift($data);
 
+        $errors = [];
         foreach ($data as $row) {
             $row = array_combine($header, $row);
 
@@ -65,6 +66,10 @@ class AdminUserController extends Controller
             ]);
 
             if ($validator->fails()) {
+                $errors[] = [
+                    'row' => $row,
+                    'errors' => $validator->errors()->all(),
+                ];
                 continue; // Skip invalid rows
             }
 
@@ -78,6 +83,10 @@ class AdminUserController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.users')->with('status', 'Users uploaded successfully.');
+        return redirect()->route('admin.users')->with([
+            'status' => 'Users uploaded successfully.',
+            'errors' => $errors,
+        ]);
     }
+
 }
