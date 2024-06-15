@@ -18,7 +18,7 @@ class DocumentHistoryController extends Controller
     public function index(Request $request)
     {
 
-        $history = DocumentHistory::orderBy('updated_at', 'asc')->paginate(10);
+        $history = DocumentHistory::orderBy('updated_at', 'desc')->paginate(10);
 
         return view('history')->with('history', $history);
     }
@@ -36,7 +36,7 @@ class DocumentHistoryController extends Controller
         // get history for the related documents along with the current document
         $history = DocumentHistory::whereIn('document_id', $related_documents->push($id)->toArray())
             ->where('operation', 'created')
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
 
         return view('specifichistory')->with('history', $history);
