@@ -39,14 +39,13 @@
                 </div>
 
                 <div class="card-body text-center">
-                    @if ($item)
-                        <div class="btn-group mb-3" role="group" aria-label="Document Actions">
-                            <button type="button" id="view-history" title="View History"
-                                class="btn btn-primary btn-sm me-2"
-                                style="background-color: #27c75a; border-color: #27c75a;">
-                                <i class="fa fa-history" aria-hidden="true"></i>
-                            </button>
-                            {{--
+                    <div class="btn-group mb-3" role="group" aria-label="Document Actions">
+                        <button type="button" id="view-history" title="View History"
+                            class="btn btn-primary btn-sm me-2"
+                            style="background-color: #27c75a; border-color: #27c75a;">
+                            <i class="fa fa-history" aria-hidden="true"></i>
+                        </button>
+                        {{--
                             <a href="{{ route('document.download', $item->file) }}" id="download-document"
                                 title="Download Document" class="btn btn-info btn-sm me-2"
                                 style="background-color: #ffd450; border-color: #ffd450;">
@@ -58,7 +57,7 @@
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </button> --}}
 
-                            {{-- <form id="delete-document-form" method="POST"
+                        {{-- <form id="delete-document-form" method="POST"
                                 action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8"
                                 style="display:inline">
                                 {{ method_field('DELETE') }}
@@ -68,17 +67,15 @@
                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </button>
                             </form> --}}
-                        </div>
+                    </div>
 
-                        <div class="iframe-container mt-3">
-                            <iframe id="document-iframe" width="900" height="900" src=""></iframe>
-                            <div id="no-preview" style="display: none;">
-                                <p>Preview not available for this file type.</p>
-                            </div>
+                    <div class="iframe-container mt-3">
+                        <iframe id="document-iframe" width="900" height="900" src=""></iframe>
+                        <div id="no-preview" style="display: none;">
+                            <p>Preview not available for this file type.</p>
                         </div>
-                    @else
-                        <p>No document selected.</p>
-                    @endif
+                    </div>
+
                 </div>
 
 
