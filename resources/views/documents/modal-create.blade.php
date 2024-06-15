@@ -14,10 +14,11 @@
                     <div class="row">
                         <div class="col-md-2">
                             <label>Doc Ref. Code</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" list="docRefCodes" required oninput="handleDocRefCodeInput(this.value)"><br>
+                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control"
+                                list="docRefCodes" required oninput="handleDocRefCodeInput(this.value)"><br>
                             <datalist id="docRefCodes">
-                                @foreach($availableDocuments as $document)
-                                <option value="{{ $document->doc_ref_code }}">{{ $document->doc_ref_code }}</option>
+                                @foreach ($availableDocuments as $document)
+                                    <option value="{{ $document->doc_ref_code }}">{{ $document->doc_ref_code }}</option>
                                 @endforeach
                             </datalist>
                         </div>
@@ -31,27 +32,31 @@
         </div> -->
                         <div class="col-md-2">
                             <label>Division</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <select name="division" id="divisioncreatemodal" class="custom-dropdown" required onchange="updateUnitDropdown()"></br>
-                                <option value="N/A">N/A</option>
-                                <option value="AFD">AFD</option>
+                            <select name="division" id="divisioncreatemodal" class="custom-dropdown" required
+                                onchange="updateUnitDropdown()"></br>
                                 <option value="ORD">ORD</option>
+                                <option value="AFD">AFD</option>
                                 <option value="TOD">TOD</option>
+                                <option value="N/A">N/A</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label>Project/Unit</label><span style="color: red; margin-left: 5px;">*</span><br>
                             <select name="unit" id="unit" class="custom-dropdown" required></br>
-                                <option value="N/A">N/A</option>
-
+                                <option value="N/A">COMMS</option>
+                                <option value="N/A">QMR</option>
+                                <option value="N/A">ORD</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label>Owner</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="process_owner" id="process_owner" class="form-control" required></br>
+                            <input type="text" name="process_owner" id="process_owner" class="form-control"
+                                required></br>
                         </div><br>
                         <div class="col-md-2">
                             <label>Status</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="status" id="status" value="Active" class="form-control" disabled required></br>
+                            <input type="text" name="status" id="status" value="Active" class="form-control"
+                                disabled required></br>
                         </div>
                         <div class="col-md-4">
                             <label>Document Type</label><span style="color: red; margin-left: 5px;">*</span><br>
@@ -82,7 +87,8 @@
                         </div>
                         <div class="col-md-4">
                             <label>Request Reason</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="request_reason" id="request_reason" class="form-control" required></br>
+                            <input type="text" name="request_reason" id="request_reason" class="form-control"
+                                required></br>
                         </div>
                         <!-- <div class="col-md-2">
                             <label>Requester *</label><br>
@@ -90,15 +96,18 @@
                         </div> -->
                         <div class="col-md-2">
                             <label>Request Date</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="date" name="request_date" id="request_date" class="form-control" required></br>
+                            <input type="date" name="request_date" id="request_date" class="form-control"
+                                required></br>
                         </div>
                         <div class="col-md-2">
                             <label>Revision Number</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="revision_num" id="revision_num" value="0" class="form-control" disabled required></br>
+                            <input type="text" name="revision_num" id="revision_num" value="0"
+                                class="form-control" disabled required></br>
                         </div>
                         <div class="col-md-2">
                             <label>Effectivity Date</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="date" name="effectivity_date" id="effectivity_date" class="form-control" required></br>
+                            <input type="date" name="effectivity_date" id="effectivity_date" class="form-control"
+                                required></br>
                         </div>
                         <div class="col-md-4">
                             <label>File</label><span style="color: red; margin-left: 5px;">*</span><br>
@@ -278,7 +287,7 @@
             // Proceed with the submission
             var docRefCode = $('#doc_ref_code').val();
             $.ajax({
-                url: '{{ route("document.check") }}',
+                url: '{{ route('document.check') }}',
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -286,7 +295,9 @@
                 },
                 success: function(response) {
                     if (response.exists) {
-                        if (confirm('A document with this reference code already exists. Proceeding will render the existing document obsolete and increment the revision number of this document. Do you still wish to proceed?')) {
+                        if (confirm(
+                                'A document with this reference code already exists. Proceeding will render the existing document obsolete and increment the revision number of this document. Do you still wish to proceed?'
+                            )) {
                             form.submit(); // Submit the form if the user confirms
                         }
                     } else {
@@ -314,26 +325,32 @@
 
         // Add options based on division
         if (division === 'AFD') {
-            addOption(unitDropdown, 'HR', 'HR');
-            addOption(unitDropdown, 'Finance', 'Finance');
-            addOption(unitDropdown, 'Supply', 'Supply');
-            addOption(unitDropdown, 'General Services', 'General Services');
-            addOption(unitDropdown, 'Records', 'Records');
-            addOption(unitDropdown, 'Others', 'Others');
+            addOption(unitDropdown, 'HUMAN RESOURCE', 'HUMAN RESOURCE');
+            addOption(unitDropdown, 'FINANCE', 'FINANCE');
+            addOption(unitDropdown, 'SUPPLY', 'SUPPLY');
+            addOption(unitDropdown, 'MOTORPOOL', 'MOTORPOOL');
+            addOption(unitDropdown, 'RECORDS', 'RECORDS');
+            addOption(unitDropdown, 'PHYSICAL PLANT', 'PHYSICAL PLANT');
+            addOption(unitDropdown, 'MISS', 'MISS');
+            addOption(unitDropdown, 'OTHERS', 'OTHERS');
         } else if (division === 'ORD') {
             addOption(unitDropdown, 'COMMS', 'COMMS');
             addOption(unitDropdown, 'QMR', 'QMR');
             addOption(unitDropdown, 'ORD', 'ORD');
-            addOption(unitDropdown, 'Others', 'Others');
         } else if (division === 'TOD') {
-            addOption(unitDropdown, 'eLGU/eGOV', 'eLGU/eGOV');
-            addOption(unitDropdown, 'GovNet', 'GovNet');
-            addOption(unitDropdown, 'FW4A', 'FW4A');
-            addOption(unitDropdown, 'ILCD', 'ILCD');
             addOption(unitDropdown, 'IID', 'IID');
-            addOption(unitDropdown, 'PNPKI', 'PNPKI');
-            addOption(unitDropdown, 'DRRM', 'DRRM');
-            addOption(unitDropdown, 'Others', 'Others');
+            addOption(unitDropdown, 'ILCD', 'ILCD');
+            addOption(unitDropdown, 'GOVNET', 'GOVNET');
+            addOption(unitDropdown, 'FW4A/FPIAP', 'FW4A/FPIAP');
+            addOption(unitDropdown, 'SVSI', 'SVSI');
+            addOption(unitDropdown, 'IMS', 'IMS');
+            addOption(unitDropdown, 'NIPPS', 'NIPPS');
+            addOption(unitDropdown, 'CYBERSECURITY/PNPKI', 'CYBERSECURITY/PNPKI');
+            addOption(unitDropdown, 'DRRM/GECS', 'DRRM/GECS');
+            addOption(unitDropdown, 'eLGU/eGOV', 'eLGU/eGOV');
+            addOption(unitDropdown, 'OTHERS', 'OTHERS');
+        } else {
+            addOption(unitDropdown, 'N/A', 'N/A')
         }
     }
 

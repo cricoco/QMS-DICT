@@ -435,6 +435,7 @@ class DocumentController extends Controller
                 'division' => $data['division'],
                 'unit' => $data['unit'],
                 'request_reason' => $data['request_reason'],
+                'doc_type' => $data['doc_type'],
                 'request_type' => $data['request_type'],
                 'requester' => $data['requester'],
                 'created_at' => $data['created_at'],

@@ -31,29 +31,60 @@
                             <p><strong>Revision Number:</strong> <span id="rev-num"></span></p>
                             <p><strong>Effectivity Date:</strong> <span id="effic-date"></span></p>
                             <p><strong>File:</strong> <span id="filename"></span></p>
-                            <p><strong>Created at:</strong> <span id="created-at"></span></p>
+                            {{-- <p><strong>Created at:</strong> <span id="created-at"></span></p> --}}
 
                         </div>
                         <p><strong>Request Reason:</strong> <span id="req-reason"></span></p>
                     </div>
                 </div>
 
-
                 <div class="card-body text-center">
-                    <iframe id="document-iframe" width="900" height="900" src=""></iframe>
-                    <div id="no-preview" style="display: none;">
-                        <p>Preview not available for this file type.</p>
+                    <div class="btn-group mb-3" role="group" aria-label="Document Actions">
+                        <button type="button" id="view-history" value="{{ $item->id }}" title="View History"
+                            class="btn btn-primary btn-sm me-2"
+                            style="background-color: #27c75a; border-color: #27c75a;">
+                            <i class="fa fa-history" aria-hidden="true"></i>
+                        </button>
+
+                        <a href="{{ route('document.download', $item->file) }}" id="download-document"
+                            title="Download Document" class="btn btn-info btn-sm me-2"
+                            style="background-color: #ffd450; border-color: #ffd450;">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </a>
+
+                        <button type="button" id="edit-document" value="{{ $item->id }}" title="Edit Document"
+                            class="btn btn-primary btn-sm me-2">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+
+                        <form id="delete-document-form" method="POST" action="{{ url('/document' . '/' . $item->id) }}"
+                            accept-charset="UTF-8" style="display:inline">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            <button type="submit" id="delete-document" class="btn btn-danger btn-sm"
+                                title="Delete Document">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="iframe-container mt-3">
+                        <iframe id="document-iframe" width="900" height="900" src=""></iframe>
+                        <div id="no-preview" style="display: none;">
+                            <p>Preview not available for this file type.</p>
+                        </div>
                     </div>
                 </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="view-history" class="btn btn-secondary"
+
+                <div class="modal-footer">
+
+                    {{-- <button type="button" id="view-history" class="btn btn-secondary"
                     style="background-color: #FF8C00; border-color: #FF8C00;">History</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>

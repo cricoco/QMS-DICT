@@ -241,72 +241,28 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+            // AJAX setup for CSRF token
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
+            // View History Button
             $('body').on('click', '#view-history', function() {
-                var docID = $(this).data('id');
-
+                var docID = $(this).val();
                 window.open("/document/history/" + docID, '_blank');
-
             });
 
-            $('body').on('click', '#show-document', function() {
-                var docURL = $(this).data('url');
-                var docID = docURL.substring(docURL.lastIndexOf('/') + 1);
-
-                // For View Document
-                $.get(docURL, function(data) {
-                    $('#docShowModal').modal('show');
-                    $('#doc-ref-code').text(data.doc_ref_code);
-                    $('#doc-title').text(data.doc_title);
-                    $('#status').text(data.status);
-                    // $('#document-iframe').attr('src', "{{ asset('storage/documents/') }}/" + data.file);
-                    $('#division').text(data.division);
-                    $('#process-owner').text(data.process_owner);
-                    $('#doc-type').text(data.doc_type);
-                    $('#req-reason').text(data.request_reason);
-                    $('#req-type').text(data.request_type);
-                    //$('#requester').text(data.requester);
-                    $('#req-date').text(data.request_date);
-                    $('#rev-num').text(data.revision_num);
-                    $('#effic-date').text(data.effectivity_date);
-                    $('#filename').text(data.file);
-                    $('#created-at').text(data.created_at);
-                    $('#type-intext').text(data.type_intext);
-                    $('#unit-text').text(data.unit);
-
-                    $('#view-history').data('id', docID);
-                    var filePath = "{{ asset('storage/documents/') }}/" + data.file;
-                    var fileExtension = data.file.split('.').pop().toLowerCase();
-
-                    if (fileExtension === 'pdf') {
-                        $('#document-iframe').attr('src', filePath).show();
-                        $('#download-link').hide();
-                    } else {
-                        $('#document-iframe').hide();
-                        $('#download-link').attr('href', filePath).show();
-                        $('#no-preview').show();
-                    }
-                })
-            });
-
-            // For Edit Document
+            // Edit Document Button
             $('body').on('click', '#edit-document', function() {
                 var doc_id = $(this).val();
-
-
                 $('#docEditModal').modal('show');
 
                 $.ajax({
                     type: "GET",
                     url: "/edit-document/" + doc_id,
-
                     success: function(response) {
-
                         $('#docEditModal #doc_id').val(response.document.id);
                         $('#docEditModal #doc_ref_code').val(response.document.doc_ref_code);
                         $('#docEditModal #doc_title').val(response.document.doc_title);
@@ -316,8 +272,7 @@
                         $('#docEditModal #doc_type').val(response.document.doc_type);
                         $('#docEditModal #request_type').val(response.document.request_type);
                         $('#docEditModal #request_reason').val(response.document
-                            .request_reason);
-                        //$('#docEditModal #requester').val(response.document.requester);
+                        .request_reason);
                         $('#docEditModal #request_date').val(response.document.request_date);
                         $('#docEditModal #revision_num').val(response.document.revision_num);
                         $('#docEditModal #effectivity_date').val(response.document
@@ -325,7 +280,72 @@
                         $('#docEditModal #type_intext').val(response.document.type_intext);
                         $('#docEditModal #unit').val(response.document.unit);
                     }
+                });
+            });
 
+            // Delete Document Button
+            $('body').on('click', '#delete-document', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                if (confirm('Are you sure you want to archive this document?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: form.attr('action'),
+                        data: form.serialize(),
+                        success: function(response) {
+                            // Handle success response (e.g., close modal, update UI, show message)
+                            alert('Document archived successfully!');
+                            // Optionally reload the page or remove the document from the list
+                            location.reload();
+                        },
+                        error: function(response) {
+                            // Handle error response (e.g., show error message)
+                            alert('An error occurred while archiving the document.');
+                        }
+                    });
+                }
+            });
+
+            // Download Document Button
+            $('body').on('click', '#download-document', function(e) {
+                if (!confirm('You are about to download an uncontrolled copy. Do you want to proceed?')) {
+                    e.preventDefault();
+                }
+            });
+
+            // Show Document Modal and Load Document
+            $('body').on('click', '#show-document', function() {
+                var docURL = $(this).data('url');
+                var docID = docURL.substring(docURL.lastIndexOf('/') + 1);
+
+                $.get(docURL, function(data) {
+                    $('#docShowModal').modal('show');
+                    $('#doc-ref-code').text(data.doc_ref_code);
+                    $('#doc-title').text(data.doc_title);
+                    $('#status').text(data.status);
+                    $('#division').text(data.division);
+                    $('#process-owner').text(data.process_owner);
+                    $('#doc-type').text(data.doc_type);
+                    $('#req-reason').text(data.request_reason);
+                    $('#req-type').text(data.request_type);
+                    $('#req-date').text(data.request_date);
+                    $('#rev-num').text(data.revision_num);
+                    $('#effic-date').text(data.effectivity_date);
+                    $('#filename').text(data.file);
+                    $('#type-intext').text(data.type_intext);
+                    $('#unit-text').text(data.unit);
+
+                    $('#view-history').val(docID);
+                    var filePath = "{{ asset('storage/documents/') }}/" + data.file;
+                    var fileExtension = data.file.split('.').pop().toLowerCase();
+
+                    if (fileExtension === 'pdf') {
+                        $('#document-iframe').attr('src', filePath).show();
+                        $('#no-preview').hide();
+                    } else {
+                        $('#document-iframe').hide();
+                        $('#no-preview').show();
+                    }
                 });
             });
 
