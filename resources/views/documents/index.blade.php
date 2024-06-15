@@ -77,11 +77,7 @@
                     <br>
                     <div class="card-body" style="height: 100vh; overflow-y: auto;">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzaeknsFlg6QE1HLExjnBSVr6ffPINNVuTzkgOpMz681Y2kQ/viewform"
-                                target="_blank" class="btn btn-success btn-sm" title="Add New Document"
-                                style="background-color: #a141ca; border-color: #a141ca; color: black;">
-                                <i class="fa fa-plus"></i> Submit New/Revision
-                            </a>
+
                             <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal"
                                 data-bs-target="#docCreateModal"
                                 style="background-color: #45b3e0; border-color: #45b3e0; color: black;">
