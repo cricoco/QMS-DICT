@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DocumentHistory;
-use App\Models\Document; 
-
+use App\Models\Document;
 
 class DocumentHistoryController extends Controller
 {
@@ -13,14 +12,14 @@ class DocumentHistoryController extends Controller
     // {
     //     $histories = DocumentHistory::find($id);
     //     return view('histories.show')->with('histories', $histories);
-        
+
     // }
 
     public function index(Request $request)
     {
-        
-        $history = DocumentHistory::orderBy('updated_at', 'desc')->paginate(10);
-        
+
+        $history = DocumentHistory::orderBy('updated_at', 'asc')->paginate(10);
+
         return view('history')->with('history', $history);
     }
 

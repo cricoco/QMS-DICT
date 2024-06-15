@@ -45,28 +45,25 @@
                             style="background-color: #27c75a; border-color: #27c75a;">
                             <i class="fa fa-history" aria-hidden="true"></i>
                         </button>
-                        {{--
-                            <a href="{{ route('document.download', $item->file) }}" id="download-document"
-                                title="Download Document" class="btn btn-info btn-sm me-2"
-                                style="background-color: #ffd450; border-color: #ffd450;">
-                                <i class="fa fa-download" aria-hidden="true"></i>
-                            </a>
 
-                            <button type="button" id="edit-document" value="{{ $item->id }}" title="Edit Document"
-                                class="btn btn-primary btn-sm me-2">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button> --}}
+                        <a href="" id="download-document" title="Download Document"
+                            class="btn btn-info btn-sm me-2" style="background-color: #ffd450; border-color: #ffd450;">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </a>
 
-                        {{-- <form id="delete-document-form" method="POST"
-                                action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8"
-                                style="display:inline">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button type="submit" id="delete-document" class="btn btn-danger btn-sm"
-                                    title="Delete Document">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </button>
-                            </form> --}}
+                        <button type="button" class="btn btn-primary btn-sm me-2">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+
+                        <form id="delete-document-form" method="POST" action="" accept-charset="UTF-8"
+                            style="display:inline">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            <button type="submit" id="delete-document" class="btn btn-danger btn-sm"
+                                title="Delete Document">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                        </form>
                     </div>
 
                     <div class="iframe-container mt-3">
