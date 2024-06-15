@@ -72,24 +72,16 @@
                             <span style="margin-left: 103px; display: block;">Any downloaded or printed copies of documents
                                 are deemed <strong>UNCONTROLLED</strong>.</span>
                         </div>
-                        <div>
-                            <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'doc_title', 'sort_dir' => 'asc']) }}"
-                                class="btn btn-sm btn-info" style="background-color: #45b3e0;">
-                                <i class="fa fa-sort-alpha-down" aria-hidden="true"></i>
-                            </a>
-                            <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'asc']) }}"
-                                class="btn btn-sm btn-info" style="background-color: #45b3e0;">
-                                <i class="fa fa-sort-numeric-down" aria-hidden="true"></i>
-                            </a>
-                            <a href="{{ route('documents.index', ['search' => request('search'), 'sort_by' => 'revision_num', 'sort_dir' => 'desc']) }}"
-                                class="btn btn-sm btn-info" style="background-color: #45b3e0;">
-                                <i class="fa fa-sort-numeric-up" aria-hidden="true"></i>
-                            </a>
-                        </div>
+
                     </div>
                     <br>
                     <div class="card-body" style="height: 100vh; overflow-y: auto;">
                         <div style="display: flex; align-items: center; gap: 10px;">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzaeknsFlg6QE1HLExjnBSVr6ffPINNVuTzkgOpMz681Y2kQ/viewform"
+                                class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal"
+                                style="background-color: #a141ca; border-color: #a141ca; color: black;">
+                                <i class="fa fa-plus"></i> Submit New/Revision
+                            </a>
                             <a href="#" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal"
                                 data-bs-target="#docCreateModal"
                                 style="background-color: #45b3e0; border-color: #45b3e0; color: black;">
@@ -272,7 +264,7 @@
                         $('#docEditModal #doc_type').val(response.document.doc_type);
                         $('#docEditModal #request_type').val(response.document.request_type);
                         $('#docEditModal #request_reason').val(response.document
-                        .request_reason);
+                            .request_reason);
                         $('#docEditModal #request_date').val(response.document.request_date);
                         $('#docEditModal #revision_num').val(response.document.revision_num);
                         $('#docEditModal #effectivity_date').val(response.document

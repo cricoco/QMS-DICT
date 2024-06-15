@@ -13,7 +13,7 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>id</th>
+                                {{-- <th>id</th> --}}
                                 <th>Doc Ref. Code</th>
                                 <th>Document Title</th>
                                 <th>Description of Change</th>
@@ -26,7 +26,7 @@
                         <tbody>
                             @foreach ($history as $item)
                                 <tr>
-                                    <td>{{ $item->document->id }}</td>
+                                    {{-- <td>{{ $item->document->id }}</td> --}}
                                     <td>{{ $item->document->doc_ref_code }}</td>
                                     <td>{{ $item->document->doc_title }}</td>
                                     <td>{{ $item->document->request_reason }}</td>
