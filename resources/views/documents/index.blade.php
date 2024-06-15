@@ -78,7 +78,7 @@
                     <div class="card-body" style="height: 100vh; overflow-y: auto;">
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzaeknsFlg6QE1HLExjnBSVr6ffPINNVuTzkgOpMz681Y2kQ/viewform"
-                                class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal"
+                                target='blank" class="btn btn-success btn-sm" title="Add New Document" data-bs-toggle="modal"
                                 style="background-color: #a141ca; border-color: #a141ca; color: black;">
                                 <i class="fa fa-plus"></i> Submit New/Revision
                             </a>
@@ -104,14 +104,14 @@
                                                 style="text-decoration: none; color: inherit;">
                                                 Document Reference Code
                                                 @if (request('sort_by') == 'doc_ref_code')
-                                                    @if (request('sort_dir') == 'asc')
-                                                        <i class="fa fa-sort-up"></i>
-                                                    @else
-                                                        <i class="fa fa-sort-down"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fa fa-sort"></i>
-                                                @endif
+@if (request('sort_dir') == 'asc')
+<i class="fa fa-sort-up"></i>
+@else
+<i class="fa fa-sort-down"></i>
+@endif
+@else
+<i class="fa fa-sort"></i>
+@endif
                                             </a>
                                         </th>
                                         <th>
@@ -119,14 +119,14 @@
                                                 style="text-decoration: none; color: inherit;">
                                                 Document Title
                                                 @if (request('sort_by') == 'doc_title')
-                                                    @if (request('sort_dir') == 'asc')
-                                                        <i class="fa fa-sort-up"></i>
-                                                    @else
-                                                        <i class="fa fa-sort-down"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fa fa-sort"></i>
-                                                @endif
+@if (request('sort_dir') == 'asc')
+<i class="fa fa-sort-up"></i>
+@else
+<i class="fa fa-sort-down"></i>
+@endif
+@else
+<i class="fa fa-sort"></i>
+@endif
                                             </a>
                                         </th>
                                         <th style="text-align: center;">
@@ -134,14 +134,14 @@
                                                 style="text-decoration: none; color: inherit;">
                                                 Revision Number
                                                 @if (request('sort_by') == 'revision_num')
-                                                    @if (request('sort_dir') == 'asc')
-                                                        <i class="fa fa-sort-up"></i>
-                                                    @else
-                                                        <i class="fa fa-sort-down"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fa fa-sort"></i>
-                                                @endif
+@if (request('sort_dir') == 'asc')
+<i class="fa fa-sort-up"></i>
+@else
+<i class="fa fa-sort-down"></i>
+@endif
+@else
+<i class="fa fa-sort"></i>
+@endif
                                             </a>
                                         </th>
                                         <th style="text-align: center;">
@@ -149,14 +149,14 @@
                                                 style="text-decoration: none; color: inherit;">
                                                 Effectivity Date
                                                 @if (request('sort_by') == 'effectivity_date')
-                                                    @if (request('sort_dir') == 'asc')
-                                                        <i class="fa fa-sort-up"></i>
-                                                    @else
-                                                        <i class="fa fa-sort-down"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fa fa-sort"></i>
-                                                @endif
+@if (request('sort_dir') == 'asc')
+<i class="fa fa-sort-up"></i>
+@else
+<i class="fa fa-sort-down"></i>
+@endif
+@else
+<i class="fa fa-sort"></i>
+@endif
                                             </a>
                                         </th>
                                         <th>Owner</th>
@@ -167,7 +167,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($documents as $item)
-                                        <tr>
+<tr>
                                             <td>{{ $item->doc_ref_code }}</td>
                                             <td>{{ $item->doc_title }}</td>
                                             <td style="text-align: center;">{{ $item->revision_num }}</td>
@@ -185,30 +185,30 @@
                                                 <a href="{{ route('document.download', $item->file) }}"
                                                     title="Download Document" class="btn btn-info btn-sm"
                                                     style="background-color: #ffd450; border-color: #ffd450;"
-                                                    onclick="return confirm('You are about to download an uncontrolled copy. Do you want to proceed?');">
-                                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                                </a>
+                                                    onclick="return confirm('You
+                                are about to download an uncontrolled copy. Do you want to proceed?');">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </a>
 
 
 
-                                                <button type="button" id="edit-document" value="{{ $item->id }}"
-                                                    title="Edit Document" class="btn btn-primary btn-sm"><i
-                                                        class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <button type="button" id="edit-document" value="{{ $item->id }}" title="Edit Document"
+                                class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"
+                                    aria-hidden="true"></i></button>
 
-                                                <form method="POST" action="{{ url('/document' . '/' . $item->id) }}"
-                                                    accept-charset="UTF-8" style="display:inline">
-                                                    {{ method_field('DELETE') }}
-                                                    {{ csrf_field() }}
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        title="Delete Document"
-                                                        onclick="return confirm('Are you sure you want to archive this document?')"><i
-                                                            class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                    <!-- Delete -->
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                            <form method="POST" action="{{ url('/document' . '/' . $item->id) }}" accept-charset="UTF-8"
+                                style="display:inline">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Document"
+                                    onclick="return confirm('Are you sure you want to archive this document?')"><i
+                                        class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                <!-- Delete -->
+                            </form>
+                            </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
                             </table>
                         </div>
                         <div>
