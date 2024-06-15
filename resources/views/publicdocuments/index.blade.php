@@ -42,7 +42,12 @@
                             <span style="margin-left: 103px; display: block;">Any downloaded or printed copies of documents
                                 are deemed <strong>UNCONTROLLED</strong>.</span>
                         </div>
-
+                        <br />
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzaeknsFlg6QE1HLExjnBSVr6ffPINNVuTzkgOpMz681Y2kQ/viewform"
+                            target="_blank" class="btn btn-success btn-sm" title="Add New Document"
+                            style="background-color: #a141ca; border-color: #a141ca; color: black;">
+                            <i class="fa fa-plus"></i> Submit New/Revision
+                        </a>
                     </div>
                     <br>
 
