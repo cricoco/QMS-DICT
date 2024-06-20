@@ -124,7 +124,9 @@ class DocumentController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             // $fileName = time() . '_' . $file->getClientOriginalName();
-            $fileName = $file->getClientOriginalName() . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $originalName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = pathinfo($originalName, PATHINFO_FILENAME) . '_' . time() . '.' . $extension;
             $file->storeAs('public/documents', $fileName); // Adjust storage path as needed
             $input['file'] = $fileName;
         }
@@ -215,7 +217,9 @@ class DocumentController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             // $fileName = time() . '_' . $file->getClientOriginalName();
-            $fileName = $file->getClientOriginalName();
+            $originalName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = pathinfo($originalName, PATHINFO_FILENAME) . '_' . time() . '.' . $extension;
             $file->storeAs('public/documents', $fileName); // Adjust storage path as needed
             $input['file'] = $fileName;
         } else {
