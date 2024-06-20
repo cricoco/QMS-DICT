@@ -68,7 +68,7 @@
 
                     <div class="iframe-container mt-3">
                         <iframe id="document-iframe" width="900" height="900" src=""></iframe>
-                        <div id="no-preview" style="display: none;">
+                        <div id="no-preview" style="display: block;">
                             <p>Preview not available for this file type.</p>
                         </div>
                     </div>

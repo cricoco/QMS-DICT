@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified', 'isAdmin', 'isVerifiedMan'])->group(funct
     Route::get('document/{id}', [DocumentController::class, 'show'])->name('documents.show');
     Route::get('edit-document/{id}', [DocumentController::class, 'edit']);
     Route::put('update-document', [DocumentController::class, 'update']);
+    Route::put('update-file', [DocumentController::class, 'update_file']);
 
     Route::get('/document/history/{id}', [DocumentHistoryController::class, 'specifichistory'])->name('specifichistory');
     Route::get('documentxx/{doc_ref_code}', [DocumentController::class, 'showByDocRefCode']);

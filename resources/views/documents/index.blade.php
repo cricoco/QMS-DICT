@@ -201,6 +201,10 @@
                                                             class="fa fa-trash-o" aria-hidden="true"></i></button>
                                                     <!-- Delete -->
                                                 </form>
+
+                                                <button type="button" id="edit-file" value="{{ $item->id }}"
+                                                    title="Change File" class="btn btn-primary btn-sm"><i
+                                                        class="fa fa-upload" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -267,6 +271,7 @@
                             .effectivity_date);
                         $('#docEditModal #type_intext').val(response.document.type_intext);
                         $('#docEditModal #unit').val(response.document.unit);
+                        $('#docEditModal #file').val(response.document.file);
                     }
                 });
             });
@@ -336,7 +341,6 @@
                     }
                 });
             });
-
         });
     </script>
 @endsection

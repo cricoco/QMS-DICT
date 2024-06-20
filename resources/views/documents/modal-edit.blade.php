@@ -7,17 +7,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            
+
             <div class="modal-body">
 
-                <form id="editDocForm" action="{{ url('update-document') }}" method="post">
+                <form id="editDocForm" action="{{ url('update-document') }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
-                    @method("PUT")
+                    @method('PUT')
                     <input type="hidden" name="doc_id" id="doc_id">
                     <div class="row">
                         <div class="col-md-2">
                             <label>Doc Ref. Code</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control" required></br>
+                            <input type="text" name="doc_ref_code" id="doc_ref_code" class="form-control"
+                                required></br>
                         </div>
                         <div class="col-md-4">
                             <label>Document Title</label><span style="color: red; margin-left: 5px;">*</span><br>
@@ -58,7 +60,8 @@
                         </div>
                         <div class="col-md-2">
                             <label>Owner</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="process_owner" id="process_owner" class="form-control" required></br>
+                            <input type="text" name="process_owner" id="process_owner" class="form-control"
+                                required></br>
                         </div><br>
                         <div class="col-md-2">
                             <label>Status</label><span style="color: red; margin-left: 5px;">*</span><br>
@@ -84,7 +87,8 @@
                         </div>
                         <div class="col-md-2">
                             <label>Request Type</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <select type="text" name="request_type" id="request_type" class="custom-dropdown" required></br>
+                            <select type="text" name="request_type" id="request_type" class="custom-dropdown"
+                                required></br>
                                 <option value="Creation">Creation</option>
                                 <option value="Revision">Revision</option>
                                 <option value="Deletion">Deletion</option>
@@ -92,7 +96,8 @@
                         </div>
                         <div class="col-md-4">
                             <label>Request Reason</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="request_reason" id="request_reason" class="form-control"></br>
+                            <input type="text" name="request_reason" id="request_reason"
+                                class="form-control"></br>
                         </div>
                         <!-- <div class="col-md-2">
                             <label>Requester *</label><br>
@@ -104,26 +109,33 @@
                         </div>
                         <div class="col-md-2">
                             <label>Revision Number</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="text" name="revision_num" id="revision_num" class="form-control" disabled></br>
+                            <input type="text" name="revision_num" id="revision_num" class="form-control"
+                                disabled></br>
                         </div>
                         <div class="col-md-2">
                             <label>Effectivity Date</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <input type="date" name="effectivity_date" id="effectivity_date" class="form-control"></br>
+                            <input type="date" name="effectivity_date" id="effectivity_date"
+                                class="form-control"></br>
+                        </div>
+                        <div class="col-md-4">
+                            <label>File</label><span style="color: red; margin-left: 5px;">*</span><br>
+                            <input type="file" name="file" id="file" class="form-control"></br>
                         </div>
                         <div class="col-md-2">
                             <label>Type</label><span style="color: red; margin-left: 5px;">*</span><br>
-                            <select type="text" name="type_intext" id="type_intext" class="custom-dropdown" required></br>
+                            <select type="text" name="type_intext" id="type_intext" class="custom-dropdown"
+                                required></br>
                                 <option value="Internal">Internal</option>
                                 <option value="External">External</option>
                             </select>
                         </div>
                     </div>
-                    
+
                 </form>
 
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-success" onclick="submitEditForm();">Update</button>
+                <button type="button" class="btn btn-success" onclick="submitEditForm();">Update</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -142,5 +154,3 @@
         }
     }
 </script>
-
-

@@ -178,6 +178,7 @@ class DocumentController extends Controller
     public function edit($id)
     {
         $documents = Document::find($id);
+
         // return view('documents.edit')->with('documents', $documents);
         return response()->json([
             'status' => 200,
@@ -194,8 +195,16 @@ class DocumentController extends Controller
      */
     public function update(Request $request)
     {
+        $validatedData = $request->validate([
+            'request_date' => 'required|date',
+            'effectivity_date' => 'required|date',
+            // Add other validations as needed
+        ]);
+
         $doc_id = $request->input('doc_id');
         $documents = Document::find($doc_id);
+        $input = $request->all();
+        // dd($input);
 
         DocumentHistory::create([
             'username_id' => auth()->id(),
@@ -203,7 +212,17 @@ class DocumentController extends Controller
             'operation' => 'updated',
         ]);
 
-        $input = $request->all();
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            // $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = $file->getClientOriginalName();
+            $file->storeAs('public/documents', $fileName); // Adjust storage path as needed
+            $input['file'] = $fileName;
+        } else {
+            unset($input['file']);
+        }
+
+        // dd($input);
         $documents->update($input);
         return redirect('documents')->with('flash_message', 'Document Updated!');
     }
